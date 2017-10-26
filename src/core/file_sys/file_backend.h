@@ -36,7 +36,7 @@ public:
      * @return Number of bytes written, or error code
      */
     virtual ResultVal<size_t> Write(u64 offset, size_t length, bool flush,
-                                    const u8* buffer) const = 0;
+                                    const u8* buffer) = 0;
 
     /**
      * Get the size of the file in bytes

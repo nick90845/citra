@@ -52,7 +52,7 @@ public:
     }
 
     ResultVal<size_t> Write(u64 offset, size_t length, bool flush,
-                            const u8* buffer) const override {
+                            const u8* buffer) override {
         LOG_ERROR(Service_FS, "The file is read-only!");
         return ERROR_UNSUPPORTED_OPEN_FLAGS;
     }
