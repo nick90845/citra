@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+|PR Number|Title|Author|Merge Success|
+|----|----|----|----|
+|[2](https://github.com/citra-emu/citra-canary/pull/2)|Canary Base|j-selby|true|
+|[3063](https://github.com/citra-emu/citra/pull/3063)|Appveyor: Use Previous version of appveyor build environment|B3n30|true|
+|[3042](https://github.com/citra-emu/citra/pull/3042)|Kernel/SVC: Don't let svcReleaseMutex release a mutex owned by another thread|Subv|true|
+|[3029](https://github.com/citra-emu/citra/pull/3029)|Services/AM: Add CIA title installation support.|shinyquagsire23|true|
+|[2997](https://github.com/citra-emu/citra/pull/2997)|Updater QT Integration|j-selby|true|
+|[2989](https://github.com/citra-emu/citra/pull/2989)|Service/UDS: Implement Bind, Unbind, SendTo, PullPacket, and GetNodeInformation|B3n30|true|
+|[2969](https://github.com/citra-emu/citra/pull/2969)|Service/PTM: Stub GetStepHistory function|mailwl|true|
+|[2968](https://github.com/citra-emu/citra/pull/2968)|Kernel/Threads: Add a new thread status that will allow using a Kernel::Event to put a guest thread to sleep inside an HLE handler until said event is signaled|Subv|true|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
