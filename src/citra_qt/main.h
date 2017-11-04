@@ -6,12 +6,16 @@
 #define _CITRA_QT_MAIN_HXX_
 
 #include <memory>
+#include <QLabel>
 #include <QMainWindow>
 #include <QTimer>
+#include "common/announce_multiplayer_room.h"
 #include "core/core.h"
+#include "network/network.h"
 #include "ui_main.h"
 
 class Config;
+class ClickableLabel;
 class EmuThread;
 class GameList;
 class GImageInfo;
@@ -26,6 +30,16 @@ class ProfilerWidget;
 class RegistersWidget;
 class WaitTreeWidget;
 class AboutDialog;
+
+// Multiplayer forward declarations
+class Lobby;
+class HostRoomWindow;
+class ClientRoomWindow;
+class DirectConnectWindow;
+
+namespace Core {
+class AnnounceMultiplayerSession;
+}
 
 class GMainWindow : public QMainWindow {
     Q_OBJECT
@@ -44,6 +58,9 @@ class GMainWindow : public QMainWindow {
 public:
     void filterBarSetChecked(bool state);
     void UpdateUITheme();
+    void ChangeRoomState();
+
+    GameList* game_list;
     GMainWindow();
     ~GMainWindow();
 
@@ -64,6 +81,16 @@ signals:
      * system emulation handles and memory are still valid, but are about become invalid.
      */
     void EmulationStopping();
+
+    void NetworkStateChanged(const Network::RoomMember::State&);
+    void AnnounceFailed(const Common::WebResult&);
+
+public slots:
+    void OnViewLobby();
+    void OnCreateRoom();
+    void OnCloseRoom();
+    void OnOpenNetworkRoom();
+    void OnDirectConnectToRoom();
 
 private:
     void InitializeWidgets();
@@ -124,6 +151,8 @@ private slots:
     /// Called whenever a user selects the "File->Select Game List Root" menu item
     void OnMenuSelectGameListRoot();
     void OnMenuRecentFile();
+    void OnNetworkStateChanged(const Network::RoomMember::State& state);
+    void OnAnnounceFailed(const Common::WebResult&);
     void OnSwapScreens();
     void OnConfigure();
     void OnToggleFilterBar();
@@ -141,16 +170,17 @@ private:
     Ui::MainWindow ui;
 
     GRenderWindow* render_window;
-    GameList* game_list;
 
     // Status bar elements
     QLabel* message_label = nullptr;
     QLabel* emu_speed_label = nullptr;
     QLabel* game_fps_label = nullptr;
     QLabel* emu_frametime_label = nullptr;
+    ClickableLabel* network_status = nullptr;
     QTimer status_bar_update_timer;
 
     std::unique_ptr<Config> config;
+    std::shared_ptr<Core::AnnounceMultiplayerSession> announce_multiplayer_session;
 
     // Whether emulation is currently running in Citra.
     bool emulation_running = false;
@@ -167,6 +197,14 @@ private:
     GraphicsTracingWidget* graphicsTracingWidget;
     WaitTreeWidget* waitTreeWidget;
 
+    // Multiplayer windows
+    Lobby* lobby = nullptr;
+    HostRoomWindow* host_room = nullptr;
+    ClientRoomWindow* client_room = nullptr;
+    DirectConnectWindow* direct_connect = nullptr;
+
+    Network::RoomMember::CallbackHandle<Network::RoomMember::State> state_callback_handle;
+
     QAction* actions_recent_files[max_recent_files_item];
 
 protected:
@@ -174,5 +212,7 @@ protected:
     void dragEnterEvent(QDragEnterEvent* event) override;
     void dragMoveEvent(QDragMoveEvent* event) override;
 };
+
+Q_DECLARE_METATYPE(Common::WebResult);
 
 #endif // _CITRA_QT_MAIN_HXX_
