@@ -63,12 +63,27 @@ ResultCode ServerSession::HandleSyncRequest(SharedPtr<Thread> thread) {
     if (hle_handler != nullptr) {
         hle_handler->HandleSyncRequest(SharedPtr<ServerSession>(this));
     } else {
-        // Put the thread to sleep until the server replies, it will be awoken in
-        // svcReplyAndReceive.
-        thread->status = THREADSTATUS_WAIT_IPC;
         // Add the thread to the list of threads that have issued a sync request with this
         // server.
         pending_requesting_threads.push_back(std::move(thread));
+    }
+
+    if (thread->status == THREADSTATUS_RUNNING) {
+        // Put the thread to sleep until the server replies, it will be awoken in
+        // svcReplyAndReceive for LLE servers.
+        thread->status = THREADSTATUS_WAIT_IPC;
+
+        if (hle_handler != nullptr) {
+            // For HLE services, we put the request threads to sleep for a short duration to simulate
+            // IPC overhead, but only if the HLE handler didn't put the thread to sleep for other
+            // reasons like an async callback. The IPC overhead is needed to prevent starvation when a
+            // thread only does sync requests to HLE services while a lower-priority thread is waiting
+            // to run.
+
+            // TODO(Subv): Figure out a good value for this.
+            static constexpr u64 IPCDelayNanoseconds = 100;
+            thread->WakeAfterDelay(IPCDelayNanoseconds);
+        }
     }
 
     // If this ServerSession does not have an HLE implementation, just wake up the threads waiting
