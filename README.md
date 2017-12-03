@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+|PR Number|Title|Author|Merge Success|
+|----|----|----|----|
+|[2](https://github.com/citra-emu/citra-canary/pull/2)|Canary Base|j-selby|true|
+|[3173](https://github.com/citra-emu/citra/pull/3173)|Services/NFC: Stub StartTagScanning as it should be for o3DS|shinyquagsire23|true|
+|[3153](https://github.com/citra-emu/citra/pull/3153)|[WIP] dynarmic updates|MerryMage|true|
+|[3116](https://github.com/citra-emu/citra/pull/3116)|Allow input configuration with SDL joysticks|muemart|true|
+|[3091](https://github.com/citra-emu/citra/pull/3091)|Kernel/IPC: Add a small delay after each SyncRequest to prevent thread starvation.|Subv|true|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|Citra-qt: Add multiplayer ui|jroweboy|false|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|Network: Added an executable to host an dedicated room for local wifi|B3n30|true|
+|[3070](https://github.com/citra-emu/citra/pull/3070)|NWM_UDS: add ConnectToNetwork and DisconnectNetwork|B3n30|true|
+|[3069](https://github.com/citra-emu/citra/pull/3069)|Announce room webservice|B3n30|true|
+|[3026](https://github.com/citra-emu/citra/pull/3026)|Cached sequential access of GetPhysicalPointer|huwpascoe|true|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
