@@ -10,6 +10,7 @@
 #include "common/logging/log.h"
 #include "common/microprofile.h"
 #include "common/vector_math.h"
+#include "core/hle/kernel/event.h"
 #include "core/hle/service/gsp/gsp.h"
 #include "core/hw/gpu.h"
 #include "core/memory.h"
