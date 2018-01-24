@@ -77,19 +77,19 @@ public:
         setData(game_path, FullPathRole);
         setData(qulonglong(program_id), ProgramIdRole);
 
+        Loader::SMDH smdh;
         if (!Loader::IsValidSMDH(smdh_data)) {
             // SMDH is not valid, set a default icon
             setData(GetDefaultIcon(true), Qt::DecorationRole);
             return;
         }
 
-        Loader::SMDH smdh;
         memcpy(&smdh, smdh_data.data(), sizeof(Loader::SMDH));
 
         // Get icon from SMDH
         setData(GetQPixmapFromSMDH(smdh, true), Qt::DecorationRole);
 
-        // Get title form SMDH
+        // Get title from SMDH
         setData(GetQStringShortTitleFromSMDH(smdh, Loader::SMDH::TitleLanguage::English),
                 TitleRole);
     }
