@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 5a57578ce9203b9a0c8dc4ff9cf476d02db2f2ae
+
+|PR Number|Commit|Title|Author|Merge Success|
+|----|----|----|----|----|
+|[3367](undefined)|f42f7dfcab724d8ef7c35875a9221ea65d472b9d|Service/Y2R: convert to ServiceFramework|wwylele|true|
+|[3322](undefined)|b26a448d3eff2d7d80a8dba18fc82846a3a69bfe|audio_core: Remove global state|MerryMage|false|
+|[3281](undefined)|88f652151173c0642ec0ee6d01bf0802ba1abdd4|Texture Cache Rework|jroweboy|true|
+|[3272](undefined)|fb2d34997e13327ad68b2aa7aa8dd64c20397bb1|core/arm: Backend-specific context implementations|MerryMage|true|
+|[3101](undefined)|2052a201c0f60cfff1b043cf1ff631e57f2ad688|Kernel/Threads: Add a new thread status that will allow using a Kernel::Event to put a guest thread to sleep inside an HLE handler until said event is signaled|Subv|true|
+|[3073](undefined)|9c482ee1fa9e373d166b00fede5ad13bf5402827|Citra-qt: Add multiplayer ui|jroweboy|true|
+|[3071](undefined)|3f96a08984b481fbbbf40ec33903f47efeb3cdb1|Network: Added an executable to host an dedicated room for local wifi|B3n30|true|
+|[3070](undefined)|1941e645d7dbaf532a97d08b5b2bac2be4b7dde8|NWM_UDS: change to Service Framework|B3n30|true|
+|[3069](undefined)|a5e63a8c35f02022f2c393c5941f53b2518641fd|Announce room webservice|B3n30|true|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
