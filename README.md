@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 40b9e55e605f51bb6283470041f06adde5279742
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[2](https://github.com/citra-emu/citra-canary/pull/2)|fd2238b|Canary Base|[j-selby](https://github.com/j-selby)|Yes|
+|[3411](https://github.com/citra-emu/citra/pull/3411)|cda972a|Add Context Menu Options to Open Application and Update Location|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[3281](https://github.com/citra-emu/citra/pull/3281)|9e16a3c|Texture Cache Rework|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3272](https://github.com/citra-emu/citra/pull/3272)|fb2d349|core/arm: Backend-specific context implementations|[MerryMage](https://github.com/MerryMage)|Yes|
+|[3101](https://github.com/citra-emu/citra/pull/3101)|2052a20|Kernel/Threads: Add a new thread status that will allow using a Kernel::Event to put a guest thread to sleep inside an HLE handler until said event is signaled|[Subv](https://github.com/Subv)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|9c482ee|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|3f96a08|Network: Added an executable to host an dedicated room for local wifi|[B3n30](https://github.com/B3n30)|Yes|
+|[3070](https://github.com/citra-emu/citra/pull/3070)|1941e64|NWM_UDS: change to Service Framework|[B3n30](https://github.com/B3n30)|Yes|
+|[3069](https://github.com/citra-emu/citra/pull/3069)|a5e63a8|Announce room webservice|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
