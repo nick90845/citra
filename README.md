@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 20f6cb1a22a64e709b14a9a9b83b914de75755ac
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[2](https://github.com/citra-emu/citra-canary/pull/2)|fd2238b|Canary Base|[j-selby](https://github.com/j-selby)|Yes|
+|[3444](https://github.com/citra-emu/citra/pull/3444)|3445660|UDS: Add non zero mac address to the shared page|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3441](https://github.com/citra-emu/citra/pull/3441)|e003e75|Service/FS: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3281](https://github.com/citra-emu/citra/pull/3281)|18456ff|Texture Cache Rework|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3101](https://github.com/citra-emu/citra/pull/3101)|2052a20|Kernel/Threads: Add a new thread status that will allow using a Kernel::Event to put a guest thread to sleep inside an HLE handler until said event is signaled|[Subv](https://github.com/Subv)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|8867d26|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|3f96a08|Network: Added an executable to host an dedicated room for local wifi|[B3n30](https://github.com/B3n30)|Yes|
+|[3070](https://github.com/citra-emu/citra/pull/3070)|853a79c|NWM_UDS: change to Service Framework|[B3n30](https://github.com/B3n30)|No|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
