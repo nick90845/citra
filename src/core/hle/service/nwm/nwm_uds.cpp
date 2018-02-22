@@ -22,6 +22,7 @@
 #include "core/hle/service/nwm/uds_beacon.h"
 #include "core/hle/service/nwm/uds_connection.h"
 #include "core/hle/service/nwm/uds_data.h"
+#include "core/hle/shared_page.h"
 #include "core/memory.h"
 #include "network/network.h"
 
