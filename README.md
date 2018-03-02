@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 7c1a22358a5d22288f64d77c83de0f938d49d130
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3462](https://github.com/citra-emu/citra/pull/3462)|7c4ed77|Service/AM: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3444](https://github.com/citra-emu/citra/pull/3444)|1f87766|UDS: Add non zero mac address to the shared page|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3440](https://github.com/citra-emu/citra/pull/3440)|d8ac3a3|File_Sys: Add a size dependent delay for each file read|[B3n30](https://github.com/B3n30)|Yes|
+|[3281](https://github.com/citra-emu/citra/pull/3281)|18456ff|Texture Cache Rework|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|8867d26|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|No|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|3f96a08|Network: Added an executable to host an dedicated room for local wifi|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
