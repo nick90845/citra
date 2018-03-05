@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: f3234db5e2e0f422514db601a7794f7e2298304b
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3469](https://github.com/citra-emu/citra/pull/3469)|54af348| Service/FRD: convert to ServiceFramework |[wwylele](https://github.com/wwylele)|Yes|
+|[3281](https://github.com/citra-emu/citra/pull/3281)|18456ff|Texture Cache Rework|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|8867d26|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|No|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|3f96a08|Network: Added an executable to host an dedicated room for local wifi|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
