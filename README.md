@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: ebb8a9b8f02b6ceb39137ee81fd78f1dd295960a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3489](https://github.com/citra-emu/citra/pull/3489)|0276149|NWM_ UDS:Let connected clients handle the eapol packet|[B3n30](https://github.com/B3n30)|Yes|
+|[3484](https://github.com/citra-emu/citra/pull/3484)|6a8960e|pica/lighting: compute highlight clamp after one-/two-sided diffuse pass|[wwylele](https://github.com/wwylele)|Yes|
+|[3481](https://github.com/citra-emu/citra/pull/3481)|3f97c3f|NWM_UDS:: Check flags in SendTo|[B3n30](https://github.com/B3n30)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|21b36ee|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3071](https://github.com/citra-emu/citra/pull/3071)|3f96a08|Network: Added an executable to host an dedicated room for local wifi|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
