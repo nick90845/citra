@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 39fce60145c7ea65701d94594e8aa59b4cf9c364
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3611](https://github.com/citra-emu/citra/pull/3611)|2a7d0ec|citra-qt: Fix the stuck in fullscreen bug.|[adityaruplaha](https://github.com/adityaruplaha)|Yes|
+|[3566](https://github.com/citra-emu/citra/pull/3566)|e1dd792|citra_qt: camera integration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3499](https://github.com/citra-emu/citra/pull/3499)|eb4a5bb|Convert PICA Shaders to GLSL|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|928e383|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
