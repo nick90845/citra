@@ -141,6 +141,15 @@ public:
 
     void HandleSyncRequest(Kernel::SharedPtr<Kernel::ServerSession> server_session) override;
 
+    /// Pauses the service (when emulation pauses). Usually does nothing.
+    virtual void PauseService() {}
+
+    /// Resumes the service (after pausing). Usually does nothing.
+    virtual void ResumeService() {}
+
+    /// Stops the service (when emulation stops). Usually does nothing.
+    virtual void StopService() {}
+
 protected:
     /// Member-function pointer type of SyncRequest handlers.
     template <typename Self>
@@ -263,6 +272,12 @@ private:
 
 /// Initialize ServiceManager
 void Init();
+
+/// Pause services
+void Pause();
+
+/// Resume services
+void Resume();
 
 /// Shutdown ServiceManager
 void Shutdown();
