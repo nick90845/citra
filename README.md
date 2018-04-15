@@ -1,3 +1,20 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 17e14d56151e6f8f880c96849abc19fe17ee9fba
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3499](https://github.com/citra-emu/citra/pull/3499)|6e851d0|Convert PICA Shaders to GLSL|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3073](https://github.com/citra-emu/citra/pull/3073)|5548650|Citra-qt: Add multiplayer ui|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
