@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 7d8b7d93fc31d436412db5fc3c3cc746bb2a3555
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|fd2238b|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3678](https://github.com/citra-emu/citra/pull/3678)|133b0e9|gl_shader_decompiler: fallback to CPU shader on GS b15 access|[wwylele](https://github.com/wwylele)|Yes|
+|[3617](https://github.com/citra-emu/citra/pull/3617)|ad6ca87|QT: Add support for multiple game directories|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[3566](https://github.com/citra-emu/citra/pull/3566)|c274790|citra_qt: camera integration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3499](https://github.com/citra-emu/citra/pull/3499)|8e0c28a|Convert PICA Shaders to GLSL|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
