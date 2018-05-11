@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 57827de38b92fc83cb53a0aea64135c8878967cf
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[5](https://github.com/citra-emu/citra-canary/pull/5)|[fd2238b](https://github.com/citra-emu/citra-canary/pull/5/files/)|Canary Base|[chris062689](https://github.com/chris062689)|Yes|
+|[3729](https://github.com/citra-emu/citra/pull/3729)|[04caaa0](https://github.com/citra-emu/citra/pull/3729/files/)|gl_rasterizer: implement shadow map 2D|[wwylele](https://github.com/wwylele)|Yes|
+|[3617](https://github.com/citra-emu/citra/pull/3617)|[bb98a9f](https://github.com/citra-emu/citra/pull/3617/files/)|QT: Add support for multiple game directories|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[3499](https://github.com/citra-emu/citra/pull/3499)|[107ab43](https://github.com/citra-emu/citra/pull/3499/files/)|Convert PICA Shaders to GLSL|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
