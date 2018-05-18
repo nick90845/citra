@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 64a8c8ee07a2f1761efd6244ded00cce6ef59ddb
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3746](https://github.com/citra-emu/citra/pull/3746)|[e289c87](https://github.com/citra-emu/citra/pull/3746/files/)|Service/NDM: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3742](https://github.com/citra-emu/citra/pull/3742)|[4377caf](https://github.com/citra-emu/citra/pull/3742/files/)| citra-qt: add gpu shader emulation related configurations |[wwylele](https://github.com/wwylele)|Yes|
+|[3729](https://github.com/citra-emu/citra/pull/3729)|[5f3b640](https://github.com/citra-emu/citra/pull/3729/files/)|gl_rasterizer: implement shadow map 2D|[wwylele](https://github.com/wwylele)|Yes|
+|[3714](https://github.com/citra-emu/citra/pull/3714)|[08a3837](https://github.com/citra-emu/citra/pull/3714/files/)|video_core/command_processor: correctly handles 0xFFFF index as a normal index|[wwylele](https://github.com/wwylele)|Yes|
+|[3706](https://github.com/citra-emu/citra/pull/3706)|[3f0e017](https://github.com/citra-emu/citra/pull/3706/files/)|Use Travis CI to build MinGW packages|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3617](https://github.com/citra-emu/citra/pull/3617)|[cc138ab](https://github.com/citra-emu/citra/pull/3617/files/)|QT: Add support for multiple game directories|[BreadFish64](https://github.com/BreadFish64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
