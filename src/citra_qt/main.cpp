@@ -227,6 +227,8 @@ void GMainWindow::InitializeWidgets() {
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Single_Screen);
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Large_Screen);
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Side_by_Side);
+    actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Stereoscopic);
+    actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_StereoscopicSingleScreen);
 }
 
 void GMainWindow::InitializeDebugWidgets() {
@@ -464,6 +466,10 @@ void GMainWindow::ConnectMenuEvents() {
     connect(ui.action_Screen_Layout_Large_Screen, &QAction::triggered, this,
             &GMainWindow::ChangeScreenLayout);
     connect(ui.action_Screen_Layout_Side_by_Side, &QAction::triggered, this,
+            &GMainWindow::ChangeScreenLayout);
+    connect(ui.action_Screen_Layout_Stereoscopic, &QAction::triggered, this,
+            &GMainWindow::ChangeScreenLayout);
+    connect(ui.action_Screen_Layout_StereoscopicSingleScreen, &QAction::triggered, this,
             &GMainWindow::ChangeScreenLayout);
     connect(ui.action_Screen_Layout_Swap_Screens, &QAction::triggered, this,
             &GMainWindow::OnSwapScreens);
@@ -1047,6 +1053,10 @@ void GMainWindow::ChangeScreenLayout() {
         new_layout = Settings::LayoutOption::LargeScreen;
     } else if (ui.action_Screen_Layout_Side_by_Side->isChecked()) {
         new_layout = Settings::LayoutOption::SideScreen;
+    } else if (ui.action_Screen_Layout_Stereoscopic->isChecked()) {
+        new_layout = Settings::LayoutOption::Stereoscopic;
+    } else if (ui.action_Screen_Layout_StereoscopicSingleScreen->isChecked()) {
+        new_layout = Settings::LayoutOption::StereoscopicSingleScreen;
     }
 
     Settings::values.layout_option = new_layout;
@@ -1068,6 +1078,12 @@ void GMainWindow::ToggleScreenLayout() {
         break;
     case Settings::LayoutOption::SideScreen:
         new_layout = Settings::LayoutOption::Default;
+        break;
+    case Settings::LayoutOption::Stereoscopic:
+        new_layout = Settings::LayoutOption::StereoscopicSingleScreen;
+        break;
+    case Settings::LayoutOption::StereoscopicSingleScreen:
+        new_layout = Settings::LayoutOption::Stereoscopic;
         break;
     }
 
@@ -1351,6 +1367,14 @@ void GMainWindow::SetupUIStrings() {
 }
 
 void GMainWindow::SyncMenuUISettings() {
+
+    ui.action_Screen_Layout_Default->setEnabled(!Settings::values.toggle_3d);
+    ui.action_Screen_Layout_Single_Screen->setEnabled(!Settings::values.toggle_3d);
+    ui.action_Screen_Layout_Large_Screen->setEnabled(!Settings::values.toggle_3d);
+    ui.action_Screen_Layout_Side_by_Side->setEnabled(!Settings::values.toggle_3d);
+    ui.action_Screen_Layout_Stereoscopic->setEnabled(Settings::values.toggle_3d);
+    ui.action_Screen_Layout_StereoscopicSingleScreen->setEnabled(Settings::values.toggle_3d);
+
     ui.action_Screen_Layout_Default->setChecked(Settings::values.layout_option ==
                                                 Settings::LayoutOption::Default);
     ui.action_Screen_Layout_Single_Screen->setChecked(Settings::values.layout_option ==
@@ -1359,6 +1383,10 @@ void GMainWindow::SyncMenuUISettings() {
                                                      Settings::LayoutOption::LargeScreen);
     ui.action_Screen_Layout_Side_by_Side->setChecked(Settings::values.layout_option ==
                                                      Settings::LayoutOption::SideScreen);
+    ui.action_Screen_Layout_Stereoscopic->setChecked(Settings::values.layout_option ==
+                                                     Settings::LayoutOption::Stereoscopic);
+    ui.action_Screen_Layout_StereoscopicSingleScreen->setChecked(
+        Settings::values.layout_option == Settings::LayoutOption::StereoscopicSingleScreen);
     ui.action_Screen_Layout_Swap_Screens->setChecked(Settings::values.swap_screen);
 }
 
