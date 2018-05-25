@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: cad00ea5fde88926d953bf9a5f6c80995baa451d
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3778](https://github.com/citra-emu/citra/pull/3778)|[71cb9c8](https://github.com/citra-emu/citra/pull/3778/files/)|gl_rasterizer: implement shadow map 2D - Image load/store version|[wwylele](https://github.com/wwylele)|Yes|
+|[3776](https://github.com/citra-emu/citra/pull/3776)|[92d1f7b](https://github.com/citra-emu/citra/pull/3776/files/)|Implement a Cubeb audio sink|[darkf](https://github.com/darkf)|Yes|
+|[3746](https://github.com/citra-emu/citra/pull/3746)|[88a8044](https://github.com/citra-emu/citra/pull/3746/files/)|Service/NDM: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3714](https://github.com/citra-emu/citra/pull/3714)|[08a3837](https://github.com/citra-emu/citra/pull/3714/files/)|video_core/command_processor: correctly handles 0xFFFF index as a normal index|[wwylele](https://github.com/wwylele)|Yes|
+|[3706](https://github.com/citra-emu/citra/pull/3706)|[3f0e017](https://github.com/citra-emu/citra/pull/3706/files/)|Use Travis CI to build MinGW packages|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3632](https://github.com/citra-emu/citra/pull/3632)|[c2fda88](https://github.com/citra-emu/citra/pull/3632/files/)|Add Support for Stereoscopic 3D|[N00byKing](https://github.com/N00byKing)|Yes|
+|[3617](https://github.com/citra-emu/citra/pull/3617)|[fcf6801](https://github.com/citra-emu/citra/pull/3617/files/)|QT: Add support for multiple game directories|[BreadFish64](https://github.com/BreadFish64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra Emulator
