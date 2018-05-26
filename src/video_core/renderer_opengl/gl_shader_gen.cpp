@@ -49,6 +49,8 @@ layout (std140) uniform shader_data {
     int alphatest_ref;
     float depth_scale;
     float depth_offset;
+    float shadow_bias_constant;
+    float shadow_bias_linear;
     int scissor_x1;
     int scissor_y1;
     int scissor_x2;
@@ -220,6 +222,12 @@ PicaFSConfig PicaFSConfig::BuildFromRegs(const Pica::Regs& regs) {
         state.proctex.lut_filter = regs.texturing.proctex_lut.filter;
     }
 
+    state.shadow_rendering = regs.framebuffer.output_merger.fragment_operation_mode ==
+                             Pica::FramebufferRegs::FragmentOperationMode::Shadow;
+
+    state.shadow_texture_orthographic = regs.texturing.shadow.orthographic != 0;
+    state.shadow_texture_bias = regs.texturing.shadow.bias << 1;
+
     return res;
 }
 
@@ -300,6 +308,7 @@ static std::string SampleTexture(const PicaFSConfig& config, unsigned texture_un
         case TexturingRegs::TextureConfig::TextureCube:
             return "texture(tex_cube, vec3(texcoord0, texcoord0_w))";
         case TexturingRegs::TextureConfig::Shadow2D:
+            return "shadowTexture(texcoord0, texcoord0_w)";
         case TexturingRegs::TextureConfig::ShadowCube:
             NGLOG_CRITICAL(HW_GPU, "Unhandled shadow texture");
             UNIMPLEMENTED();
@@ -1181,7 +1190,13 @@ float ProcTexNoiseCoef(vec2 x) {
 std::string GenerateFragmentShader(const PicaFSConfig& config, bool separable_shader) {
     const auto& state = config.state;
 
-    std::string out = "#version 330 core\n";
+    std::string out = R"(
+#version 330 core
+#extension GL_ARB_shader_image_load_store : enable
+#extension GL_ARB_shader_image_size : enable
+#define ALLOW_SHADOW (defined(GL_ARB_shader_image_load_store) && defined(GL_ARB_shader_image_size))
+)";
+
     if (separable_shader) {
         out += "#extension GL_ARB_separate_shader_objects : enable\n";
     }
@@ -1204,6 +1219,11 @@ uniform samplerBuffer proctex_color_map;
 uniform samplerBuffer proctex_alpha_map;
 uniform samplerBuffer proctex_lut;
 uniform samplerBuffer proctex_diff_lut;
+
+#if ALLOW_SHADOW
+layout(r32ui) uniform readonly uimage2D shadow_texture;
+layout(r32ui) uniform uimage2D shadow_buffer;
+#endif
 )";
 
     out += UniformBlockDef;
@@ -1248,6 +1268,48 @@ vec4 byteround(vec4 x) {
     return round(x * 255.0) * (1.0 / 255.0);
 }
 
+#if ALLOW_SHADOW
+
+uvec2 DecodeShadow(uint pixel) {
+    return uvec2(pixel >> 8, pixel & 0xFFu);
+}
+
+uint EncodeShadow(uvec2 pixel) {
+    return (pixel.x << 8) | pixel.y;
+}
+
+float SampleShadow(ivec2 uv, uint z) {
+    if (any(bvec4( lessThan(uv, ivec2(0)), greaterThanEqual(uv, imageSize(shadow_texture)) )))
+        return 1.0;
+    uvec2 pixel = DecodeShadow(imageLoad(shadow_texture, uv).x);
+    return mix(float(pixel.y) * (1.0 / 255.0), 0.0, pixel.x <= z);
+}
+
+vec4 shadowTexture(vec2 uv, float w) {
+)";
+    if (!config.state.shadow_texture_orthographic) {
+        out += "uv /= w;";
+    }
+    out += "uint z = uint(max(0, int(min(abs(w), 1.0) * 0xFFFFFF) - " +
+           std::to_string(state.shadow_texture_bias) + "));";
+    out += R"(
+vec2 coord = imageSize(shadow_texture) * uv - vec2(0.5);
+vec2 coord_floor = floor(coord);
+vec2 f = coord - coord_floor;
+ivec2 i = ivec2(coord_floor);
+vec2 s0 = vec2(SampleShadow(i              , z), SampleShadow(i + ivec2(1, 0), z));
+vec2 s1 = vec2(SampleShadow(i + ivec2(0, 1), z), SampleShadow(i + ivec2(1, 1), z));
+vec2 s = mix(s0, s1, f.yy);
+return vec4(mix(s.x, s.y, f.x));
+}
+
+#else
+
+vec4 shadowTexture(vec2 uv, float w) {
+    return vec4(1.0);
+}
+
+#endif
 )";
 
     if (config.state.proctex.enable)
@@ -1331,9 +1393,38 @@ vec4 secondary_fragment_color = vec4(0.0);
         return out;
     }
 
-    out += "gl_FragDepth = depth;\n";
-    // Round the final fragment color to maintain the PICA's 8 bits of precision
-    out += "color = byteround(last_tex_env_out);\n";
+    if (state.shadow_rendering) {
+        out += R"(
+#if ALLOW_SHADOW
+uint d = uint(clamp(depth, 0.0, 1.0) * 0xFFFFFF);
+uint s = uint(last_tex_env_out.g * 0xFF);
+ivec2 image_coord = ivec2(gl_FragCoord.xy);
+
+uint old = imageLoad(shadow_buffer, image_coord).x;
+uint new;
+uint old2;
+do {
+    old2 = old;
+
+    uvec2 ref = DecodeShadow(old);
+    if (d < ref.x) {
+        if (s == 0u) {
+            ref.x = d;
+        } else {
+            s = uint(float(s) / (shadow_bias_constant + shadow_bias_linear * float(d) / float(ref.x)));
+            ref.y = min(s, ref.y);
+        }
+    }
+    new = EncodeShadow(ref);
+
+} while ((old = imageAtomicCompSwap(shadow_buffer, image_coord, old, new)) != old2);
+#endif // ALLOW_SHADOW
+)";
+    } else {
+        out += "gl_FragDepth = depth;\n";
+        // Round the final fragment color to maintain the PICA's 8 bits of precision
+        out += "color = byteround(last_tex_env_out);\n";
+    }
 
     out += "}";
 

@@ -31,6 +31,11 @@ constexpr TextureUnit TextureCube{10};
 
 } // namespace TextureUnits
 
+namespace ImageUnits {
+constexpr GLuint ShadowBuffer = 0;
+constexpr GLuint ShadowTexture = 1;
+} // namespace ImageUnits
+
 class OpenGLState {
 public:
     struct {
