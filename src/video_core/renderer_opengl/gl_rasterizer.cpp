@@ -38,6 +38,15 @@ RasterizerOpenGL::RasterizerOpenGL()
     : shader_dirty(true), vertex_buffer(GL_ARRAY_BUFFER, VERTEX_BUFFER_SIZE),
       uniform_buffer(GL_UNIFORM_BUFFER, UNIFORM_BUFFER_SIZE),
       index_buffer(GL_ELEMENT_ARRAY_BUFFER, INDEX_BUFFER_SIZE) {
+
+    allow_shadow = GLAD_GL_ARB_shader_image_load_store && GLAD_GL_ARB_shader_image_size &&
+                   GLAD_GL_ARB_framebuffer_no_attachments;
+    if (!allow_shadow) {
+        NGLOG_WARNING(
+            Render_OpenGL,
+            "Shadow might not be able to render because of unsupported OpenGL extensions.");
+    }
+
     // Clipping plane 0 is always enabled for PICA fixed clip plane z <= 0
     state.clip_distance[0] = true;
 
@@ -237,6 +246,7 @@ void RasterizerOpenGL::SyncEntireState() {
 
     SyncFogColor();
     SyncProcTexNoise();
+    SyncShadowBias();
 }
 
 /**
@@ -533,12 +543,16 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
     MICROPROFILE_SCOPE(OpenGL_Drawing);
     const auto& regs = Pica::g_state.regs;
 
+    bool shadow_rendering = regs.framebuffer.output_merger.fragment_operation_mode ==
+                            Pica::FramebufferRegs::FragmentOperationMode::Shadow;
+
     const bool has_stencil =
         regs.framebuffer.framebuffer.depth_format == Pica::FramebufferRegs::DepthFormat::D24S8;
 
-    const bool write_color_fb =
-        state.color_mask.red_enabled == GL_TRUE || state.color_mask.green_enabled == GL_TRUE ||
-        state.color_mask.blue_enabled == GL_TRUE || state.color_mask.alpha_enabled == GL_TRUE;
+    const bool write_color_fb = shadow_rendering || state.color_mask.red_enabled == GL_TRUE ||
+                                state.color_mask.green_enabled == GL_TRUE ||
+                                state.color_mask.blue_enabled == GL_TRUE ||
+                                state.color_mask.alpha_enabled == GL_TRUE;
 
     const bool write_depth_fb =
         (state.depth.test_enabled && state.depth.write_mask == GL_TRUE) ||
@@ -547,7 +561,7 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
     const bool using_color_fb =
         regs.framebuffer.framebuffer.GetColorBufferPhysicalAddress() != 0 && write_color_fb;
     const bool using_depth_fb =
-        regs.framebuffer.framebuffer.GetDepthBufferPhysicalAddress() != 0 &&
+        !shadow_rendering && regs.framebuffer.framebuffer.GetDepthBufferPhysicalAddress() != 0 &&
         (write_depth_fb || regs.framebuffer.output_merger.depth_test_enable != 0 ||
          (has_stencil && state.stencil.test_enabled));
 
@@ -591,24 +605,40 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
     state.draw.draw_framebuffer = framebuffer.handle;
     state.Apply();
 
-    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           color_surface != nullptr ? color_surface->texture.handle : 0, 0);
-    if (depth_surface != nullptr) {
-        if (has_stencil) {
-            // attach both depth and stencil
-            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D,
-                                   depth_surface->texture.handle, 0);
-        } else {
-            // attach depth
-            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
-                                   depth_surface->texture.handle, 0);
-            // clear stencil attachment
-            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, 0, 0);
+    if (shadow_rendering) {
+        if (!allow_shadow || color_surface == nullptr) {
+            return true;
         }
-    } else {
-        // clear both depth and stencil attachment
+        glFramebufferParameteri(GL_DRAW_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_WIDTH,
+                                color_surface->width * color_surface->res_scale);
+        glFramebufferParameteri(GL_DRAW_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_HEIGHT,
+                                color_surface->height * color_surface->res_scale);
+        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
         glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, 0,
                                0);
+        glBindImageTexture(ImageUnits::ShadowBuffer, color_surface->texture.handle, 0, GL_FALSE, 0,
+                           GL_READ_WRITE, GL_R32UI);
+    } else {
+        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+                               color_surface != nullptr ? color_surface->texture.handle : 0, 0);
+        if (depth_surface != nullptr) {
+            if (has_stencil) {
+                // attach both depth and stencil
+                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
+                                       GL_TEXTURE_2D, depth_surface->texture.handle, 0);
+            } else {
+                // attach depth
+                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+                                       depth_surface->texture.handle, 0);
+                // clear stencil attachment
+                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_TEXTURE_2D, 0,
+                                       0);
+            }
+        } else {
+            // clear both depth and stencil attachment
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D,
+                                   0, 0);
+        }
     }
 
     // Sync the viewport
@@ -650,6 +680,12 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
     }
 
     // Sync and bind the texture surfaces
+    bool use_shadow_texture_px = false;
+    bool use_shadow_texture_nx = false;
+    bool use_shadow_texture_py = false;
+    bool use_shadow_texture_ny = false;
+    bool use_shadow_texture_pz = false;
+    bool use_shadow_texture_nz = false;
     const auto pica_textures = regs.texturing.GetTextures();
     for (unsigned texture_index = 0; texture_index < pica_textures.size(); ++texture_index) {
         const auto& texture = pica_textures[texture_index];
@@ -658,6 +694,82 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
             if (texture_index == 0) {
                 using TextureType = Pica::TexturingRegs::TextureConfig::TextureType;
                 switch (texture.config.type.Value()) {
+                case TextureType::Shadow2D: {
+                    if (!allow_shadow)
+                        continue;
+
+                    Surface surface = res_cache.GetTextureSurface(texture);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTexturePX, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_px = true;
+                    }
+                    continue;
+                }
+                case TextureType::ShadowCube: {
+                    if (!allow_shadow)
+                        continue;
+                    Pica::Texture::TextureInfo info = Pica::Texture::TextureInfo::FromPicaRegister(
+                        texture.config, texture.format);
+                    Surface surface;
+
+                    using CubeFace = Pica::TexturingRegs::CubeFace;
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::PositiveX);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTexturePX, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_px = true;
+                    }
+
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::NegativeX);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTextureNX, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_nx = true;
+                    }
+
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::PositiveY);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTexturePY, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_py = true;
+                    }
+
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::NegativeY);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTextureNY, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_ny = true;
+                    }
+
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::PositiveZ);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTexturePZ, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_pz = true;
+                    }
+
+                    info.physical_address =
+                        regs.texturing.GetCubePhysicalAddress(CubeFace::NegativeZ);
+                    surface = res_cache.GetTextureSurface(info);
+                    if (surface != nullptr) {
+                        glBindImageTexture(ImageUnits::ShadowTextureNZ, surface->texture.handle, 0,
+                                           GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+                        use_shadow_texture_nz = true;
+                    }
+
+                    continue;
+                }
                 case TextureType::TextureCube:
                     using CubeFace = Pica::TexturingRegs::CubeFace;
                     TextureCubeConfig config;
@@ -791,6 +903,36 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
     }
     state.texture_cube_unit.texture_cube = 0;
     state.Apply();
+
+    if (use_shadow_texture_px) {
+        glBindImageTexture(ImageUnits::ShadowTexturePX, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (use_shadow_texture_nx) {
+        glBindImageTexture(ImageUnits::ShadowTextureNX, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (use_shadow_texture_py) {
+        glBindImageTexture(ImageUnits::ShadowTexturePY, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (use_shadow_texture_ny) {
+        glBindImageTexture(ImageUnits::ShadowTextureNY, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (use_shadow_texture_pz) {
+        glBindImageTexture(ImageUnits::ShadowTexturePZ, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (use_shadow_texture_nz) {
+        glBindImageTexture(ImageUnits::ShadowTextureNZ, 0, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32UI);
+    }
+
+    if (shadow_rendering) {
+        glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT |
+                        GL_TEXTURE_UPDATE_BARRIER_BIT | GL_FRAMEBUFFER_BARRIER_BIT);
+        glBindImageTexture(ImageUnits::ShadowBuffer, 0, 0, GL_FALSE, 0, GL_READ_WRITE, GL_R32UI);
+    }
 
     // Mark framebuffer surfaces as dirty
     MathUtil::Rectangle<u32> draw_rect_unscaled{
@@ -948,6 +1090,10 @@ void RasterizerOpenGL::NotifyPicaRegisterChanged(u32 id) {
     // (This is a dedicated color write-enable register)
     case PICA_REG_INDEX(framebuffer.framebuffer.allow_color_write):
         SyncColorWriteMask();
+        break;
+
+    case PICA_REG_INDEX(framebuffer.shadow):
+        SyncShadowBias();
         break;
 
     // Scissor test
@@ -1921,6 +2067,19 @@ void RasterizerOpenGL::SyncLightDistanceAttenuationScale(int light_index) {
 
     if (dist_atten_scale != uniform_block_data.data.light_src[light_index].dist_atten_scale) {
         uniform_block_data.data.light_src[light_index].dist_atten_scale = dist_atten_scale;
+        uniform_block_data.dirty = true;
+    }
+}
+
+void RasterizerOpenGL::SyncShadowBias() {
+    const auto& shadow = Pica::g_state.regs.framebuffer.shadow;
+    GLfloat constant = Pica::float16::FromRaw(shadow.constant).ToFloat32();
+    GLfloat linear = Pica::float16::FromRaw(shadow.linear).ToFloat32();
+
+    if (constant != uniform_block_data.data.shadow_bias_constant ||
+        linear != uniform_block_data.data.shadow_bias_linear) {
+        uniform_block_data.data.shadow_bias_constant = constant;
+        uniform_block_data.data.shadow_bias_linear = linear;
         uniform_block_data.dirty = true;
     }
 }
