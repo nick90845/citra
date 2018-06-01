@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 174241ff900dfeb664566b5a7081169849d58568
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3778](https://github.com/citra-emu/citra/pull/3778)|[08d7b59](https://github.com/citra-emu/citra/pull/3778/files/)|gl_rasterizer: implement shadow map 2D/Cube - Image load/store version|[wwylele](https://github.com/wwylele)|Yes|
+|[3764](https://github.com/citra-emu/citra/pull/3764)|[96e23b3](https://github.com/citra-emu/citra/pull/3764/files/)|camera: Add camera flip config & camera refactor|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3757](https://github.com/citra-emu/citra/pull/3757)|[9504aa1](https://github.com/citra-emu/citra/pull/3757/files/)|citra_qt: Improve Game List Item display|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3751](https://github.com/citra-emu/citra/pull/3751)|[92a1252](https://github.com/citra-emu/citra/pull/3751/files/)|gl_shader_gen: rearrange function definition to avoid suprious warnings|[wwylele](https://github.com/wwylele)|Yes|
+|[3750](https://github.com/citra-emu/citra/pull/3750)|[8b4e832](https://github.com/citra-emu/citra/pull/3750/files/)|gl_rasterizer_cache: add missing watcher invalidation|[wwylele](https://github.com/wwylele)|Yes|
+|[3706](https://github.com/citra-emu/citra/pull/3706)|[b1858c2](https://github.com/citra-emu/citra/pull/3706/files/)|Use Travis CI to build MinGW packages|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3632](https://github.com/citra-emu/citra/pull/3632)|[b491686](https://github.com/citra-emu/citra/pull/3632/files/)|Add Support for Stereoscopic 3D|[N00byKing](https://github.com/N00byKing)|Yes|
+|[3617](https://github.com/citra-emu/citra/pull/3617)|[30c6c37](https://github.com/citra-emu/citra/pull/3617/files/)|QT: Add support for multiple game directories|[BreadFish64](https://github.com/BreadFish64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
