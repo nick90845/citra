@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: c2efd4999737509395d1cbf644decd5f19dac75a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3834](https://github.com/citra-emu/citra/pull/3834)|[cdebde8](https://github.com/citra-emu/citra/pull/3834/files/)|Update cpp-httplib for gzip + chunked encoding fixes|[j-selby](https://github.com/j-selby)|Yes|
+|[3830](https://github.com/citra-emu/citra/pull/3830)|[729842b](https://github.com/citra-emu/citra/pull/3830/files/)|dist/languages: Update current translations|[Hexagon12](https://github.com/Hexagon12)|Yes|
+|[3759](https://github.com/citra-emu/citra/pull/3759)|[c4ff0ba](https://github.com/citra-emu/citra/pull/3759/files/)|Rewrite texture_buffer_object handling.|[degasus](https://github.com/degasus)|Yes|
+|[3706](https://github.com/citra-emu/citra/pull/3706)|[34e0119](https://github.com/citra-emu/citra/pull/3706/files/)|Use Travis CI to build MinGW packages|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
