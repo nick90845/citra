@@ -19,6 +19,7 @@ public:
     ~ConfigureAudio();
 
     void applyConfiguration();
+    void OnVolumeChanged();
     void retranslateUi();
 
 public slots:
