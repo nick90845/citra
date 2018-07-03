@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: fd5f71bcff0fb55ce2ee59ab6ac911fbeaf6683b
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3907](https://github.com/citra-emu/citra/pull/3907)|[113ae6c](https://github.com/citra-emu/citra/pull/3907/files/)|citra_qt: enable per-monitor DPI scaling|[BynariStar](https://github.com/BynariStar)|Yes|
+|[3881](https://github.com/citra-emu/citra/pull/3881)|[f4bd39e](https://github.com/citra-emu/citra/pull/3881/files/)|Use open source Shared Font if no dumped file is available|[B3n30](https://github.com/B3n30)|Yes|
+|[3850](https://github.com/citra-emu/citra/pull/3850)|[05334e6](https://github.com/citra-emu/citra/pull/3850/files/)|applets/swkbd: Software Keyboard Implementation|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3831](https://github.com/citra-emu/citra/pull/3831)|[a780f38](https://github.com/citra-emu/citra/pull/3831/files/)|citra_qt: Add a volume slider|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[3706](https://github.com/citra-emu/citra/pull/3706)|[34e0119](https://github.com/citra-emu/citra/pull/3706/files/)|Use Travis CI to build MinGW packages|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
