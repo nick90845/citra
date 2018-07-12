@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 47d283a1e4860e3b1d10666f488e6ecf0aa1a27a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3926](https://github.com/citra-emu/citra/pull/3926)|[431fe44](https://github.com/citra-emu/citra/pull/3926/files/)|gl_rasterizer: call glTextureBarrier when an image is bound to both texture and framebuffer|[wwylele](https://github.com/wwylele)|Yes|
+|[3917](https://github.com/citra-emu/citra/pull/3917)|[56488a9](https://github.com/citra-emu/citra/pull/3917/files/)|am: Fix DLC loading.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[3916](https://github.com/citra-emu/citra/pull/3916)|[2927c88](https://github.com/citra-emu/citra/pull/3916/files/)|gl_rasterizer: implement mipmap for procedural texture|[wwylele](https://github.com/wwylele)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[2ec05d1](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+|[3907](https://github.com/citra-emu/citra/pull/3907)|[60c3ec2](https://github.com/citra-emu/citra/pull/3907/files/)|citra_qt: enable per-monitor DPI scaling|[BynariStar](https://github.com/BynariStar)|Yes|
+|[3881](https://github.com/citra-emu/citra/pull/3881)|[3300b07](https://github.com/citra-emu/citra/pull/3881/files/)|Use open source Shared Font if no dumped file is available|[B3n30](https://github.com/B3n30)|Yes|
+|[3850](https://github.com/citra-emu/citra/pull/3850)|[dcaf4a8](https://github.com/citra-emu/citra/pull/3850/files/)|applets/swkbd: Software Keyboard Implementation|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3831](https://github.com/citra-emu/citra/pull/3831)|[6eb7ee9](https://github.com/citra-emu/citra/pull/3831/files/)|citra_qt: Add a volume slider|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
