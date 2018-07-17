@@ -1,3 +1,29 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: a9e922e68f4fc2a24c449c18a11f61e388d8e55e
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3947](https://github.com/citra-emu/citra/pull/3947)|[40aea8d](https://github.com/citra-emu/citra/pull/3947/files/)|citra_qt: use Citra Web Service username as default multiplayer nickname|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3946](https://github.com/citra-emu/citra/pull/3946)|[a398bce](https://github.com/citra-emu/citra/pull/3946/files/)|citra_qt: disable hw shader by default for macos|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3944](https://github.com/citra-emu/citra/pull/3944)|[8bca734](https://github.com/citra-emu/citra/pull/3944/files/)|Service/SOC: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3928](https://github.com/citra-emu/citra/pull/3928)|[82aa45d](https://github.com/citra-emu/citra/pull/3928/files/)|citra_qt: Log settings on launch|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3926](https://github.com/citra-emu/citra/pull/3926)|[431fe44](https://github.com/citra-emu/citra/pull/3926/files/)|gl_rasterizer: call glTextureBarrier when an image is bound to both texture and framebuffer|[wwylele](https://github.com/wwylele)|Yes|
+|[3917](https://github.com/citra-emu/citra/pull/3917)|[56488a9](https://github.com/citra-emu/citra/pull/3917/files/)|am: Fix DLC loading.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[3916](https://github.com/citra-emu/citra/pull/3916)|[2927c88](https://github.com/citra-emu/citra/pull/3916/files/)|gl_rasterizer: implement mipmap for procedural texture|[wwylele](https://github.com/wwylele)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[2ec05d1](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+|[3881](https://github.com/citra-emu/citra/pull/3881)|[3300b07](https://github.com/citra-emu/citra/pull/3881/files/)|Use open source Shared Font if no dumped file is available|[B3n30](https://github.com/B3n30)|Yes|
+|[3850](https://github.com/citra-emu/citra/pull/3850)|[b54e3b7](https://github.com/citra-emu/citra/pull/3850/files/)|applets/swkbd: Software Keyboard Implementation|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3831](https://github.com/citra-emu/citra/pull/3831)|[6eb7ee9](https://github.com/citra-emu/citra/pull/3831/files/)|citra_qt: Add a volume slider|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
