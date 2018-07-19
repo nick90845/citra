@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: f40ce71f7667906a97680e91bfe2143462316913
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[3951](https://github.com/citra-emu/citra/pull/3951)|[e61b7d2](https://github.com/citra-emu/citra/pull/3951/files/)|service/cfg, citra_qt: add country code configuration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3944](https://github.com/citra-emu/citra/pull/3944)|[aa02c50](https://github.com/citra-emu/citra/pull/3944/files/)|Service/SOC: convert to ServiceFramework|[wwylele](https://github.com/wwylele)|Yes|
+|[3928](https://github.com/citra-emu/citra/pull/3928)|[e8ac58c](https://github.com/citra-emu/citra/pull/3928/files/)|citra_qt: Log settings on launch|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3917](https://github.com/citra-emu/citra/pull/3917)|[56488a9](https://github.com/citra-emu/citra/pull/3917/files/)|am: Fix DLC loading.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[3916](https://github.com/citra-emu/citra/pull/3916)|[2927c88](https://github.com/citra-emu/citra/pull/3916/files/)|gl_rasterizer: implement mipmap for procedural texture|[wwylele](https://github.com/wwylele)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[2ec05d1](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
