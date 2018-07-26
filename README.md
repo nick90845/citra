@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 4a3c4f5f67819b62d0f494c35c10505986c3151c
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4000](https://github.com/citra-emu/citra/pull/4000)|[8aa55b7](https://github.com/citra-emu/citra/pull/4000/files/)|dist/languages: Update translations|[Hexagon12](https://github.com/Hexagon12)|Yes|
+|[3998](https://github.com/citra-emu/citra/pull/3998)|[afc6aff](https://github.com/citra-emu/citra/pull/3998/files/)|service/boss: Migrate to ServiceFramework|[NarcolepticK](https://github.com/NarcolepticK)|Yes|
+|[3977](https://github.com/citra-emu/citra/pull/3977)|[8a2c44b](https://github.com/citra-emu/citra/pull/3977/files/)|Add virtual bad word list; Load if dump is missing|[B3n30](https://github.com/B3n30)|Yes|
+|[3951](https://github.com/citra-emu/citra/pull/3951)|[e61b7d2](https://github.com/citra-emu/citra/pull/3951/files/)|service/cfg, citra_qt: add country code configuration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3928](https://github.com/citra-emu/citra/pull/3928)|[e8ac58c](https://github.com/citra-emu/citra/pull/3928/files/)|citra_qt: Log settings on launch|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3924](https://github.com/citra-emu/citra/pull/3924)|[1d7dc5a](https://github.com/citra-emu/citra/pull/3924/files/)|citra_qt: Settings (configuration) default value fix|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3917](https://github.com/citra-emu/citra/pull/3917)|[56488a9](https://github.com/citra-emu/citra/pull/3917/files/)|am: Fix DLC loading.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[a85447d](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
