@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 71729fd47a8730d5a85c9f9da532cbd6e2542941
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4030](https://github.com/citra-emu/citra/pull/4030)|[1affca0](https://github.com/citra-emu/citra/pull/4030/files/)|Port "logging: Use std::string_view where applicable" from yuzu|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4020](https://github.com/citra-emu/citra/pull/4020)|[12034e5](https://github.com/citra-emu/citra/pull/4020/files/)|ncch_container: support encrypted games|[wwylele](https://github.com/wwylele)|Yes|
+|[4000](https://github.com/citra-emu/citra/pull/4000)|[8aa55b7](https://github.com/citra-emu/citra/pull/4000/files/)|dist/languages: Update translations|[Hexagon12](https://github.com/Hexagon12)|Yes|
+|[3996](https://github.com/citra-emu/citra/pull/3996)|[8f70e9a](https://github.com/citra-emu/citra/pull/3996/files/)|service/dsp: Clean up global state|[NarcolepticK](https://github.com/NarcolepticK)|Yes|
+|[3988](https://github.com/citra-emu/citra/pull/3988)|[921037a](https://github.com/citra-emu/citra/pull/3988/files/)|citra_qt/multiplayer: allow blocking other players in chat room|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3924](https://github.com/citra-emu/citra/pull/3924)|[1d7dc5a](https://github.com/citra-emu/citra/pull/3924/files/)|citra_qt: Settings (configuration) default value fix|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[a85447d](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+|[3839](https://github.com/citra-emu/citra/pull/3839)|[786eca3](https://github.com/citra-emu/citra/pull/3839/files/)|travis: use prebuilt image|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
