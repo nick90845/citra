@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 14b0435df227b8ab5318c37bd1558fec85cac8a7
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4020](https://github.com/citra-emu/citra/pull/4020)|[dd34cab](https://github.com/citra-emu/citra/pull/4020/files/)|ncch_container: support encrypted games|[wwylele](https://github.com/wwylele)|Yes|
+|[4001](https://github.com/citra-emu/citra/pull/4001)|[d19dbe8](https://github.com/citra-emu/citra/pull/4001/files/)|Services/HTTP: Corrected some error codes and added a few new ones.|[Subv](https://github.com/Subv)|Yes|
+|[3985](https://github.com/citra-emu/citra/pull/3985)|[aa4b71d](https://github.com/citra-emu/citra/pull/3985/files/)|core: clean up warnings|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[3924](https://github.com/citra-emu/citra/pull/3924)|[1d7dc5a](https://github.com/citra-emu/citra/pull/3924/files/)|citra_qt: Settings (configuration) default value fix|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3922](https://github.com/citra-emu/citra/pull/3922)|[4899685](https://github.com/citra-emu/citra/pull/3922/files/)|movie: Add Qt Movie feature|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3839](https://github.com/citra-emu/citra/pull/3839)|[786eca3](https://github.com/citra-emu/citra/pull/3839/files/)|travis: use prebuilt image|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
