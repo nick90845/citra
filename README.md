@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 27b015e652b3dc419d6fd3ade47fb491c6f2b2d5
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4047](https://github.com/citra-emu/citra/pull/4047)|[60eddda](https://github.com/citra-emu/citra/pull/4047/files/)|citra_qt/configuration: Add background color config|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4042](https://github.com/citra-emu/citra/pull/4042)|[266f2b6](https://github.com/citra-emu/citra/pull/4042/files/)|gl_rasterizer: apply AMD hack only when the vendor is AMD|[wwylele](https://github.com/wwylele)|Yes|
+|[4020](https://github.com/citra-emu/citra/pull/4020)|[dd34cab](https://github.com/citra-emu/citra/pull/4020/files/)|ncch_container: support encrypted games|[wwylele](https://github.com/wwylele)|Yes|
+|[4001](https://github.com/citra-emu/citra/pull/4001)|[d19dbe8](https://github.com/citra-emu/citra/pull/4001/files/)|Services/HTTP: Corrected some error codes and added a few new ones.|[Subv](https://github.com/Subv)|Yes|
+|[4000](https://github.com/citra-emu/citra/pull/4000)|[8aa55b7](https://github.com/citra-emu/citra/pull/4000/files/)|dist/languages: Update translations|[Hexagon12](https://github.com/Hexagon12)|Yes|
+|[3985](https://github.com/citra-emu/citra/pull/3985)|[aa4b71d](https://github.com/citra-emu/citra/pull/3985/files/)|core: clean up warnings|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[3924](https://github.com/citra-emu/citra/pull/3924)|[1d7dc5a](https://github.com/citra-emu/citra/pull/3924/files/)|citra_qt: Settings (configuration) default value fix|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3922](https://github.com/citra-emu/citra/pull/3922)|[4899685](https://github.com/citra-emu/citra/pull/3922/files/)|movie: Add Qt Movie feature|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3839](https://github.com/citra-emu/citra/pull/3839)|[786eca3](https://github.com/citra-emu/citra/pull/3839/files/)|travis: use prebuilt image|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
