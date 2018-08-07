@@ -89,6 +89,9 @@ void Config::ReadValues() {
                          "engine:motion_emu,update_period:100,sensitivity:0.01,tilt_clamp:90.0");
     Settings::values.touch_device =
         sdl2_config->Get("Controls", "touch_device", "engine:emu_window");
+    Settings::values.udp_input_address =
+        sdl2_config->Get("Controls", "udp_input_address", "127.0.0.1");
+    Settings::values.udp_input_port = sdl2_config->GetInteger("Controls", "udp_input_port", 26760);
 
     // Core
     Settings::values.use_cpu_jit = sdl2_config->GetBoolean("Core", "use_cpu_jit", true);
