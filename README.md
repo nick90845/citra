@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 1e724b046b061be29aa192846632b7cbe9f6b3b6
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4053](https://github.com/citra-emu/citra/pull/4053)|[4c3961d](https://github.com/citra-emu/citra/pull/4053/files/)|am: Corrections to handling of non-existent content indices.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[4049](https://github.com/citra-emu/citra/pull/4049)|[7d5f2b4](https://github.com/citra-emu/citra/pull/4049/files/)|Input: UDP Client to provide motion and touch controls|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4043](https://github.com/citra-emu/citra/pull/4043)|[29af8f5](https://github.com/citra-emu/citra/pull/4043/files/)|Add system time configuration|[B3n30](https://github.com/B3n30)|Yes|
+|[4020](https://github.com/citra-emu/citra/pull/4020)|[d4a808c](https://github.com/citra-emu/citra/pull/4020/files/)|ncch_container: support encrypted games|[wwylele](https://github.com/wwylele)|Yes|
+|[4001](https://github.com/citra-emu/citra/pull/4001)|[79db1f8](https://github.com/citra-emu/citra/pull/4001/files/)|Services/HTTP: Corrected some error codes and added a few new ones.|[Subv](https://github.com/Subv)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
