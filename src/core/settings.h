@@ -11,6 +11,11 @@
 
 namespace Settings {
 
+enum class InitClock {
+    SystemTime = 0,
+    FixedTime = 1,
+};
+
 enum class LayoutOption {
     Default,
     SingleScreen,
@@ -104,8 +109,10 @@ struct Values {
     // Data Storage
     bool use_virtual_sd;
 
-    // System Region
+    // System
     int region_value;
+    InitClock init_clock;
+    time_t init_time;
 
     // Renderer
     bool use_hw_renderer;
