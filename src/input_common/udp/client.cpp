@@ -11,6 +11,7 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include "common/logging/log.h"
+#include "common/thread.h"
 #include "common/vector_math.h"
 #include "input_common/udp/client.h"
 #include "input_common/udp/protocol.h"
@@ -126,17 +127,18 @@ static void SocketLoop(Socket* socket) {
 Client::Client(std::shared_ptr<DeviceStatus> status, const std::string& host, u16 port,
                u32 client_id)
     : status(status) {
-    SocketCallback callback{[this](Response::Version version) { OnVersion(version); },
-                            [this](Response::PortInfo info) { OnPortInfo(info); },
-                            [this](Response::PadData data) { OnPadData(data); }};
-    LOG_INFO(Input, "Starting communication with UDP input server on {}:{}", host, port);
-    socket = std::make_unique<Socket>(host, port, client_id, callback);
-    thread = std::thread{SocketLoop, this->socket.get()};
+    StartCommunication(host, port, client_id);
 }
 
 Client::~Client() {
     socket->Stop();
     thread.join();
+}
+
+void Client::ReloadSocket(const std::string& host, u16 port, u32 client_id) {
+    socket->Stop();
+    thread.join();
+    StartCommunication(host, port, client_id);
 }
 
 void Client::OnVersion(Response::Version data) {
@@ -188,6 +190,74 @@ void Client::OnPadData(Response::PadData data) {
 
         status->touch_status = {x, y, is_active};
     }
+}
+
+void Client::StartCommunication(const std::string& host, u16 port, u32 client_id) {
+    SocketCallback callback{[this](Response::Version version) { OnVersion(version); },
+                            [this](Response::PortInfo info) { OnPortInfo(info); },
+                            [this](Response::PadData data) { OnPadData(data); }};
+    LOG_INFO(Input, "Starting communication with UDP input server on {}:{}", host, port);
+    socket = std::make_unique<Socket>(host, port, client_id, callback);
+    thread = std::thread{SocketLoop, this->socket.get()};
+}
+
+void TestCommunication(const std::string& host, u16 port, u32 client_id,
+                       std::function<void()> success_callback,
+                       std::function<void()> failure_callback) {
+    std::thread([=] {
+        Common::Event success_event;
+        SocketCallback callback{[](Response::Version version) {}, [](Response::PortInfo info) {},
+                                [&](Response::PadData data) { success_event.Set(); }};
+        Socket socket(host, port, client_id, callback);
+        std::thread worker_thread{SocketLoop, &socket};
+        bool result = success_event.WaitFor(std::chrono::seconds(10));
+        socket.Stop();
+        worker_thread.join();
+        if (result)
+            success_callback();
+        else
+            failure_callback();
+    })
+        .detach();
+}
+
+constexpr u16 CALIBRATION_THRESHOLD = 100;
+
+void ConfigureCalibration(const std::string& host, u16 port, u32 client_id,
+                          std::function<void(u16, u16, u16, u16)> success_callback,
+                          std::function<void()> failure_callback) {
+    std::thread([=] {
+        Common::Event complete_event;
+        u16 min_x{UINT16_MAX}, min_y{UINT16_MAX};
+        u16 max_x, max_y;
+        SocketCallback callback{[](Response::Version version) {}, [](Response::PortInfo info) {},
+                                [&](Response::PadData data) {
+                                    if (!data.touch_1.is_active)
+                                        return;
+                                    LOG_INFO(Common, "Current touch: {} {}", data.touch_1.x,
+                                             data.touch_1.y);
+                                    min_x = std::min(min_x, static_cast<u16>(data.touch_1.x));
+                                    min_y = std::min(min_y, static_cast<u16>(data.touch_1.y));
+                                    if (data.touch_1.x - min_x > CALIBRATION_THRESHOLD &&
+                                        data.touch_1.y - min_y > CALIBRATION_THRESHOLD) {
+                                        // Set the current position as max value and finishes
+                                        // configuration
+                                        max_x = data.touch_1.x;
+                                        max_y = data.touch_1.y;
+                                        complete_event.Set();
+                                    }
+                                }};
+        Socket socket(host, port, client_id, callback);
+        std::thread worker_thread{SocketLoop, &socket};
+        bool result = complete_event.WaitFor(std::chrono::seconds(30));
+        socket.Stop();
+        worker_thread.join();
+        if (result)
+            success_callback(min_x, min_y, max_x, max_y);
+        else
+            failure_callback();
+    })
+        .detach();
 }
 
 } // namespace InputCommon::CemuhookUDP
