@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 84fc8eaaba35542e602c002e658cf09e3169f6ce
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4059](https://github.com/citra-emu/citra/pull/4059)|[33d21c5](https://github.com/citra-emu/citra/pull/4059/files/)| citra_qt: add motion/touch config|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4053](https://github.com/citra-emu/citra/pull/4053)|[4c3961d](https://github.com/citra-emu/citra/pull/4053/files/)|am: Corrections to handling of non-existent content indices.|[Steveice10](https://github.com/Steveice10)|Yes|
+|[4043](https://github.com/citra-emu/citra/pull/4043)|[be91b34](https://github.com/citra-emu/citra/pull/4043/files/)|Add system time configuration|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
