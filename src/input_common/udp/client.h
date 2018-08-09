@@ -47,15 +47,26 @@ public:
     explicit Client(std::shared_ptr<DeviceStatus> status, const std::string& host = DEFAULT_ADDR,
                     u16 port = DEFAULT_PORT, u32 client_id = 24872);
     ~Client();
+    void ReloadSocket(const std::string& host = "127.0.0.1", u16 port = 26760,
+                      u32 client_id = 24872);
 
 private:
     void OnVersion(Response::Version);
     void OnPortInfo(Response::PortInfo);
     void OnPadData(Response::PadData);
+    void StartCommunication(const std::string& host, u16 port, u32 client_id);
 
     std::unique_ptr<Socket> socket;
     std::shared_ptr<DeviceStatus> status;
     std::thread thread;
     u64 packet_sequence = 0;
 };
+
+void TestCommunication(const std::string& host, u16 port, u32 client_id,
+                       std::function<void()> success_callback,
+                       std::function<void()> failure_callback);
+
+void ConfigureCalibration(const std::string& host, u16 port, u32 client_id,
+                          std::function<void(u16, u16, u16, u16)> success_callback,
+                          std::function<void()> failure_callback);
 } // namespace InputCommon::CemuhookUDP
