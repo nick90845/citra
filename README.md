@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 5e658efdb89b7ab95ea90ba7f7fc434d30b82005
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4069](https://github.com/citra-emu/citra/pull/4069)|[aa98e55](https://github.com/citra-emu/citra/pull/4069/files/)|Service::SM: Wait till client is registered|[B3n30](https://github.com/B3n30)|Yes|
+|[4059](https://github.com/citra-emu/citra/pull/4059)|[6565f2a](https://github.com/citra-emu/citra/pull/4059/files/)| citra_qt: add motion/touch config|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4043](https://github.com/citra-emu/citra/pull/4043)|[54c94c8](https://github.com/citra-emu/citra/pull/4043/files/)|Add system time configuration|[B3n30](https://github.com/B3n30)|Yes|
+|[3786](https://github.com/citra-emu/citra/pull/3786)|[f977ba0](https://github.com/citra-emu/citra/pull/3786/files/)|citra-qt: Make hotkeys configurable via the GUI.|[adityaruplaha](https://github.com/adityaruplaha)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
