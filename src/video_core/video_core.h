@@ -6,6 +6,7 @@
 
 #include <atomic>
 #include <memory>
+#include "core/core.h"
 
 class EmuWindow;
 class RendererBase;
@@ -29,7 +30,7 @@ extern std::atomic<bool> g_renderer_bg_color_update_requested;
 extern std::atomic<bool> g_use_format_reinterpret_hack;
 
 /// Initialize the video core
-bool Init(EmuWindow* emu_window);
+Core::System::ResultStatus Init(EmuWindow* emu_window);
 
 /// Shutdown the video core
 void Shutdown();
