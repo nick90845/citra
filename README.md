@@ -1,3 +1,28 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: f2816aa430ded43d40d0ffc98d69602249aa4177
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4086](https://github.com/citra-emu/citra/pull/4086)|[4e53fbe](https://github.com/citra-emu/citra/pull/4086/files/)|externals: Update dynarmic|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4069](https://github.com/citra-emu/citra/pull/4069)|[aa98e55](https://github.com/citra-emu/citra/pull/4069/files/)|Service::SM: Wait till client is registered|[B3n30](https://github.com/B3n30)|Yes|
+|[4059](https://github.com/citra-emu/citra/pull/4059)|[8db6822](https://github.com/citra-emu/citra/pull/4059/files/)| citra_qt: add motion/touch config|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4043](https://github.com/citra-emu/citra/pull/4043)|[4536681](https://github.com/citra-emu/citra/pull/4043/files/)|Add system time configuration|[B3n30](https://github.com/B3n30)|Yes|
+|[4041](https://github.com/citra-emu/citra/pull/4041)|[1800894](https://github.com/citra-emu/citra/pull/4041/files/)|web_service: Change authentication system to use JWT|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4005](https://github.com/citra-emu/citra/pull/4005)|[4a9c4c4](https://github.com/citra-emu/citra/pull/4005/files/)|service/cecd: Stub some functions|[NarcolepticK](https://github.com/NarcolepticK)|Yes|
+|[3970](https://github.com/citra-emu/citra/pull/3970)|[b19e88a](https://github.com/citra-emu/citra/pull/3970/files/)|citra_qt: Add more verbose popups for video_core errors|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[3922](https://github.com/citra-emu/citra/pull/3922)|[9d05628](https://github.com/citra-emu/citra/pull/3922/files/)|movie: Add Qt Movie feature|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3786](https://github.com/citra-emu/citra/pull/3786)|[fd5f443](https://github.com/citra-emu/citra/pull/3786/files/)|citra-qt: Make hotkeys configurable via the GUI.|[adityaruplaha](https://github.com/adityaruplaha)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
