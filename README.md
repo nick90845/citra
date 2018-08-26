@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 9b9227089b70ce1e38987e5a982593c95c693320
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4138](https://github.com/citra-emu/citra/pull/4138)|[efb80d5](https://github.com/citra-emu/citra/pull/4138/files/)|web_service: Unify links for web service endpoints|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4086](https://github.com/citra-emu/citra/pull/4086)|[1817e30](https://github.com/citra-emu/citra/pull/4086/files/)|externals: Update dynarmic|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4069](https://github.com/citra-emu/citra/pull/4069)|[aa98e55](https://github.com/citra-emu/citra/pull/4069/files/)|Service::SM: Wait till client is registered|[B3n30](https://github.com/B3n30)|Yes|
+|[4059](https://github.com/citra-emu/citra/pull/4059)|[8db6822](https://github.com/citra-emu/citra/pull/4059/files/)| citra_qt: add motion/touch config|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4043](https://github.com/citra-emu/citra/pull/4043)|[4536681](https://github.com/citra-emu/citra/pull/4043/files/)|Add system time configuration|[B3n30](https://github.com/B3n30)|Yes|
+|[4005](https://github.com/citra-emu/citra/pull/4005)|[8783c99](https://github.com/citra-emu/citra/pull/4005/files/)|service/cecd: Stub some functions|[NarcolepticK](https://github.com/NarcolepticK)|Yes|
+|[3922](https://github.com/citra-emu/citra/pull/3922)|[9d05628](https://github.com/citra-emu/citra/pull/3922/files/)|movie: Add Qt Movie feature|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
