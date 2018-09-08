@@ -1,3 +1,28 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 5b8820ba2972d07855e335df4d34e4392db7af76
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4183](https://github.com/citra-emu/citra/pull/4183)|[cdd3bd7](https://github.com/citra-emu/citra/pull/4183/files/)|citra_qt/multiplayer: three minor fixes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4141](https://github.com/citra-emu/citra/pull/4141)|[d361d46](https://github.com/citra-emu/citra/pull/4141/files/)|Joystick hotplug support|[B3n30](https://github.com/B3n30)|Yes|
+|[4140](https://github.com/citra-emu/citra/pull/4140)|[486e9f6](https://github.com/citra-emu/citra/pull/4140/files/)|citra_qt/configuration: misc input tab improvements|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4138](https://github.com/citra-emu/citra/pull/4138)|[fd25e42](https://github.com/citra-emu/citra/pull/4138/files/)|web_service: Unify links for web service endpoints|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4114](https://github.com/citra-emu/citra/pull/4114)|[a8af14a](https://github.com/citra-emu/citra/pull/4114/files/)|Implement soc - RecvFromOther|[namkazt](https://github.com/namkazt)|Yes|
+|[4113](https://github.com/citra-emu/citra/pull/4113)|[0e89555](https://github.com/citra-emu/citra/pull/4113/files/)|fix soc service - RecvFrom - SendTo|[namkazt](https://github.com/namkazt)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4016](https://github.com/citra-emu/citra/pull/4016)|[aa7067c](https://github.com/citra-emu/citra/pull/4016/files/)|Initial support for scripting|[EverOddish](https://github.com/EverOddish)|Yes|
+|[4005](https://github.com/citra-emu/citra/pull/4005)|[69b3217](https://github.com/citra-emu/citra/pull/4005/files/)|service/cecd: Stub some functions|[NarcolepticK](https://github.com/NarcolepticK)|Yes|
+|[3786](https://github.com/citra-emu/citra/pull/3786)|[11dcb24](https://github.com/citra-emu/citra/pull/3786/files/)|citra-qt: Make hotkeys configurable via the GUI.|[adityaruplaha](https://github.com/adityaruplaha)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
