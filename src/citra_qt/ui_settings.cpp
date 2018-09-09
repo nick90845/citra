@@ -6,5 +6,8 @@
 
 namespace UISettings {
 
+Shortcut::Shortcut(const QString name, const QString group, ContextualShortcut shortcut)
+    : name(name), group(group), shortcut(shortcut) {}
+
 Values values = {};
-}
+} // namespace UISettings
