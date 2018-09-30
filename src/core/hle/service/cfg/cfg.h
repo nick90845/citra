@@ -10,6 +10,10 @@
 #include "common/common_types.h"
 #include "core/hle/service/fs/archive.h"
 
+namespace Core {
+class System;
+}
+
 namespace Service::CFG {
 
 enum SystemModel {
@@ -403,7 +407,7 @@ private:
     u32 preferred_region_code = 0;
 };
 
-void InstallInterfaces(SM::ServiceManager& service_manager);
+void InstallInterfaces(Core::System& system);
 std::shared_ptr<Module> GetCurrentModule();
 
 } // namespace Service::CFG
