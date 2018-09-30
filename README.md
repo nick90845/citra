@@ -1,3 +1,29 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 41688b2f2a45d3ef4b22569c0d4399f12e1064b9
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4276](https://github.com/citra-emu/citra/pull/4276)|[a20a7bf](https://github.com/citra-emu/citra/pull/4276/files/)|arm_dynarmic: Pass breakpoints to gdbstub|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4272](https://github.com/citra-emu/citra/pull/4272)|[4c4ed4d](https://github.com/citra-emu/citra/pull/4272/files/)|Core: pass down Core::System reference to all services|[wwylele](https://github.com/wwylele)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4267](https://github.com/citra-emu/citra/pull/4267)|[9d142f9](https://github.com/citra-emu/citra/pull/4267/files/)|movie: Add clock init time to CTM header|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4253](https://github.com/citra-emu/citra/pull/4253)|[e087cb9](https://github.com/citra-emu/citra/pull/4253/files/)|common/string_util cleanup|[wwylele](https://github.com/wwylele)|Yes|
+|[4244](https://github.com/citra-emu/citra/pull/4244)|[41d53ce](https://github.com/citra-emu/citra/pull/4244/files/)|common/swap: add swap template for enum|[wwylele](https://github.com/wwylele)|Yes|
+|[4229](https://github.com/citra-emu/citra/pull/4229)|[b80f496](https://github.com/citra-emu/citra/pull/4229/files/)|citra_qt, core: game list "Open XXX Location" improvements|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4181](https://github.com/citra-emu/citra/pull/4181)|[9668852](https://github.com/citra-emu/citra/pull/4181/files/)|Add encrypted CIA support|[wwylele](https://github.com/wwylele)|Yes|
+|[4140](https://github.com/citra-emu/citra/pull/4140)|[a3625b5](https://github.com/citra-emu/citra/pull/4140/files/)|citra_qt/configuration: misc input tab improvements|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+|[3786](https://github.com/citra-emu/citra/pull/3786)|[1902caf](https://github.com/citra-emu/citra/pull/3786/files/)|citra-qt: Make hotkeys configurable via the GUI.|[adityaruplaha](https://github.com/adityaruplaha)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
