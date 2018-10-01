@@ -6,6 +6,7 @@
 
 #include <array>
 #include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 #include "common/common_types.h"
@@ -62,13 +63,12 @@ using ProgressCallback = void(std::size_t, std::size_t);
 // A file handled returned for CIAs to be written into and subsequently installed.
 class CIAFile final : public FileSys::FileBackend {
 public:
-    explicit CIAFile(Service::FS::MediaType media_type) : media_type(media_type) {}
-    ~CIAFile() {
-        Close();
-    }
+    explicit CIAFile(Service::FS::MediaType media_type);
+    ~CIAFile();
 
     ResultVal<std::size_t> Read(u64 offset, std::size_t length, u8* buffer) const override;
-    ResultVal<std::size_t> WriteTitleMetadata(u64 offset, std::size_t length, const u8* buffer);
+    ResultCode WriteTicket();
+    ResultCode WriteTitleMetadata();
     ResultVal<std::size_t> WriteContentData(u64 offset, std::size_t length, const u8* buffer);
     ResultVal<std::size_t> Write(u64 offset, std::size_t length, bool flush,
                                  const u8* buffer) override;
@@ -90,6 +90,9 @@ private:
     std::vector<u8> data;
     std::vector<u64> content_written;
     Service::FS::MediaType media_type;
+
+    class DecryptionState;
+    std::unique_ptr<DecryptionState> decryption_state;
 };
 
 /**
