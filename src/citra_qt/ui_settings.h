@@ -14,7 +14,12 @@
 namespace UISettings {
 
 using ContextualShortcut = std::pair<QString, int>;
-using Shortcut = std::pair<QString, ContextualShortcut>;
+
+struct Shortcut {
+    QString name;
+    QString group;
+    ContextualShortcut shortcut;
+};
 
 static const std::array<std::pair<QString, QString>, 4> themes = {
     {std::make_pair(QString("Default"), QString("default")),
