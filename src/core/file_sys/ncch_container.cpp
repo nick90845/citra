@@ -576,6 +576,36 @@ Loader::ResultStatus NCCHContainer::ReadProgramId(u64_le& program_id) {
     return Loader::ResultStatus::Success;
 }
 
+Loader::ResultStatus NCCHContainer::ReadExtdataId(u64& extdata_id) {
+    Loader::ResultStatus result = Load();
+    if (result != Loader::ResultStatus::Success)
+        return result;
+
+    if (!has_exheader)
+        return Loader::ResultStatus::ErrorNotUsed;
+
+    if (exheader_header.arm11_system_local_caps.storage_info.other_attributes >> 1) {
+        // Using extended save data access
+        // There would be multiple possible extdata IDs in this case. The best we can do for now is
+        // guessing that the first one would be the main save.
+        if (exheader_header.arm11_system_local_caps.storage_info.storage_accessible_unique_ids) {
+            // Prefer the IDs specified in storage_accessible_unique_ids
+            extdata_id =
+                exheader_header.arm11_system_local_caps.storage_info.storage_accessible_unique_ids;
+        } else {
+            extdata_id = exheader_header.arm11_system_local_caps.storage_info.ext_save_data_id;
+        }
+        // Use the ID specified in the most significant bits
+        while (extdata_id >> 20) {
+            extdata_id >>= 20;
+        }
+        return Loader::ResultStatus::Success;
+    }
+
+    extdata_id = exheader_header.arm11_system_local_caps.storage_info.ext_save_data_id;
+    return Loader::ResultStatus::Success;
+}
+
 bool NCCHContainer::HasExeFS() {
     Loader::ResultStatus result = Load();
     if (result != Loader::ResultStatus::Success)
