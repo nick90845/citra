@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <utility>
+#include <SDL_touch.h> // should it include all of <SDL>?
 #include "core/frontend/emu_window.h"
 
 struct SDL_Window;
@@ -39,6 +40,18 @@ private:
 
     /// Called by PollEvents when a mouse button is pressed or released
     void OnMouseButton(u32 button, u8 state, s32 x, s32 y);
+
+    /// Translates pixel position (0..1) to pixel positions
+    void TouchToPixelPos(float touch_x, float touch_y, int* pixel_x, int* pixel_y);
+
+    /// Called by PollEvents when a finger starts touching the touchscreen
+    void OnFingerDown(SDL_FingerID finger, float x, float y);
+
+    /// Called by PollEvents when a finger moves while touching the touchscreen
+    void OnFingerMotion(SDL_FingerID finger, float x, float y);
+
+    /// Called by PollEvents when a finger stops touching the touchscreen
+    void OnFingerUp(SDL_FingerID finger);
 
     /// Called by PollEvents when any event that may cause the window to be resized occurs
     void OnResize();

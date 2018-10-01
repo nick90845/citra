@@ -41,6 +41,39 @@ void EmuWindow_SDL2::OnMouseButton(u32 button, u8 state, s32 x, s32 y) {
     }
 }
 
+void EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y, int* pixel_x, int* pixel_y) {
+    int w, h;
+    SDL_GetWindowSize(render_window, &w, &h);
+
+    touch_x *= w;
+    touch_y *= h;
+
+    *pixel_x = (int)(touch_x + 0.5);
+    *pixel_y = (int)(touch_y + 0.5);
+}
+
+void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
+    // To do: keep track of multitouch using the fingerID and a dictionary of some kind
+    // This isn't critical because the best we can do when we have that is to average them, like the
+    // 3DS does
+
+    int px, py;
+    TouchToPixelPos(x, y, &px, &py);
+
+    TouchPressed((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
+}
+
+void EmuWindow_SDL2::OnFingerMotion(SDL_FingerID finger, float x, float y) {
+    int px, py;
+    TouchToPixelPos(x, y, &px, &py);
+
+    TouchMoved((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
+}
+
+void EmuWindow_SDL2::OnFingerUp(SDL_FingerID finger) {
+    TouchReleased();
+}
+
 void EmuWindow_SDL2::OnKeyEvent(int key, u8 state) {
     if (state == SDL_PRESSED) {
         InputCommon::GetKeyboard()->PressKey(key);
@@ -178,11 +211,25 @@ void EmuWindow_SDL2::PollEvents() {
             OnKeyEvent(static_cast<int>(event.key.keysym.scancode), event.key.state);
             break;
         case SDL_MOUSEMOTION:
-            OnMouseMotion(event.motion.x, event.motion.y);
+            // ignore if it came from touch
+            if (event.button.which != SDL_TOUCH_MOUSEID)
+                OnMouseMotion(event.motion.x, event.motion.y);
             break;
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP:
-            OnMouseButton(event.button.button, event.button.state, event.button.x, event.button.y);
+            // ignore if it came from touch
+            if (event.button.which != SDL_TOUCH_MOUSEID)
+                OnMouseButton(event.button.button, event.button.state, event.button.x,
+                              event.button.y);
+            break;
+        case SDL_FINGERDOWN:
+            OnFingerDown(event.tfinger.fingerId, event.tfinger.x, event.tfinger.y);
+            break;
+        case SDL_FINGERMOTION:
+            OnFingerMotion(event.tfinger.fingerId, event.tfinger.x, event.tfinger.y);
+            break;
+        case SDL_FINGERUP:
+            OnFingerUp(event.tfinger.fingerId);
             break;
         case SDL_QUIT:
             is_open = false;
