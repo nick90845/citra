@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 9813d0deed02efe4d5edf91bf621d1485d5e3f19
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4282](https://github.com/citra-emu/citra/pull/4282)|[cb775eb](https://github.com/citra-emu/citra/pull/4282/files/)|core, citra_qt: add frame advancing to framelimiter|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4272](https://github.com/citra-emu/citra/pull/4272)|[6b31a81](https://github.com/citra-emu/citra/pull/4272/files/)|Core: pass down Core::System reference to all services|[wwylele](https://github.com/wwylele)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4267](https://github.com/citra-emu/citra/pull/4267)|[9d142f9](https://github.com/citra-emu/citra/pull/4267/files/)|movie: Add clock init time to CTM header|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4244](https://github.com/citra-emu/citra/pull/4244)|[41d53ce](https://github.com/citra-emu/citra/pull/4244/files/)|common/swap: add swap template for enum|[wwylele](https://github.com/wwylele)|Yes|
+|[4229](https://github.com/citra-emu/citra/pull/4229)|[8cf1132](https://github.com/citra-emu/citra/pull/4229/files/)|citra_qt, core: game list "Open XXX Location" improvements|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
