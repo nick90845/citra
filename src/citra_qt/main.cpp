@@ -1009,6 +1009,7 @@ void GMainWindow::OnMenuInstallCIA() {
         return;
 
     ui.action_Install_CIA->setEnabled(false);
+    game_list->setDirectoryWatcherEnabled(false);
     progress_bar->show();
     progress_bar->setMaximum(INT_MAX);
 
@@ -1062,7 +1063,9 @@ void GMainWindow::OnCIAInstallReport(Service::AM::InstallStatus status, QString 
 void GMainWindow::OnCIAInstallFinished() {
     progress_bar->hide();
     progress_bar->setValue(0);
+    game_list->setDirectoryWatcherEnabled(true);
     ui.action_Install_CIA->setEnabled(true);
+    game_list->PopulateAsync(UISettings::values.game_dirs);
 }
 
 void GMainWindow::OnMenuRecentFile() {
