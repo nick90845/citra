@@ -58,12 +58,12 @@ void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
     // 3DS does
 
     const auto [px, py] = TouchToPixelPos(x, y);
-    TouchPressed((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
+    TouchPressed(static_cast<unsigned>(std::max(px, 0)), static_cast<unsigned>(std::max(py, 0)));
 }
 
 void EmuWindow_SDL2::OnFingerMotion(SDL_FingerID finger, float x, float y) {
     const auto [px, py] = TouchToPixelPos(x, y);
-    TouchMoved((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
+    TouchMoved(static_cast<unsigned>(std::max(px, 0)), static_cast<unsigned>(std::max(py, 0)));
 }
 
 void EmuWindow_SDL2::OnFingerUp(SDL_FingerID finger) {
