@@ -45,13 +45,13 @@ private:
     std::pair<int, int> TouchToPixelPos(float touch_x, float touch_y) const;
 
     /// Called by PollEvents when a finger starts touching the touchscreen
-    void OnFingerDown(SDL_FingerID finger, float x, float y);
+    void OnFingerDown(float x, float y);
 
     /// Called by PollEvents when a finger moves while touching the touchscreen
-    void OnFingerMotion(SDL_FingerID finger, float x, float y);
+    void OnFingerMotion(float x, float y);
 
     /// Called by PollEvents when a finger stops touching the touchscreen
-    void OnFingerUp(SDL_FingerID finger);
+    void OnFingerUp();
 
     /// Called by PollEvents when any event that may cause the window to be resized occurs
     void OnResize();

@@ -52,7 +52,7 @@ std::pair<int, int> EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y
     return {static_cast<int>(touch_x + 0.5), static_cast<int>(touch_y + 0.5)};
 }
 
-void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
+void EmuWindow_SDL2::OnFingerDown(float x, float y) {
     // To do: keep track of multitouch using the fingerID and a dictionary of some kind
     // This isn't critical because the best we can do when we have that is to average them, like the
     // 3DS does
@@ -61,12 +61,12 @@ void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
     TouchPressed(static_cast<unsigned>(std::max(px, 0)), static_cast<unsigned>(std::max(py, 0)));
 }
 
-void EmuWindow_SDL2::OnFingerMotion(SDL_FingerID finger, float x, float y) {
+void EmuWindow_SDL2::OnFingerMotion(float x, float y) {
     const auto [px, py] = TouchToPixelPos(x, y);
     TouchMoved(static_cast<unsigned>(std::max(px, 0)), static_cast<unsigned>(std::max(py, 0)));
 }
 
-void EmuWindow_SDL2::OnFingerUp(SDL_FingerID finger) {
+void EmuWindow_SDL2::OnFingerUp() {
     TouchReleased();
 }
 
@@ -220,13 +220,13 @@ void EmuWindow_SDL2::PollEvents() {
             }
             break;
         case SDL_FINGERDOWN:
-            OnFingerDown(event.tfinger.fingerId, event.tfinger.x, event.tfinger.y);
+            OnFingerDown(event.tfinger.x, event.tfinger.y);
             break;
         case SDL_FINGERMOTION:
-            OnFingerMotion(event.tfinger.fingerId, event.tfinger.x, event.tfinger.y);
+            OnFingerMotion(event.tfinger.x, event.tfinger.y);
             break;
         case SDL_FINGERUP:
-            OnFingerUp(event.tfinger.fingerId);
+            OnFingerUp();
             break;
         case SDL_QUIT:
             is_open = false;
