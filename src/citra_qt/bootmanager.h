@@ -151,9 +151,9 @@ signals:
     void Closed();
 
 private:
-    void TouchBeginEvent(QTouchEvent* event);
-    void TouchUpdateEvent(QTouchEvent* event);
-    void TouchEndEvent(QTouchEvent* event);
+    void TouchBeginEvent(const QTouchEvent* event);
+    void TouchUpdateEvent(const QTouchEvent* event);
+    void TouchEndEvent(const QTouchEvent* event);
 
     void OnMinimalClientAreaChangeRequest(
         const std::pair<unsigned, unsigned>& minimal_size) override;
