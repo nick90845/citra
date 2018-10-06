@@ -216,7 +216,7 @@ void GRenderWindow::mousePressEvent(QMouseEvent* event) {
 
     auto pos = event->pos();
     if (event->button() == Qt::LeftButton) {
-        auto [x, y] = ScaleTouch(pos);
+        const auto [x, y] = ScaleTouch(pos);
         this->TouchPressed(x, y);
     } else if (event->button() == Qt::RightButton) {
         InputCommon::GetMotionEmu()->BeginTilt(pos.x(), pos.y());
@@ -228,7 +228,7 @@ void GRenderWindow::mouseMoveEvent(QMouseEvent* event) {
         return; // touch input is handled in TouchUpdateEvent
 
     auto pos = event->pos();
-    auto [x, y] = ScaleTouch(pos);
+    const auto [x, y] = ScaleTouch(pos);
     this->TouchMoved(x, y);
     InputCommon::GetMotionEmu()->Tilt(pos.x(), pos.y());
 }
@@ -252,7 +252,7 @@ std::pair<unsigned, unsigned> GRenderWindow::ScaleTouch(QPointF pos) {
 void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
     auto pos = event->touchPoints().first().pos(); // there should only be 1 point in TouchBegin
 
-    auto [x, y] = ScaleTouch(pos);
+    const auto [x, y] = ScaleTouch(pos);
 
     this->TouchPressed(x, y);
 }
@@ -272,7 +272,7 @@ void GRenderWindow::TouchUpdateEvent(const QTouchEvent* event) {
 
     pos /= active_points;
 
-    auto [x, y] = ScaleTouch(pos);
+    const auto [x, y] = ScaleTouch(pos);
     this->TouchMoved(x, y);
 }
 
