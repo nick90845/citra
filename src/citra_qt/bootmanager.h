@@ -131,9 +131,9 @@ public:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
 
-    void touchBeginEvent(QTouchEvent* event);
-    void touchUpdateEvent(QTouchEvent* event);
-    void touchEndEvent(QTouchEvent* event);
+    void TouchBeginEvent(QTouchEvent* event);
+    void TouchUpdateEvent(QTouchEvent* event);
+    void TouchEndEvent(QTouchEvent* event);
 
     bool event(QEvent* event) override;
 
