@@ -216,9 +216,8 @@ void GRenderWindow::mousePressEvent(QMouseEvent* event) {
 
     auto pos = event->pos();
     if (event->button() == Qt::LeftButton) {
-        qreal pixelRatio = windowPixelRatio();
-        this->TouchPressed(static_cast<unsigned>(pos.x() * pixelRatio),
-                           static_cast<unsigned>(pos.y() * pixelRatio));
+        auto [x, y] = ScaleTouch(QPointF(pos));
+        this->TouchPressed(x, y);
     } else if (event->button() == Qt::RightButton) {
         InputCommon::GetMotionEmu()->BeginTilt(pos.x(), pos.y());
     }
@@ -229,9 +228,8 @@ void GRenderWindow::mouseMoveEvent(QMouseEvent* event) {
         return; // touch input is handled in TouchUpdateEvent
 
     auto pos = event->pos();
-    qreal pixelRatio = windowPixelRatio();
-    this->TouchMoved(std::max(static_cast<unsigned>(pos.x() * pixelRatio), 0u),
-                     std::max(static_cast<unsigned>(pos.y() * pixelRatio), 0u));
+    auto [x, y] = ScaleTouch(QPointF(pos));
+    this->TouchMoved(x, y);
     InputCommon::GetMotionEmu()->Tilt(pos.x(), pos.y());
 }
 
@@ -245,39 +243,37 @@ void GRenderWindow::mouseReleaseEvent(QMouseEvent* event) {
         InputCommon::GetMotionEmu()->EndTilt();
 }
 
-void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
-    auto points = event->touchPoints();
-    auto tp = points.first(); // there should only be 1 point in TouchBegin
-    auto pos = tp.pos();
+std::pair<unsigned, unsigned> GRenderWindow::ScaleTouch(QPointF pos) {
+    qreal pixel_ratio = windowPixelRatio();
+    return {static_cast<unsigned>(std::max(std::round(pos.x() * pixel_ratio), qreal{0.0})),
+            static_cast<unsigned>(std::max(std::round(pos.y() * pixel_ratio), qreal{0.0}))};
+}
 
-    // Copied from mousePressEvent:
-    qreal pixelRatio = windowPixelRatio();
-    this->TouchPressed(static_cast<unsigned>(pos.x() * pixelRatio),
-                       static_cast<unsigned>(pos.y() * pixelRatio));
+void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
+    auto pos = event->touchPoints().first().pos(); // there should only be 1 point in TouchBegin
+
+    auto [x, y] = ScaleTouch(pos);
+
+    this->TouchPressed(x, y);
 }
 
 void GRenderWindow::TouchUpdateEvent(const QTouchEvent* event) {
-    qreal x = 0.0;
-    qreal y = 0.0;
+    QPointF pos;
     int active_points = 0;
     const auto points = event->touchPoints();
 
+    // average all active touch points
     for (const auto tp : event->touchPoints()) {
         if (tp.state() & (Qt::TouchPointPressed | Qt::TouchPointMoved | Qt::TouchPointStationary)) {
             active_points++;
-
-            x += tp.pos().x();
-            y += tp.pos().y();
+            pos += tp.pos();
         }
     }
 
-    x /= active_points;
-    y /= active_points;
+    pos /= active_points;
 
-    // Copied from mouseMoveEvent:
-    qreal pixelRatio = windowPixelRatio();
-    this->TouchMoved(std::max(static_cast<unsigned>(x * pixelRatio), 0u),
-                     std::max(static_cast<unsigned>(y * pixelRatio), 0u));
+    auto [x, y] = ScaleTouch(pos);
+    this->TouchMoved(x, y);
 }
 
 void GRenderWindow::TouchEndEvent() {

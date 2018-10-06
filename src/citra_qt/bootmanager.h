@@ -151,6 +151,7 @@ signals:
     void Closed();
 
 private:
+    std::pair<unsigned, unsigned> ScaleTouch(QPointF pos);
     void TouchBeginEvent(const QTouchEvent* event);
     void TouchUpdateEvent(const QTouchEvent* event);
     void TouchEndEvent();
