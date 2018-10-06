@@ -245,7 +245,7 @@ void GRenderWindow::mouseReleaseEvent(QMouseEvent* event) {
         InputCommon::GetMotionEmu()->EndTilt();
 }
 
-void GRenderWindow::TouchBeginEvent(QTouchEvent* event) {
+void GRenderWindow::TouchBeginEvent(QTouchEvent* const event) {
     auto points = event->touchPoints();
     auto tp = points.first(); // there should only be 1 point in TouchBegin
     auto pos = tp.pos();
@@ -256,7 +256,7 @@ void GRenderWindow::TouchBeginEvent(QTouchEvent* event) {
                        static_cast<unsigned>(pos.y() * pixelRatio));
 }
 
-void GRenderWindow::TouchUpdateEvent(QTouchEvent* event) {
+void GRenderWindow::TouchUpdateEvent(QTouchEvent* const event) {
     qreal x = 0.0;
     qreal y = 0.0;
     int active_points = 0;
@@ -280,7 +280,7 @@ void GRenderWindow::TouchUpdateEvent(QTouchEvent* event) {
                      std::max(static_cast<unsigned>(y * pixelRatio), 0u));
 }
 
-void GRenderWindow::TouchEndEvent(QTouchEvent* event) {
+void GRenderWindow::TouchEndEvent(QTouchEvent* const event) {
     // Copied from mouseReleaseEvent:
     this->TouchReleased();
 }
