@@ -42,7 +42,7 @@ private:
     void OnMouseButton(u32 button, u8 state, s32 x, s32 y);
 
     /// Translates pixel position (0..1) to pixel positions
-    std::pair<int, int> TouchToPixelPos(float touch_x, float touch_y);
+    std::pair<int, int> TouchToPixelPos(float touch_x, float touch_y) const;
 
     /// Called by PollEvents when a finger starts touching the touchscreen
     void OnFingerDown(SDL_FingerID finger, float x, float y);

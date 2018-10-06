@@ -41,7 +41,7 @@ void EmuWindow_SDL2::OnMouseButton(u32 button, u8 state, s32 x, s32 y) {
     }
 }
 
-std::pair<int, int> EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y) {
+std::pair<int, int> EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y) const {
     int w, h;
     SDL_GetWindowSize(render_window, &w, &h);
 
