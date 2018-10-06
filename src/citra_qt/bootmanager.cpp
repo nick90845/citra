@@ -250,6 +250,7 @@ void GRenderWindow::mouseReleaseEvent(QMouseEvent* event) {
 }
 
 void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
+    // TouchBegin always has exactly one touch point, so take the .first()
     const auto [x, y] = ScaleTouch(event->touchPoints().first().pos());
     this->TouchPressed(x, y);
 }
