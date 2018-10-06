@@ -120,7 +120,7 @@ public:
     void restoreGeometry(const QByteArray& geometry); // overridden
     QByteArray saveGeometry();                        // overridden
 
-    qreal windowPixelRatio();
+    qreal windowPixelRatio() const;
 
     void closeEvent(QCloseEvent* event) override;
 
@@ -151,7 +151,7 @@ signals:
     void Closed();
 
 private:
-    std::pair<unsigned, unsigned> ScaleTouch(QPointF pos);
+    std::pair<unsigned, unsigned> ScaleTouch(const QPointF pos) const;
     void TouchBeginEvent(const QTouchEvent* event);
     void TouchUpdateEvent(const QTouchEvent* event);
     void TouchEndEvent();

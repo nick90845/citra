@@ -192,9 +192,15 @@ QByteArray GRenderWindow::saveGeometry() {
         return geometry;
 }
 
-qreal GRenderWindow::windowPixelRatio() {
+qreal GRenderWindow::windowPixelRatio() const {
     // windowHandle() might not be accessible until the window is displayed to screen.
     return windowHandle() ? windowHandle()->screen()->devicePixelRatio() : 1.0f;
+}
+
+std::pair<unsigned, unsigned> GRenderWindow::ScaleTouch(const QPointF pos) const {
+    const qreal pixel_ratio = windowPixelRatio();
+    return {static_cast<unsigned>(std::max(std::round(pos.x() * pixel_ratio), qreal{0.0})),
+            static_cast<unsigned>(std::max(std::round(pos.y() * pixel_ratio), qreal{0.0}))};
 }
 
 void GRenderWindow::closeEvent(QCloseEvent* event) {
@@ -241,12 +247,6 @@ void GRenderWindow::mouseReleaseEvent(QMouseEvent* event) {
         this->TouchReleased();
     else if (event->button() == Qt::RightButton)
         InputCommon::GetMotionEmu()->EndTilt();
-}
-
-std::pair<unsigned, unsigned> GRenderWindow::ScaleTouch(QPointF pos) {
-    qreal pixel_ratio = windowPixelRatio();
-    return {static_cast<unsigned>(std::max(std::round(pos.x() * pixel_ratio), qreal{0.0})),
-            static_cast<unsigned>(std::max(std::round(pos.y() * pixel_ratio), qreal{0.0}))};
 }
 
 void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
