@@ -250,17 +250,13 @@ std::pair<unsigned, unsigned> GRenderWindow::ScaleTouch(QPointF pos) {
 }
 
 void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
-    auto pos = event->touchPoints().first().pos(); // there should only be 1 point in TouchBegin
-
-    const auto [x, y] = ScaleTouch(pos);
-
+    const auto [x, y] = ScaleTouch(event->touchPoints().first().pos());
     this->TouchPressed(x, y);
 }
 
 void GRenderWindow::TouchUpdateEvent(const QTouchEvent* event) {
     QPointF pos;
     int active_points = 0;
-    const auto points = event->touchPoints();
 
     // average all active touch points
     for (const auto tp : event->touchPoints()) {
