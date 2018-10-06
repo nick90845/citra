@@ -280,8 +280,7 @@ void GRenderWindow::TouchUpdateEvent(const QTouchEvent* event) {
                      std::max(static_cast<unsigned>(y * pixelRatio), 0u));
 }
 
-void GRenderWindow::TouchEndEvent(const QTouchEvent* event) {
-    // Copied from mouseReleaseEvent:
+void GRenderWindow::TouchEndEvent() {
     this->TouchReleased();
 }
 
@@ -293,7 +292,7 @@ bool GRenderWindow::event(QEvent* event) {
         TouchUpdateEvent(static_cast<QTouchEvent*>(event));
         return true;
     } else if (event->type() == QEvent::TouchEnd || event->type() == QEvent::TouchCancel) {
-        TouchEndEvent(static_cast<QTouchEvent*>(event));
+        TouchEndEvent();
         return true;
     }
 
