@@ -257,23 +257,22 @@ void GRenderWindow::touchBeginEvent(QTouchEvent* event) {
 }
 
 void GRenderWindow::touchUpdateEvent(QTouchEvent* event) {
-    qreal x = 0.0, y = 0.0;
-    int activePoints = 0;
-    auto points = event->touchPoints();
+    qreal x = 0.0;
+    qreal y = 0.0;
+    int active_points = 0;
+    const auto points = event->touchPoints();
 
-    for (int i = 0; i < points.count(); i++) {
-        auto tp = points[i];
-
+    for (const auto tp : event->touchPoints()) {
         if (tp.state() & (Qt::TouchPointPressed | Qt::TouchPointMoved | Qt::TouchPointStationary)) {
-            activePoints++;
+            active_points++;
 
             x += tp.pos().x();
             y += tp.pos().y();
         }
     }
 
-    x /= activePoints;
-    y /= activePoints;
+    x /= active_points;
+    y /= active_points;
 
     // Copied from mouseMoveEvent:
     qreal pixelRatio = windowPixelRatio();
