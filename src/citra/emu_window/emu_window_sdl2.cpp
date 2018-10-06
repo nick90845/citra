@@ -214,9 +214,10 @@ void EmuWindow_SDL2::PollEvents() {
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP:
             // ignore if it came from touch
-            if (event.button.which != SDL_TOUCH_MOUSEID)
+            if (event.button.which != SDL_TOUCH_MOUSEID) {
                 OnMouseButton(event.button.button, event.button.state, event.button.x,
                               event.button.y);
+            }
             break;
         case SDL_FINGERDOWN:
             OnFingerDown(event.tfinger.fingerId, event.tfinger.x, event.tfinger.y);
