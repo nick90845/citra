@@ -53,7 +53,7 @@ std::pair<unsigned, unsigned> EmuWindow_SDL2::TouchToPixelPos(float touch_x, flo
 }
 
 void EmuWindow_SDL2::OnFingerDown(float x, float y) {
-    // To do: keep track of multitouch using the fingerID and a dictionary of some kind
+    // TODO(NeatNit): keep track of multitouch using the fingerID and a dictionary of some kind
     // This isn't critical because the best we can do when we have that is to average them, like the
     // 3DS does
 
