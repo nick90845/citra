@@ -41,15 +41,15 @@ void EmuWindow_SDL2::OnMouseButton(u32 button, u8 state, s32 x, s32 y) {
     }
 }
 
-void EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y, int* pixel_x, int* pixel_y) {
+std::pair<int, int> EmuWindow_SDL2::TouchToPixelPos(float touch_x, float touch_y) {
     int w, h;
     SDL_GetWindowSize(render_window, &w, &h);
 
     touch_x *= w;
     touch_y *= h;
 
-    *pixel_x = (int)(touch_x + 0.5);
-    *pixel_y = (int)(touch_y + 0.5);
+    // add 0.5 to have .99992 round up instead of down. These will always be near-integers.
+    return {static_cast<int>(touch_x + 0.5), static_cast<int>(touch_y + 0.5)};
 }
 
 void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
@@ -57,16 +57,12 @@ void EmuWindow_SDL2::OnFingerDown(SDL_FingerID finger, float x, float y) {
     // This isn't critical because the best we can do when we have that is to average them, like the
     // 3DS does
 
-    int px, py;
-    TouchToPixelPos(x, y, &px, &py);
-
+    const auto [px, py] = TouchToPixelPos(x, y);
     TouchPressed((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
 }
 
 void EmuWindow_SDL2::OnFingerMotion(SDL_FingerID finger, float x, float y) {
-    int px, py;
-    TouchToPixelPos(x, y, &px, &py);
-
+    const auto [px, py] = TouchToPixelPos(x, y);
     TouchMoved((unsigned)std::max(px, 0), (unsigned)std::max(py, 0));
 }
 
