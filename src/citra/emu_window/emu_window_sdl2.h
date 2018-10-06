@@ -6,7 +6,7 @@
 
 #include <memory>
 #include <utility>
-#include <SDL_touch.h> // should it include all of <SDL>?
+#include <SDL_touch.h>
 #include "core/frontend/emu_window.h"
 
 struct SDL_Window;
