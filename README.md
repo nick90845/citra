@@ -1,3 +1,30 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 20d6d450bdba91c6ced10fddb9009673c46c3e79
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4306](https://github.com/citra-emu/citra/pull/4306)|[8ec2a98](https://github.com/citra-emu/citra/pull/4306/files/)|Services/APT: Better implementation of PrepareToDoApplicationJump and DoApplicationJump.|[Subv](https://github.com/Subv)|Yes|
+|[4305](https://github.com/citra-emu/citra/pull/4305)|[389d3d6](https://github.com/citra-emu/citra/pull/4305/files/)|FS/archive: wrap states into ArchiveManager class|[wwylele](https://github.com/wwylele)|Yes|
+|[4304](https://github.com/citra-emu/citra/pull/4304)|[2306af3](https://github.com/citra-emu/citra/pull/4304/files/)|Replace boost::optional with std::optional where possible|[B3n30](https://github.com/B3n30)|Yes|
+|[4299](https://github.com/citra-emu/citra/pull/4299)|[458346d](https://github.com/citra-emu/citra/pull/4299/files/)|NWM_UDS: Fix some issues, cleanups, better PacketHandling|[B3n30](https://github.com/B3n30)|Yes|
+|[4284](https://github.com/citra-emu/citra/pull/4284)|[2dae149](https://github.com/citra-emu/citra/pull/4284/files/)|citra-qt: disable directory watcher during CIA installation|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4283](https://github.com/citra-emu/citra/pull/4283)|[7b6c5cd](https://github.com/citra-emu/citra/pull/4283/files/)|Implement SeedDB & Seed Crypto|[valentinvanelslande](https://github.com/valentinvanelslande)|Yes|
+|[4282](https://github.com/citra-emu/citra/pull/4282)|[cb775eb](https://github.com/citra-emu/citra/pull/4282/files/)|core, citra_qt: add frame advancing to framelimiter|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4259](https://github.com/citra-emu/citra/pull/4259)|[a487fca](https://github.com/citra-emu/citra/pull/4259/files/)|citra_qt: Add Game List configuration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4242](https://github.com/citra-emu/citra/pull/4242)|[53afb1c](https://github.com/citra-emu/citra/pull/4242/files/)|Fix camera on Linux|[valentinvanelslande](https://github.com/valentinvanelslande)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
