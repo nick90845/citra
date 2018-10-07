@@ -57,6 +57,7 @@
 #include "core/frontend/applets/default_applets.h"
 #include "core/gdbstub/gdbstub.h"
 #include "core/hle/service/fs/archive.h"
+#include "core/hle/service/nfc/nfc.h"
 #include "core/loader/loader.h"
 #include "core/movie.h"
 #include "core/settings.h"
@@ -487,6 +488,7 @@ void GMainWindow::ConnectMenuEvents() {
     connect(ui.action_Load_File, &QAction::triggered, this, &GMainWindow::OnMenuLoadFile);
     connect(ui.action_Install_CIA, &QAction::triggered, this, &GMainWindow::OnMenuInstallCIA);
     connect(ui.action_Exit, &QAction::triggered, this, &QMainWindow::close);
+    connect(ui.action_Load_Amiibo, &QAction::triggered, this, &GMainWindow::OnLoadAmiibo);
 
     // Emulation
     connect(ui.action_Start, &QAction::triggered, this, &GMainWindow::OnStartGame);
@@ -822,6 +824,7 @@ void GMainWindow::ShutdownGame() {
     ui.action_Pause->setEnabled(false);
     ui.action_Stop->setEnabled(false);
     ui.action_Restart->setEnabled(false);
+    ui.action_Load_Amiibo->setEnabled(false);
     ui.action_Report_Compatibility->setEnabled(false);
     render_window->hide();
     if (game_list->isEmpty())
@@ -1109,6 +1112,7 @@ void GMainWindow::OnStartGame() {
     ui.action_Pause->setEnabled(true);
     ui.action_Stop->setEnabled(true);
     ui.action_Restart->setEnabled(true);
+    ui.action_Load_Amiibo->setEnabled(true);
     ui.action_Report_Compatibility->setEnabled(true);
 
     discord_rpc->Update();
@@ -1258,6 +1262,27 @@ void GMainWindow::OnConfigure() {
         emit UpdateThemedIcons();
         SyncMenuUISettings();
         config->Save();
+    }
+}
+
+void GMainWindow::OnLoadAmiibo() {
+    const QString extensions{"*.bin"};
+    const QString file_filter =
+        tr("Amiibo File") + " (" + extensions + ");;" + tr("All Files (*.*)");
+    const QString filename = QFileDialog::getOpenFileName(this, tr("Load Amiibo"), "", file_filter);
+    if (!filename.isEmpty()) {
+        Core::System& system{Core::System::GetInstance()};
+
+        Service::SM::ServiceManager& sm = system.ServiceManager();
+        auto nfc = sm.GetService<Service::NFC::Module::Interface>("nfc:u");
+        if (nfc != nullptr) {
+            auto nfc_module = nfc->GetModule();
+            if (nfc_module != nullptr) {
+                nfc_module->nfc_filename = filename.toStdString();
+                nfc_module->nfc_tag_state = Service::NFC::TagState::TagInRange;
+                nfc_module->tag_in_range_event->Signal();
+            }
+        }
     }
 }
 

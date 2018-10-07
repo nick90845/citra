@@ -49,6 +49,8 @@ public:
         Interface(std::shared_ptr<Module> nfc, const char* name, u32 max_session);
         ~Interface();
 
+        std::shared_ptr<Module> GetModule() const;
+
     protected:
         /**
          * NFC::Initialize service function
@@ -167,15 +169,36 @@ public:
          */
         void CommunicationGetStatus(Kernel::HLERequestContext& ctx);
 
+        /**
+         * NFC::GetTagInfo service function
+         *  Inputs:
+         *      0 : Header code [0x00110000]
+         *  Outputs:
+         *      1 : Result of function, 0 on success, otherwise error code
+         *   2-12 : 0x2C-byte struct
+         */
+        void GetTagInfo(Kernel::HLERequestContext& ctx);
+
+        /**
+         * NFC::GetAmiiboConfig service function
+         *  Inputs:
+         *      0 : Header code [0x00180000]
+         *  Outputs:
+         *      1 : Result of function, 0 on success, otherwise error code
+         *   2-17 : 0x40-byte config struct
+         */
+        void GetAmiiboConfig(Kernel::HLERequestContext& ctx);
+
     private:
         std::shared_ptr<Module> nfc;
     };
 
-private:
     Kernel::SharedPtr<Kernel::Event> tag_in_range_event;
     Kernel::SharedPtr<Kernel::Event> tag_out_of_range_event;
     TagState nfc_tag_state = TagState::NotInitialized;
     CommunicationStatus nfc_status = CommunicationStatus::NfcInitialized;
+
+    std::string nfc_filename;
 };
 
 void InstallInterfaces(Core::System& system);
