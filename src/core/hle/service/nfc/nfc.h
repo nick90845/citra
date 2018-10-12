@@ -32,6 +32,7 @@ enum class TagState : u8 {
     TagInRange = 3,
     TagOutOfRange = 4,
     TagDataLoaded = 5,
+    Unknown6 = 6,
 };
 
 enum class CommunicationStatus : u8 {
@@ -188,6 +189,25 @@ public:
          *   2-17 : 0x40-byte config struct
          */
         void GetAmiiboConfig(Kernel::HLERequestContext& ctx);
+
+        /**
+         * NFC::Unknown0x1A service function
+         *  Inputs:
+         *      0 : Header code [0x001A0000]
+         *  Outputs:
+         *      1 : Result of function, 0 on success, otherwise error code
+         */
+        void Unknown0x1A(Kernel::HLERequestContext& ctx);
+
+        /**
+         * NFC::Unknown0x1B service function
+         *  Inputs:
+         *      0 : Header code [0x001B0000]
+         *  Outputs:
+         *      1 : Result of function, 0 on success, otherwise error code
+         *   2-31 : 0x36-byte struct
+         */
+        void Unknown0x1B(Kernel::HLERequestContext& ctx);
 
     private:
         std::shared_ptr<Module> nfc;
