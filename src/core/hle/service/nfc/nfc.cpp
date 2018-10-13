@@ -97,11 +97,12 @@ void Module::Interface::StartTagScanning(Kernel::HLERequestContext& ctx) {
 void Module::Interface::GetTagInfo(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x11, 0, 0);
 
-    ResultCode result = RESULT_SUCCESS;
     if (nfc->nfc_tag_state != TagState::TagInRange &&
         nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
-        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
-                            ErrorSummary::InvalidState, ErrorLevel::Status);
+        IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
     }
 
     TagInfo tag_info{};
@@ -113,7 +114,7 @@ void Module::Interface::GetTagInfo(Kernel::HLERequestContext& ctx) {
     tag_info.unk2 = 0x2;
 
     IPC::RequestBuilder rb = rp.MakeBuilder(12, 0);
-    rb.Push(result);
+    rb.Push(RESULT_SUCCESS);
     rb.PushRaw<TagInfo>(tag_info);
     LOG_WARNING(Service_NFC, "(STUBBED) called");
 }
@@ -202,26 +203,28 @@ void Module::Interface::CommunicationGetStatus(Kernel::HLERequestContext& ctx) {
 void Module::Interface::Unknown0x1A(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x1A, 0, 0);
 
-    ResultCode result = RESULT_SUCCESS;
     if (nfc->nfc_tag_state != TagState::TagInRange) {
-        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
-                            ErrorSummary::InvalidState, ErrorLevel::Status);
-    } else {
-        nfc->nfc_tag_state = TagState::Unknown6;
+        IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
     }
 
+    nfc->nfc_tag_state = TagState::Unknown6;
+
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
-    rb.Push(result);
+    rb.Push(RESULT_SUCCESS);
     LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::GetIdentificationBlock(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x1B, 0, 0);
 
-    ResultCode result = RESULT_SUCCESS;
     if (nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
-        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
-                            ErrorSummary::InvalidState, ErrorLevel::Status);
+        IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
     }
 
     IdentificationBlockReply identification_block_reply{};
@@ -234,7 +237,7 @@ void Module::Interface::GetIdentificationBlock(Kernel::HLERequestContext& ctx) {
     nfc->amiibo_data_mutex.unlock();
 
     IPC::RequestBuilder rb = rp.MakeBuilder(0x1F, 0);
-    rb.Push(result);
+    rb.Push(RESULT_SUCCESS);
     rb.PushRaw<IdentificationBlockReply>(identification_block_reply);
     LOG_DEBUG(Service_NFC, "called");
 }
@@ -248,10 +251,9 @@ std::shared_ptr<Module> Module::Interface::GetModule() const {
     return nfc;
 }
 
-void Module::Interface::LoadAmiibo(const std::string& filename) {
-    auto nfc_file = FileUtil::IOFile(filename, "rb");
+void Module::Interface::LoadAmiibo(const AmiiboData& amiibo_data) {
     nfc->amiibo_data_mutex.lock();
-    nfc_file.ReadBytes(&nfc->amiibo_data, sizeof(AmiiboData));
+    nfc->amiibo_data = amiibo_data;
     nfc->amiibo_data_mutex.unlock();
     nfc->nfc_tag_state = Service::NFC::TagState::TagInRange;
     nfc->tag_in_range_event->Signal();

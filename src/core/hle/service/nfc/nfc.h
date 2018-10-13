@@ -67,7 +67,7 @@ public:
 
         std::shared_ptr<Module> GetModule() const;
 
-        void LoadAmiibo(const std::string& filename);
+        void LoadAmiibo(const AmiiboData& amiibo_data);
 
         void RemoveAmiibo();
 

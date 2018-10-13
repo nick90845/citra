@@ -44,6 +44,7 @@
 #include "citra_qt/util/clickable_label.h"
 #include "common/common_paths.h"
 #include "common/detached_tasks.h"
+#include "common/file_util.h"
 #include "common/logging/backend.h"
 #include "common/logging/filter.h"
 #include "common/logging/log.h"
@@ -1278,7 +1279,10 @@ void GMainWindow::OnLoadAmiibo() {
         Service::SM::ServiceManager& sm = system.ServiceManager();
         auto nfc = sm.GetService<Service::NFC::Module::Interface>("nfc:u");
         if (nfc != nullptr) {
-            nfc->LoadAmiibo(filename.toStdString());
+            Service::NFC::AmiiboData amiibo_data{};
+            auto nfc_file = FileUtil::IOFile(filename.toStdString(), "rb");
+            nfc_file.ReadBytes(&amiibo_data, sizeof(Service::NFC::AmiiboData));
+            nfc->LoadAmiibo(amiibo_data);
             ui.action_Remove_Amiibo->setEnabled(true);
         }
     }
