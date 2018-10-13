@@ -354,6 +354,10 @@ void GMainWindow::InitializeHotkeys() {
                                    Qt::ApplicationShortcut);
     hotkey_registry.RegisterHotkey("Main Window", "Decrease Speed Limit", QKeySequence("-"),
                                    Qt::ApplicationShortcut);
+    hotkey_registry.RegisterHotkey("Main Window", "Toggle Frame Advancing", QKeySequence("CTRL+A"),
+                                   Qt::ApplicationShortcut);
+    hotkey_registry.RegisterHotkey("Main Window", "Advance Frame", QKeySequence(Qt::Key_Backslash),
+                                   Qt::ApplicationShortcut);
     hotkey_registry.LoadHotkeys();
 
     connect(hotkey_registry.GetHotkey("Main Window", "Load File", this), &QShortcut::activated,
@@ -411,6 +415,10 @@ void GMainWindow::InitializeHotkeys() {
                     UpdateStatusBar();
                 }
             });
+    connect(hotkey_registry.GetHotkey("Main Window", "Toggle Frame Advancing", this),
+            &QShortcut::activated, ui.action_Enable_Frame_Advancing, &QAction::trigger);
+    connect(hotkey_registry.GetHotkey("Main Window", "Advance Frame", this), &QShortcut::activated,
+            ui.action_Advance_Frame, &QAction::trigger);
 }
 
 void GMainWindow::ShowUpdaterWidgets() {
@@ -544,6 +552,20 @@ void GMainWindow::ConnectMenuEvents() {
     connect(ui.action_Play_Movie, &QAction::triggered, this, &GMainWindow::OnPlayMovie);
     connect(ui.action_Stop_Recording_Playback, &QAction::triggered, this,
             &GMainWindow::OnStopRecordingPlayback);
+    connect(ui.action_Enable_Frame_Advancing, &QAction::triggered, this, [this] {
+        if (emulation_running) {
+            Core::System::GetInstance().frame_limiter.SetFrameAdvancing(
+                ui.action_Enable_Frame_Advancing->isChecked());
+            ui.action_Advance_Frame->setEnabled(ui.action_Enable_Frame_Advancing->isChecked());
+        }
+    });
+    connect(ui.action_Advance_Frame, &QAction::triggered, this, [this] {
+        if (emulation_running) {
+            ui.action_Enable_Frame_Advancing->setChecked(true);
+            ui.action_Advance_Frame->setEnabled(true);
+            Core::System::GetInstance().frame_limiter.AdvanceFrame();
+        }
+    });
 
     // Help
     connect(ui.action_FAQ, &QAction::triggered,
@@ -807,6 +829,9 @@ void GMainWindow::ShutdownGame() {
     // TODO(bunnei): This function is not thread safe, but it's being used as if it were
     Pica::g_debug_context->ClearBreakpoints();
 
+    // Frame advancing must be cancelled in order to release the emu thread from waiting
+    Core::System::GetInstance().frame_limiter.SetFrameAdvancing(false);
+
     emit EmulationStopping();
 
     // Wait for emulation thread to complete and delete it
@@ -829,6 +854,9 @@ void GMainWindow::ShutdownGame() {
     ui.action_Load_Amiibo->setEnabled(false);
     ui.action_Remove_Amiibo->setEnabled(false);
     ui.action_Report_Compatibility->setEnabled(false);
+    ui.action_Enable_Frame_Advancing->setEnabled(false);
+    ui.action_Enable_Frame_Advancing->setChecked(false);
+    ui.action_Advance_Frame->setEnabled(false);
     render_window->hide();
     if (game_list->isEmpty())
         game_list_placeholder->show();
@@ -1117,6 +1145,7 @@ void GMainWindow::OnStartGame() {
     ui.action_Restart->setEnabled(true);
     ui.action_Load_Amiibo->setEnabled(true);
     ui.action_Report_Compatibility->setEnabled(true);
+    ui.action_Enable_Frame_Advancing->setEnabled(true);
 
     discord_rpc->Update();
 }
