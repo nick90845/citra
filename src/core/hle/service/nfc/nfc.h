@@ -4,7 +4,9 @@
 
 #pragma once
 
+#include <atomic>
 #include <memory>
+#include <mutex>
 #include "common/common_types.h"
 #include "core/hle/kernel/kernel.h"
 #include "core/hle/service/service.h"
@@ -24,6 +26,19 @@ enum {
     CommandInvalidForState = 512,
 };
 } // namespace ErrCodes
+
+// TODO(FearlessTobi): Add more members to this struct
+struct AmiiboData {
+    std::array<u8, 7> uuid;
+    INSERT_PADDING_BYTES(0x4D);
+    u16_le char_id;
+    u8 char_variant;
+    u8 figure_type;
+    u16_be model_number;
+    u8 series;
+    INSERT_PADDING_BYTES(0x1C1);
+};
+static_assert(sizeof(AmiiboData) == 0x21C, "AmiiboData is an invalid size");
 
 enum class TagState : u8 {
     NotInitialized = 0,
@@ -51,6 +66,10 @@ public:
         ~Interface();
 
         std::shared_ptr<Module> GetModule() const;
+
+        void LoadAmiibo(const std::string& filename);
+
+        void RemoveAmiibo();
 
     protected:
         /**
@@ -200,25 +219,27 @@ public:
         void Unknown0x1A(Kernel::HLERequestContext& ctx);
 
         /**
-         * NFC::Unknown0x1B service function
+         * NFC::GetIdentificationBlock service function
          *  Inputs:
          *      0 : Header code [0x001B0000]
          *  Outputs:
          *      1 : Result of function, 0 on success, otherwise error code
          *   2-31 : 0x36-byte struct
          */
-        void Unknown0x1B(Kernel::HLERequestContext& ctx);
+        void GetIdentificationBlock(Kernel::HLERequestContext& ctx);
 
     private:
         std::shared_ptr<Module> nfc;
     };
 
+private:
     Kernel::SharedPtr<Kernel::Event> tag_in_range_event;
     Kernel::SharedPtr<Kernel::Event> tag_out_of_range_event;
-    TagState nfc_tag_state = TagState::NotInitialized;
+    std::atomic<TagState> nfc_tag_state = TagState::NotInitialized;
     CommunicationStatus nfc_status = CommunicationStatus::NfcInitialized;
 
-    std::string nfc_filename;
+    AmiiboData amiibo_data{};
+    std::mutex amiibo_data_mutex;
 };
 
 void InstallInterfaces(Core::System& system);

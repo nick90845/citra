@@ -1278,13 +1278,8 @@ void GMainWindow::OnLoadAmiibo() {
         Service::SM::ServiceManager& sm = system.ServiceManager();
         auto nfc = sm.GetService<Service::NFC::Module::Interface>("nfc:u");
         if (nfc != nullptr) {
-            auto nfc_module = nfc->GetModule();
-            if (nfc_module != nullptr) {
-                nfc_module->nfc_filename = filename.toStdString();
-                nfc_module->nfc_tag_state = Service::NFC::TagState::TagInRange;
-                nfc_module->tag_in_range_event->Signal();
-                ui.action_Remove_Amiibo->setEnabled(true);
-            }
+            nfc->LoadAmiibo(filename.toStdString());
+            ui.action_Remove_Amiibo->setEnabled(true);
         }
     }
 }
@@ -1294,13 +1289,8 @@ void GMainWindow::OnRemoveAmiibo() {
     Service::SM::ServiceManager& sm = system.ServiceManager();
     auto nfc = sm.GetService<Service::NFC::Module::Interface>("nfc:u");
     if (nfc != nullptr) {
-        auto nfc_module = nfc->GetModule();
-        if (nfc_module != nullptr) {
-            nfc_module->nfc_filename = "";
-            nfc_module->nfc_tag_state = Service::NFC::TagState::TagOutOfRange;
-            nfc_module->tag_out_of_range_event->Signal();
-            ui.action_Remove_Amiibo->setEnabled(false);
-        }
+        nfc->RemoveAmiibo();
+        ui.action_Remove_Amiibo->setEnabled(false);
     }
 }
 

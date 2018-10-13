@@ -34,16 +34,6 @@ struct AmiiboConfig {
 };
 static_assert(sizeof(AmiiboConfig) == 0x40, "AmiiboConfig is an invalid size");
 
-struct IdentificationBlockRaw {
-    u16_le char_id;
-    u8 char_variant;
-    u8 figure_type;
-    u16_be model_number;
-    u8 series;
-    INSERT_PADDING_BYTES(0x2F);
-};
-static_assert(sizeof(IdentificationBlockRaw) == 0x36, "IdentificationBlockRaw is an invalid size");
-
 struct IdentificationBlockReply {
     u16_le char_id;
     u8 char_variant;
@@ -107,15 +97,23 @@ void Module::Interface::StartTagScanning(Kernel::HLERequestContext& ctx) {
 void Module::Interface::GetTagInfo(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x11, 0, 0);
 
+    ResultCode result = RESULT_SUCCESS;
+    if (nfc->nfc_tag_state != TagState::TagInRange &&
+        nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
+        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                            ErrorSummary::InvalidState, ErrorLevel::Status);
+    }
+
     TagInfo tag_info{};
-    auto nfc_file = FileUtil::IOFile(nfc->nfc_filename, "rb");
-    nfc_file.ReadBytes(tag_info.uuid.data(), sizeof(tag_info.uuid.size()));
-    tag_info.id_offset_size = 0x7;
+    nfc->amiibo_data_mutex.lock();
+    tag_info.uuid = nfc->amiibo_data.uuid;
+    tag_info.id_offset_size = tag_info.uuid.size();
+    nfc->amiibo_data_mutex.unlock();
     tag_info.unk1 = 0x0;
     tag_info.unk2 = 0x2;
 
     IPC::RequestBuilder rb = rp.MakeBuilder(12, 0);
-    rb.Push(RESULT_SUCCESS);
+    rb.Push(result);
     rb.PushRaw<TagInfo>(tag_info);
     LOG_WARNING(Service_NFC, "(STUBBED) called");
 }
@@ -188,7 +186,7 @@ void Module::Interface::GetTagState(Kernel::HLERequestContext& ctx) {
 
     IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
     rb.Push(RESULT_SUCCESS);
-    rb.PushEnum(nfc->nfc_tag_state);
+    rb.PushEnum(nfc->nfc_tag_state.load());
     LOG_DEBUG(Service_NFC, "called");
 }
 
@@ -204,31 +202,39 @@ void Module::Interface::CommunicationGetStatus(Kernel::HLERequestContext& ctx) {
 void Module::Interface::Unknown0x1A(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x1A, 0, 0);
 
-    nfc->nfc_tag_state = TagState::Unknown6;
+    ResultCode result = RESULT_SUCCESS;
+    if (nfc->nfc_tag_state != TagState::TagInRange) {
+        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                            ErrorSummary::InvalidState, ErrorLevel::Status);
+    } else {
+        nfc->nfc_tag_state = TagState::Unknown6;
+    }
 
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
-    rb.Push(RESULT_SUCCESS);
+    rb.Push(result);
     LOG_DEBUG(Service_NFC, "called");
 }
 
-void Module::Interface::Unknown0x1B(Kernel::HLERequestContext& ctx) {
+void Module::Interface::GetIdentificationBlock(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x1B, 0, 0);
 
-    IdentificationBlockRaw identification_block_raw{};
-    auto nfc_file = FileUtil::IOFile(nfc->nfc_filename, "rb");
-    // go to offset of the Amiibo identification block
-    nfc_file.Seek(0x54, SEEK_SET);
-    nfc_file.ReadBytes(&identification_block_raw, 0x7);
+    ResultCode result = RESULT_SUCCESS;
+    if (nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
+        result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                            ErrorSummary::InvalidState, ErrorLevel::Status);
+    }
 
     IdentificationBlockReply identification_block_reply{};
-    identification_block_reply.char_id = identification_block_raw.char_id;
-    identification_block_reply.char_variant = identification_block_raw.char_variant;
-    identification_block_reply.series = identification_block_raw.series;
-    identification_block_reply.model_number = identification_block_raw.model_number;
-    identification_block_reply.figure_type = identification_block_raw.figure_type;
+    nfc->amiibo_data_mutex.lock();
+    identification_block_reply.char_id = nfc->amiibo_data.char_id;
+    identification_block_reply.char_variant = nfc->amiibo_data.char_variant;
+    identification_block_reply.series = nfc->amiibo_data.series;
+    identification_block_reply.model_number = nfc->amiibo_data.model_number;
+    identification_block_reply.figure_type = nfc->amiibo_data.figure_type;
+    nfc->amiibo_data_mutex.unlock();
 
     IPC::RequestBuilder rb = rp.MakeBuilder(0x1F, 0);
-    rb.Push(RESULT_SUCCESS);
+    rb.Push(result);
     rb.PushRaw<IdentificationBlockReply>(identification_block_reply);
     LOG_DEBUG(Service_NFC, "called");
 }
@@ -240,6 +246,23 @@ Module::Interface::~Interface() = default;
 
 std::shared_ptr<Module> Module::Interface::GetModule() const {
     return nfc;
+}
+
+void Module::Interface::LoadAmiibo(const std::string& filename) {
+    auto nfc_file = FileUtil::IOFile(filename, "rb");
+    nfc->amiibo_data_mutex.lock();
+    nfc_file.ReadBytes(&nfc->amiibo_data, sizeof(AmiiboData));
+    nfc->amiibo_data_mutex.unlock();
+    nfc->nfc_tag_state = Service::NFC::TagState::TagInRange;
+    nfc->tag_in_range_event->Signal();
+}
+
+void Module::Interface::RemoveAmiibo() {
+    nfc->nfc_tag_state = Service::NFC::TagState::TagOutOfRange;
+    nfc->tag_out_of_range_event->Signal();
+    nfc->amiibo_data_mutex.lock();
+    nfc->amiibo_data = {};
+    nfc->amiibo_data_mutex.unlock();
 }
 
 Module::Module() {
