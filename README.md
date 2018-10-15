@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 0df32275a740a9027b8849edc661a642d7495b2d
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4339](https://github.com/citra-emu/citra/pull/4339)|[b90a550](https://github.com/citra-emu/citra/pull/4339/files/)|FileSys::Ticket::Load: Return error if signature type does not match|[B3n30](https://github.com/B3n30)|Yes|
+|[4335](https://github.com/citra-emu/citra/pull/4335)|[3b4a4ee](https://github.com/citra-emu/citra/pull/4335/files/)|Load AES keys stored in boot9.bin|[B3n30](https://github.com/B3n30)|Yes|
+|[4328](https://github.com/citra-emu/citra/pull/4328)|[eb3af0f](https://github.com/citra-emu/citra/pull/4328/files/)|remove GetCurrentModule() functions in HLE Services|[B3n30](https://github.com/B3n30)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4259](https://github.com/citra-emu/citra/pull/4259)|[8ecd31d](https://github.com/citra-emu/citra/pull/4259/files/)|citra_qt: Add Game List configuration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4197](https://github.com/citra-emu/citra/pull/4197)|[e267377](https://github.com/citra-emu/citra/pull/4197/files/)|threadsafe_queue: Add PopWait and use it where possible|[B3n30](https://github.com/B3n30)|Yes|
+|[4193](https://github.com/citra-emu/citra/pull/4193)|[ca77be3](https://github.com/citra-emu/citra/pull/4193/files/)|Joystick: Allow for background events; Add deadzone to SDLAnalog|[B3n30](https://github.com/B3n30)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
