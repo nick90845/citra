@@ -1,3 +1,28 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: b01b94d843c278d4105dcde07863bed012cbafbb
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4338](https://github.com/citra-emu/citra/pull/4338)|[7ddfce4](https://github.com/citra-emu/citra/pull/4338/files/)|Port yuzu-emu/yuzu#1490: "citra_qt/main: Simplify OnMenuLoadFile()"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4336](https://github.com/citra-emu/citra/pull/4336)|[25a370e](https://github.com/citra-emu/citra/pull/4336/files/)|Only redefine some 64-bit file operation for MSVC|[wwylele](https://github.com/wwylele)|Yes|
+|[4335](https://github.com/citra-emu/citra/pull/4335)|[3b4a4ee](https://github.com/citra-emu/citra/pull/4335/files/)|Load AES keys stored in boot9.bin|[B3n30](https://github.com/B3n30)|Yes|
+|[4328](https://github.com/citra-emu/citra/pull/4328)|[eb3af0f](https://github.com/citra-emu/citra/pull/4328/files/)|remove GetCurrentModule() functions in HLE Services|[B3n30](https://github.com/B3n30)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4259](https://github.com/citra-emu/citra/pull/4259)|[8ecd31d](https://github.com/citra-emu/citra/pull/4259/files/)|citra_qt: Add Game List configuration|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4197](https://github.com/citra-emu/citra/pull/4197)|[e267377](https://github.com/citra-emu/citra/pull/4197/files/)|threadsafe_queue: Add PopWait and use it where possible|[B3n30](https://github.com/B3n30)|Yes|
+|[4193](https://github.com/citra-emu/citra/pull/4193)|[ca77be3](https://github.com/citra-emu/citra/pull/4193/files/)|Joystick: Allow for background events; Add deadzone to SDLAnalog|[B3n30](https://github.com/B3n30)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
