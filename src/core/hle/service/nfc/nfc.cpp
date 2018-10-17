@@ -11,6 +11,40 @@
 
 namespace Service::NFC {
 
+struct TagInfo {
+    u16_le id_offset_size;
+    u8 unk1;
+    u8 unk2;
+    std::array<u8, 7> uuid;
+    INSERT_PADDING_BYTES(0x20);
+};
+static_assert(sizeof(TagInfo) == 0x2C, "TagInfo is an invalid size");
+
+struct AmiiboConfig {
+    u16_le lastwritedate_year;
+    u8 lastwritedate_month;
+    u8 lastwritedate_day;
+    u16_le write_counter;
+    std::array<u8, 3> characterID;
+    u16_le amiiboID;
+    u8 type;
+    u8 pagex4_byte3;
+    u16_le appdata_size;
+    INSERT_PADDING_BYTES(0x30);
+};
+static_assert(sizeof(AmiiboConfig) == 0x40, "AmiiboConfig is an invalid size");
+
+struct IdentificationBlockReply {
+    u16_le char_id;
+    u8 char_variant;
+    u8 series;
+    u16_le model_number;
+    u8 figure_type;
+    INSERT_PADDING_BYTES(0x2F);
+};
+static_assert(sizeof(IdentificationBlockReply) == 0x36,
+              "IdentificationBlockReply is an invalid size");
+
 void Module::Interface::Initialize(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x01, 1, 0);
     u8 param = rp.Pop<u8>();
@@ -53,20 +87,50 @@ void Module::Interface::StartTagScanning(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x05, 1, 0); // 0x00050040
     u16 in_val = rp.Pop<u16>();
 
-    ResultCode result = RESULT_SUCCESS;
-
-    // TODO(shinyquagsire23): Implement NFC tag detection, for now stub result
-    result = ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
-                        ErrorSummary::InvalidState, ErrorLevel::Status);
-
-    if (result == RESULT_SUCCESS) {
-        nfc->nfc_tag_state = TagState::TagInRange;
-        nfc->tag_in_range_event->Signal();
-    }
+    nfc->nfc_tag_state = TagState::Scanning;
 
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
-    rb.Push(result);
+    rb.Push(RESULT_SUCCESS);
     LOG_WARNING(Service_NFC, "(STUBBED) called, in_val={:04x}", in_val);
+}
+
+void Module::Interface::GetTagInfo(Kernel::HLERequestContext& ctx) {
+    IPC::RequestParser rp(ctx, 0x11, 0, 0);
+
+    if (nfc->nfc_tag_state != TagState::TagInRange &&
+        nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
+        IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
+    }
+
+    TagInfo tag_info{};
+    std::lock_guard<std::mutex> lock(nfc->amiibo_data_mutex);
+    tag_info.uuid = nfc->amiibo_data.uuid;
+    tag_info.id_offset_size = tag_info.uuid.size();
+    tag_info.unk1 = 0x0;
+    tag_info.unk2 = 0x2;
+
+    IPC::RequestBuilder rb = rp.MakeBuilder(12, 0);
+    rb.Push(RESULT_SUCCESS);
+    rb.PushRaw<TagInfo>(tag_info);
+    LOG_WARNING(Service_NFC, "(STUBBED) called");
+}
+
+void Module::Interface::GetAmiiboConfig(Kernel::HLERequestContext& ctx) {
+    IPC::RequestParser rp(ctx, 0x18, 0, 0);
+
+    AmiiboConfig amiibo_config{};
+    amiibo_config.lastwritedate_year = 2017;
+    amiibo_config.lastwritedate_month = 10;
+    amiibo_config.lastwritedate_day = 10;
+    // TODO(FearlessTobi): Find the right values for the struct
+
+    IPC::RequestBuilder rb = rp.MakeBuilder(17, 0);
+    rb.Push(RESULT_SUCCESS);
+    rb.PushRaw<AmiiboConfig>(amiibo_config);
+    LOG_WARNING(Service_NFC, "(STUBBED) called");
 }
 
 void Module::Interface::StopTagScanning(Kernel::HLERequestContext& ctx) {
@@ -76,7 +140,7 @@ void Module::Interface::StopTagScanning(Kernel::HLERequestContext& ctx) {
 
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
     rb.Push(RESULT_SUCCESS);
-    LOG_WARNING(Service_NFC, "(STUBBED) called");
+    LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::LoadAmiiboData(Kernel::HLERequestContext& ctx) {
@@ -92,11 +156,11 @@ void Module::Interface::LoadAmiiboData(Kernel::HLERequestContext& ctx) {
 void Module::Interface::ResetTagScanState(Kernel::HLERequestContext& ctx) {
     IPC::RequestParser rp(ctx, 0x08, 0, 0);
 
-    nfc->nfc_tag_state = TagState::NotScanning;
+    nfc->nfc_tag_state = TagState::TagInRange;
 
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
     rb.Push(RESULT_SUCCESS);
-    LOG_WARNING(Service_NFC, "(STUBBED) called");
+    LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::GetTagInRangeEvent(Kernel::HLERequestContext& ctx) {
@@ -105,7 +169,7 @@ void Module::Interface::GetTagInRangeEvent(Kernel::HLERequestContext& ctx) {
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 2);
     rb.Push(RESULT_SUCCESS);
     rb.PushCopyObjects(nfc->tag_in_range_event);
-    LOG_WARNING(Service_NFC, "(STUBBED) called");
+    LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::GetTagOutOfRangeEvent(Kernel::HLERequestContext& ctx) {
@@ -114,7 +178,7 @@ void Module::Interface::GetTagOutOfRangeEvent(Kernel::HLERequestContext& ctx) {
     IPC::RequestBuilder rb = rp.MakeBuilder(1, 2);
     rb.Push(RESULT_SUCCESS);
     rb.PushCopyObjects(nfc->tag_out_of_range_event);
-    LOG_WARNING(Service_NFC, "(STUBBED) called");
+    LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::GetTagState(Kernel::HLERequestContext& ctx) {
@@ -122,8 +186,8 @@ void Module::Interface::GetTagState(Kernel::HLERequestContext& ctx) {
 
     IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
     rb.Push(RESULT_SUCCESS);
-    rb.PushEnum(nfc->nfc_tag_state);
-    LOG_DEBUG(Service_NFC, "(STUBBED) called");
+    rb.PushEnum(nfc->nfc_tag_state.load());
+    LOG_DEBUG(Service_NFC, "called");
 }
 
 void Module::Interface::CommunicationGetStatus(Kernel::HLERequestContext& ctx) {
@@ -135,10 +199,68 @@ void Module::Interface::CommunicationGetStatus(Kernel::HLERequestContext& ctx) {
     LOG_DEBUG(Service_NFC, "(STUBBED) called");
 }
 
+void Module::Interface::Unknown0x1A(Kernel::HLERequestContext& ctx) {
+    IPC::RequestParser rp(ctx, 0x1A, 0, 0);
+
+    IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+    if (nfc->nfc_tag_state != TagState::TagInRange) {
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
+    }
+
+    nfc->nfc_tag_state = TagState::Unknown6;
+
+    rb.Push(RESULT_SUCCESS);
+    LOG_DEBUG(Service_NFC, "called");
+}
+
+void Module::Interface::GetIdentificationBlock(Kernel::HLERequestContext& ctx) {
+    IPC::RequestParser rp(ctx, 0x1B, 0, 0);
+
+    if (nfc->nfc_tag_state != TagState::TagDataLoaded && nfc->nfc_tag_state != TagState::Unknown6) {
+        IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
+        rb.Push(ResultCode(ErrCodes::CommandInvalidForState, ErrorModule::NFC,
+                           ErrorSummary::InvalidState, ErrorLevel::Status));
+        return;
+    }
+
+    IdentificationBlockReply identification_block_reply{};
+    std::lock_guard<std::mutex> lock(nfc->amiibo_data_mutex);
+    identification_block_reply.char_id = nfc->amiibo_data.char_id;
+    identification_block_reply.char_variant = nfc->amiibo_data.char_variant;
+    identification_block_reply.series = nfc->amiibo_data.series;
+    identification_block_reply.model_number = nfc->amiibo_data.model_number;
+    identification_block_reply.figure_type = nfc->amiibo_data.figure_type;
+
+    IPC::RequestBuilder rb = rp.MakeBuilder(0x1F, 0);
+    rb.Push(RESULT_SUCCESS);
+    rb.PushRaw<IdentificationBlockReply>(identification_block_reply);
+    LOG_DEBUG(Service_NFC, "called");
+}
+
 Module::Interface::Interface(std::shared_ptr<Module> nfc, const char* name, u32 max_session)
     : ServiceFramework(name, max_session), nfc(std::move(nfc)) {}
 
 Module::Interface::~Interface() = default;
+
+std::shared_ptr<Module> Module::Interface::GetModule() const {
+    return nfc;
+}
+
+void Module::Interface::LoadAmiibo(const AmiiboData& amiibo_data) {
+    std::lock_guard<std::mutex> lock(nfc->amiibo_data_mutex);
+    nfc->amiibo_data = amiibo_data;
+    nfc->nfc_tag_state = Service::NFC::TagState::TagInRange;
+    nfc->tag_in_range_event->Signal();
+}
+
+void Module::Interface::RemoveAmiibo() {
+    nfc->nfc_tag_state = Service::NFC::TagState::TagOutOfRange;
+    nfc->tag_out_of_range_event->Signal();
+    std::lock_guard<std::mutex> lock(nfc->amiibo_data_mutex);
+    nfc->amiibo_data = {};
+}
 
 Module::Module() {
     tag_in_range_event =
