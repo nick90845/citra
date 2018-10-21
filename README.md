@@ -1,3 +1,28 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 11729eafe1052daba1602600ed99e87402d0791a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4353](https://github.com/citra-emu/citra/pull/4353)|[92f8b71](https://github.com/citra-emu/citra/pull/4353/files/)|Add IPS patching|[zaksabeast](https://github.com/zaksabeast)|Yes|
+|[4347](https://github.com/citra-emu/citra/pull/4347)|[10915b1](https://github.com/citra-emu/citra/pull/4347/files/)|citra_qt: add seconds section to clock settings|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4344](https://github.com/citra-emu/citra/pull/4344)|[61fd20c](https://github.com/citra-emu/citra/pull/4344/files/)|SeedDB: replace seek(tell, set) with seek(cur)|[wwylele](https://github.com/wwylele)|Yes|
+|[4341](https://github.com/citra-emu/citra/pull/4341)|[751ebe5](https://github.com/citra-emu/citra/pull/4341/files/)|Kernel: make a kernel instance and remove object ID counter from global state|[wwylele](https://github.com/wwylele)|Yes|
+|[4337](https://github.com/citra-emu/citra/pull/4337)|[bf71bf0](https://github.com/citra-emu/citra/pull/4337/files/)|nfc: Add Amiibo support (REOPENED)|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4336](https://github.com/citra-emu/citra/pull/4336)|[380b83e](https://github.com/citra-emu/citra/pull/4336/files/)|Only redefine some 64-bit file operation for MSVC|[wwylele](https://github.com/wwylele)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4235](https://github.com/citra-emu/citra/pull/4235)|[111b7db](https://github.com/citra-emu/citra/pull/4235/files/)|Port various game_list changes from yuzu|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
