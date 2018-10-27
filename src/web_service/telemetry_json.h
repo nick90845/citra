@@ -37,6 +37,7 @@ public:
     void Visit(const Telemetry::Field<std::chrono::microseconds>& field) override;
 
     void Complete() override;
+    bool SubmitTestcase() override;
 
 private:
     nlohmann::json& TopSection() {
