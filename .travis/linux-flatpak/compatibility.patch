@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 094904cb..a7583a12 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,6 +49,9 @@ check_submodules_present()
+ configure_file(${PROJECT_SOURCE_DIR}/dist/compatibility_list/compatibility_list.qrc
+                ${PROJECT_BINARY_DIR}/dist/compatibility_list/compatibility_list.qrc
+                COPYONLY)
++configure_file(${PROJECT_SOURCE_DIR}/dist/compatibility_list/compatibility_list.json
++               ${PROJECT_BINARY_DIR}/dist/compatibility_list/compatibility_list.json
++               COPYONLY)
+ if (ENABLE_COMPATIBILITY_LIST_DOWNLOAD AND NOT EXISTS ${PROJECT_BINARY_DIR}/dist/compatibility_list/compatibility_list.json)
+     message(STATUS "Downloading compatibility list for citra...")
+     file(DOWNLOAD
