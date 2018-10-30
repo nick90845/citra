@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 445538c2cf7151fafec24266f7b4ab851d12ff41
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4383](https://github.com/citra-emu/citra/pull/4383)|[e4a0058](https://github.com/citra-emu/citra/pull/4383/files/)|Flatpak support|[bscubed](https://github.com/bscubed)|Yes|
+|[4353](https://github.com/citra-emu/citra/pull/4353)|[92f8b71](https://github.com/citra-emu/citra/pull/4353/files/)|Add IPS patching|[zaksabeast](https://github.com/zaksabeast)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
