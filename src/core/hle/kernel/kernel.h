@@ -7,10 +7,19 @@
 #include <atomic>
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include <boost/smart_ptr/intrusive_ptr.hpp>
 #include "common/common_types.h"
 #include "core/hle/result.h"
+
+namespace ConfigMem {
+class ConfigMemDef;
+}
+
+namespace SharedPage {
+class Handler;
+}
 
 namespace Kernel {
 
@@ -30,6 +39,7 @@ class ResourceLimitList;
 class SharedMemory;
 class ThreadManager;
 class TimerManager;
+class VMManager;
 
 enum class ResetType {
     OneShot,
@@ -58,6 +68,14 @@ enum class MemoryRegion : u16 {
 
 template <typename T>
 using SharedPtr = boost::intrusive_ptr<T>;
+
+struct MemoryRegionInfo {
+    u32 base; // Not an address, but offset from start of FCRAM
+    u32 size;
+    u32 used;
+
+    std::shared_ptr<std::vector<u8>> linear_heap_memory;
+};
 
 class KernelSystem {
 public:
@@ -195,7 +213,24 @@ public:
     TimerManager& GetTimerManager();
     const TimerManager& GetTimerManager() const;
 
+    void MapSharedPages(VMManager& address_space);
+
+    SharedPage::Handler& GetSharedPageHandler();
+    const SharedPage::Handler& GetSharedPageHandler() const;
+
+    MemoryRegionInfo* GetMemoryRegion(MemoryRegion region);
+
+    /// Adds a port to the named port table
+    void AddNamedPort(std::string name, SharedPtr<ClientPort> port);
+
+    MemoryRegionInfo memory_regions[3];
+
+    /// Map of named ports managed by the kernel, which can be retrieved using the ConnectToPort
+    std::unordered_map<std::string, SharedPtr<ClientPort>> named_ports;
+
 private:
+    void MemoryInit(u32 mem_type);
+
     std::unique_ptr<ResourceLimitList> resource_limits;
     std::atomic<u32> next_object_id{0};
 
@@ -210,6 +245,9 @@ private:
 
     std::unique_ptr<ThreadManager> thread_manager;
     std::unique_ptr<TimerManager> timer_manager;
+
+    std::unique_ptr<ConfigMem::ConfigMemDef> config_mem;
+    std::unique_ptr<SharedPage::Handler> shared_page_handler;
 };
 
 } // namespace Kernel
