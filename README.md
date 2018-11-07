@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 1444d601096e950e9e1fd4288f352f4e9117d5fe
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4405](https://github.com/citra-emu/citra/pull/4405)|[3b024a0](https://github.com/citra-emu/citra/pull/4405/files/)|SVC: new wrapper template & pass system reference across the SVC barrier|[wwylele](https://github.com/wwylele)|Yes|
+|[4398](https://github.com/citra-emu/citra/pull/4398)|[ab07d44](https://github.com/citra-emu/citra/pull/4398/files/)|citra_qt/configuration: fix language configuration issues|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4387](https://github.com/citra-emu/citra/pull/4387)|[41b41d3](https://github.com/citra-emu/citra/pull/4387/files/)|citra_qt: Add Amiibo hotkeys, notify user of loading errors|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4383](https://github.com/citra-emu/citra/pull/4383)|[ae5543a](https://github.com/citra-emu/citra/pull/4383/files/)|Flatpak support|[bscubed](https://github.com/bscubed)|Yes|
+|[4353](https://github.com/citra-emu/citra/pull/4353)|[92f8b71](https://github.com/citra-emu/citra/pull/4353/files/)|Add IPS patching|[zaksabeast](https://github.com/zaksabeast)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4270](https://github.com/citra-emu/citra/pull/4270)|[3970d86](https://github.com/citra-emu/citra/pull/4270/files/)|Threaded CPU vertex shader processing|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4089](https://github.com/citra-emu/citra/pull/4089)|[80bdc4a](https://github.com/citra-emu/citra/pull/4089/files/)|[NOT FOR MERGE YET] Ignore format reinterpretation hack|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
