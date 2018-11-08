@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include "common/common_types.h"
+#include "core/cheats/cheats.h"
 #include "core/frontend/applets/swkbd.h"
 #include "core/loader/loader.h"
 #include "core/memory.h"
@@ -184,6 +185,12 @@ public:
     /// Gets a const reference to the timing system
     const Timing& CoreTiming() const;
 
+    /// Gets a refernce to the cheat engine
+    Cheats::CheatEngine& CheatEngine();
+
+    /// Gets a const refernce to the cheat engine
+    const Cheats::CheatEngine& CheatEngine() const;
+
     PerfStats perf_stats;
     FrameLimiter frame_limiter;
 
@@ -243,6 +250,9 @@ private:
 
     /// Frontend applets
     std::shared_ptr<Frontend::SoftwareKeyboard> registered_swkbd;
+
+    /// Cheats manager
+    std::unique_ptr<Cheats::CheatEngine> cheat_engine;
 
 #ifdef ENABLE_SCRIPTING
     /// RPC Server for scripting support
