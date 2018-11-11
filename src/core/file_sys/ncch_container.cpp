@@ -483,6 +483,21 @@ Loader::ResultStatus NCCHContainer::LoadSectionExeFS(const char* name, std::vect
                     dec.ProcessData(&buffer[0], &buffer[0], section.size);
                 }
             }
+
+            std::string override_ips = filepath + ".exefsdir/code.ips";
+
+            if (FileUtil::Exists(override_ips) && strcmp(name, ".code") == 0) {
+                FileUtil::IOFile ips_file(override_ips, "rb");
+                std::size_t ips_file_size = ips_file.GetSize();
+                std::vector<u8> ips(ips_file_size);
+
+                if (ips_file.IsOpen() &&
+                    ips_file.ReadBytes(&ips[0], ips_file_size) == ips_file_size) {
+                    LOG_INFO(Service_FS, "File {} patching code.bin", override_ips);
+                    ApplyIPS(ips, buffer);
+                }
+            }
+
             return Loader::ResultStatus::Success;
         }
     }
@@ -519,6 +534,48 @@ Loader::ResultStatus NCCHContainer::LoadOverrideExeFSSection(const char* name,
         }
     }
     return Loader::ResultStatus::ErrorNotUsed;
+}
+
+void NCCHContainer::ApplyIPS(std::vector<u8>& ips, std::vector<u8>& buffer) {
+    u32 cursor = 5;
+    u32 patch_length = ips.size() - 3;
+    std::string ips_header(ips.begin(), ips.begin() + 5);
+
+    if (ips_header != "PATCH") {
+        LOG_INFO(Service_FS, "Attempted to load invalid IPS");
+        return;
+    }
+
+    while (cursor < patch_length) {
+        std::string eof_check(ips.begin() + cursor, ips.begin() + cursor + 3);
+
+        if (eof_check == "EOF")
+            return;
+
+        u32 offset = ips[cursor] << 16 | ips[cursor + 1] << 8 | ips[cursor + 2];
+        std::size_t length = ips[cursor + 3] << 8 | ips[cursor + 4];
+
+        // check for an rle record
+        if (length == 0) {
+            length = ips[cursor + 5] << 8 | ips[cursor + 6];
+
+            if (buffer.size() < offset + length)
+                return;
+
+            for (u32 i = 0; i < length; ++i)
+                buffer[offset + i] = ips[cursor + 7];
+
+            cursor += 8;
+
+            continue;
+        }
+
+        if (buffer.size() < offset + length)
+            return;
+
+        std::memcpy(&buffer[offset], &ips[cursor + 5], length);
+        cursor += length + 5;
+    }
 }
 
 Loader::ResultStatus NCCHContainer::ReadRomFS(std::shared_ptr<RomFSReader>& romfs_file) {
