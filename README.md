@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: ecc1c575d5fe873f4d4b2d0583a75c704f1aa3d6
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4427](https://github.com/citra-emu/citra/pull/4427)|[5325388](https://github.com/citra-emu/citra/pull/4427/files/)|SVC: QueryMemory merges similar VMA|[wwylele](https://github.com/wwylele)|Yes|
+|[4408](https://github.com/citra-emu/citra/pull/4408)|[29ade3e](https://github.com/citra-emu/citra/pull/4408/files/)| ldr_ro: properly map CRS/CRO buffer |[wwylele](https://github.com/wwylele)|Yes|
+|[4406](https://github.com/citra-emu/citra/pull/4406)|[2595e08](https://github.com/citra-emu/citra/pull/4406/files/)|Add CheatEngine and support for Gateway cheats|[B3n30](https://github.com/B3n30)|Yes|
+|[4405](https://github.com/citra-emu/citra/pull/4405)|[c57ee36](https://github.com/citra-emu/citra/pull/4405/files/)|SVC: new wrapper template & pass system reference across the SVC barrier|[wwylele](https://github.com/wwylele)|Yes|
+|[4398](https://github.com/citra-emu/citra/pull/4398)|[ab07d44](https://github.com/citra-emu/citra/pull/4398/files/)|citra_qt/configuration: fix language configuration issues|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4353](https://github.com/citra-emu/citra/pull/4353)|[1ded48f](https://github.com/citra-emu/citra/pull/4353/files/)|Add IPS patching|[zaksabeast](https://github.com/zaksabeast)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
