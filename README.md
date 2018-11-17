@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 7f727177bfcfe5c232aaa7895b6266c23e010fec
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4427](https://github.com/citra-emu/citra/pull/4427)|[5325388](https://github.com/citra-emu/citra/pull/4427/files/)|SVC: QueryMemory merges similar VMA|[wwylele](https://github.com/wwylele)|Yes|
+|[4419](https://github.com/citra-emu/citra/pull/4419)|[3a1fe87](https://github.com/citra-emu/citra/pull/4419/files/)|Port yuzu-emu/yuzu#1639: "qt: Add help option to open yuzu folder"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4398](https://github.com/citra-emu/citra/pull/4398)|[ab07d44](https://github.com/citra-emu/citra/pull/4398/files/)|citra_qt/configuration: fix language configuration issues|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4353](https://github.com/citra-emu/citra/pull/4353)|[1ded48f](https://github.com/citra-emu/citra/pull/4353/files/)|Add IPS patching|[zaksabeast](https://github.com/zaksabeast)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4164](https://github.com/citra-emu/citra/pull/4164)|[0ee4a17](https://github.com/citra-emu/citra/pull/4164/files/)|citra_qt, video_core: Screenshot functionality|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
