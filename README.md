@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 0d96c0b44e413b9143d41e92ddb089571b61e84d
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4436](https://github.com/citra-emu/citra/pull/4436)|[365eeb8](https://github.com/citra-emu/citra/pull/4436/files/)|Memory: GetPhysicalPointer should accept right open bound address|[wwylele](https://github.com/wwylele)|Yes|
+|[4433](https://github.com/citra-emu/citra/pull/4433)|[95bbe23](https://github.com/citra-emu/citra/pull/4433/files/)|VMManager: remove shared_ptr<vector> backing type|[wwylele](https://github.com/wwylele)|Yes|
+|[4427](https://github.com/citra-emu/citra/pull/4427)|[5325388](https://github.com/citra-emu/citra/pull/4427/files/)|SVC: QueryMemory merges similar VMA|[wwylele](https://github.com/wwylele)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4279](https://github.com/citra-emu/citra/pull/4279)|[deaed38](https://github.com/citra-emu/citra/pull/4279/files/)|applets: stub mii selector to always return a standard mii|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4164](https://github.com/citra-emu/citra/pull/4164)|[a21f2da](https://github.com/citra-emu/citra/pull/4164/files/)|citra_qt, video_core: Screenshot functionality|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/blob/master/CONTRIBUTING.md#reporting-issues) FILE!!!**
 
 Citra
