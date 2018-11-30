@@ -249,6 +249,19 @@ void GMainWindow::InitializeWidgets() {
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Single_Screen);
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Large_Screen);
     actionGroup_ScreenLayouts->addAction(ui.action_Screen_Layout_Side_by_Side);
+
+    actionGroup_screenshot_resolutions = new QActionGroup(this);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_Auto);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_1);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_2);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_3);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_4);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_5);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_6);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_7);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_8);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_9);
+    actionGroup_screenshot_resolutions->addAction(ui.action_Screenshot_Resolution_10);
 }
 
 void GMainWindow::InitializeDebugWidgets() {
@@ -365,6 +378,7 @@ void GMainWindow::InitializeHotkeys() {
                                    Qt::ApplicationShortcut);
     hotkey_registry.RegisterHotkey("Main Window", "Remove Amiibo", QKeySequence(Qt::Key_F3),
                                    Qt::ApplicationShortcut);
+    hotkey_registry.RegisterHotkey("Main Window", "Capture Screenshot", QKeySequence(tr("CTRL+P")));
 
     hotkey_registry.LoadHotkeys();
 
@@ -437,6 +451,12 @@ void GMainWindow::InitializeHotkeys() {
             this, [&] {
                 if (ui.action_Remove_Amiibo->isEnabled()) {
                     OnRemoveAmiibo();
+                }
+            });
+    connect(hotkey_registry.GetHotkey("Main Window", "Capture Screenshot", this),
+            &QShortcut::activated, this, [&] {
+                if (emu_thread->IsRunning()) {
+                    OnCaptureScreenshot();
                 }
             });
 }
@@ -588,6 +608,11 @@ void GMainWindow::ConnectMenuEvents() {
             Core::System::GetInstance().frame_limiter.AdvanceFrame();
         }
     });
+    connect(ui.action_Capture_Screenshot, &QAction::triggered, this,
+            &GMainWindow::OnCaptureScreenshot);
+    for (auto* action : actionGroup_screenshot_resolutions->actions()) {
+        connect(action, &QAction::triggered, this, &GMainWindow::ChangeScreenshotResolution);
+    }
 
     // Help
     connect(ui.action_Open_Citra_Folder, &QAction::triggered, this,
@@ -882,6 +907,7 @@ void GMainWindow::ShutdownGame() {
     ui.action_Enable_Frame_Advancing->setEnabled(false);
     ui.action_Enable_Frame_Advancing->setChecked(false);
     ui.action_Advance_Frame->setEnabled(false);
+    ui.action_Capture_Screenshot->setEnabled(false);
     render_window->hide();
     if (game_list->isEmpty())
         game_list_placeholder->show();
@@ -1169,6 +1195,7 @@ void GMainWindow::OnStartGame() {
     ui.action_Load_Amiibo->setEnabled(true);
     ui.action_Report_Compatibility->setEnabled(true);
     ui.action_Enable_Frame_Advancing->setEnabled(true);
+    ui.action_Capture_Screenshot->setEnabled(true);
 
     discord_rpc->Update();
 }
@@ -1179,6 +1206,7 @@ void GMainWindow::OnPauseGame() {
     ui.action_Start->setEnabled(true);
     ui.action_Pause->setEnabled(false);
     ui.action_Stop->setEnabled(true);
+    ui.action_Capture_Screenshot->setEnabled(false);
 }
 
 void GMainWindow::OnStopGame() {
@@ -1539,6 +1567,28 @@ void GMainWindow::OnStopRecordingPlayback() {
     ui.action_Stop_Recording_Playback->setEnabled(false);
 }
 
+void GMainWindow::OnCaptureScreenshot() {
+    OnPauseGame();
+    const QString path =
+        QFileDialog::getSaveFileName(this, tr("Capture Screenshot"),
+                                     UISettings::values.screenshot_path, tr("PNG Image (*.png)"));
+    if (!path.isEmpty()) {
+        UISettings::values.screenshot_path = QFileInfo(path).path();
+        render_window->CaptureScreenshot(UISettings::values.screenshot_resolution_factor, path);
+    }
+    OnStartGame();
+}
+
+void GMainWindow::ChangeScreenshotResolution() {
+    for (int i = 0; i < actionGroup_screenshot_resolutions->actions().size(); i++) {
+        if (actionGroup_screenshot_resolutions->actions()[i]->isChecked()) {
+            UISettings::values.screenshot_resolution_factor = i;
+            return;
+        }
+    }
+    LOG_ERROR(Frontend, "No screenshot resolution is checked");
+}
+
 void GMainWindow::UpdateStatusBar() {
     if (emu_thread == nullptr) {
         status_bar_update_timer.stop();
@@ -1789,6 +1839,11 @@ void GMainWindow::SyncMenuUISettings() {
     ui.action_Screen_Layout_Side_by_Side->setChecked(Settings::values.layout_option ==
                                                      Settings::LayoutOption::SideScreen);
     ui.action_Screen_Layout_Swap_Screens->setChecked(Settings::values.swap_screen);
+    // Screenshot Resolutions
+    for (int i = 0; i < actionGroup_screenshot_resolutions->actions().size(); i++) {
+        actionGroup_screenshot_resolutions->actions()[i]->setChecked(
+            UISettings::values.screenshot_resolution_factor == i);
+    }
 }
 
 void GMainWindow::RetranslateStatusBar() {
