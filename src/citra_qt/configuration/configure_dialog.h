@@ -17,12 +17,12 @@ class ConfigureDialog : public QDialog {
     Q_OBJECT
 
 public:
-    explicit ConfigureDialog(QWidget* parent, const HotkeyRegistry& registry);
+    explicit ConfigureDialog(QWidget* parent, HotkeyRegistry& registry);
     ~ConfigureDialog();
 
-    void applyConfiguration();
     void UpdateVisibleTabs();
     void PopulateSelectionList();
+    void applyConfiguration();
 
 private slots:
     void onLanguageChanged(const QString& locale);
@@ -36,4 +36,5 @@ private:
 
 private:
     std::unique_ptr<Ui::ConfigureDialog> ui;
+    HotkeyRegistry& registry;
 };
