@@ -80,7 +80,7 @@ cat > /tmp/org.citra.$REPO_NAME.json <<EOF
         "--share=ipc",
         "--filesystem=xdg-config/citra-emu:create",
         "--filesystem=xdg-data/citra-emu:create",
-        "--filesystem=host:ro"
+        "--filesystem=home:ro"
     ],
     "modules": [
         {
