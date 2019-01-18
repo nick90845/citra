@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 95a57a2fe3e561d2465c94f53b5657b89388b2ab
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4579](https://github.com/citra-emu/citra/pull/4579)|[c1ac39f](https://github.com/citra-emu/citra/pull/4579/files/)|[WIP] Change 3D Slider in-game|[xperia64](https://github.com/xperia64)|Yes|
+|[4517](https://github.com/citra-emu/citra/pull/4517)|[22e4a2b](https://github.com/citra-emu/citra/pull/4517/files/)|[WIP] travis: Simplify macos/upload.sh|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4508](https://github.com/citra-emu/citra/pull/4508)|[41be572](https://github.com/citra-emu/citra/pull/4508/files/)|[WIP] CoreAudio::HLE: Add FFmpeg/WMF AAC decoder|[B3n30](https://github.com/B3n30)|Yes|
+|[4472](https://github.com/citra-emu/citra/pull/4472)|[4f4deb6](https://github.com/citra-emu/citra/pull/4472/files/)|HLE: Move NS:S into APT and remove NS|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4457](https://github.com/citra-emu/citra/pull/4457)|[6d46b39](https://github.com/citra-emu/citra/pull/4457/files/)|citra_qt: Remove V-Sync option|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
