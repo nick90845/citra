@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: a17a31a934053fd5d2332e26e25d513b1b93246e
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4586](https://github.com/citra-emu/citra/pull/4586)|[ce26de8](https://github.com/citra-emu/citra/pull/4586/files/)|citra_qt: Use QPixmap/QIcon for background color selection button|[xperia64](https://github.com/xperia64)|Yes|
+|[4579](https://github.com/citra-emu/citra/pull/4579)|[c1ac39f](https://github.com/citra-emu/citra/pull/4579/files/)|Change 3D Slider in-game|[xperia64](https://github.com/xperia64)|Yes|
+|[4517](https://github.com/citra-emu/citra/pull/4517)|[22e4a2b](https://github.com/citra-emu/citra/pull/4517/files/)|[WIP] travis: Simplify macos/upload.sh|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4508](https://github.com/citra-emu/citra/pull/4508)|[41be572](https://github.com/citra-emu/citra/pull/4508/files/)|[WIP] CoreAudio::HLE: Add FFmpeg/WMF AAC decoder|[B3n30](https://github.com/B3n30)|Yes|
+|[4472](https://github.com/citra-emu/citra/pull/4472)|[4f4deb6](https://github.com/citra-emu/citra/pull/4472/files/)|HLE: Move NS:S into APT and remove NS|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
