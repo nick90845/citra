@@ -27,8 +27,6 @@
 namespace OpenGL {
 
 static const char vertex_shader[] = R"(
-#version 150 core
-
 in vec2 vert_position;
 in vec2 vert_tex_coord;
 out vec2 frag_tex_coord;
@@ -50,8 +48,6 @@ void main() {
 )";
 
 static const char fragment_shader[] = R"(
-#version 150 core
-
 in vec2 frag_tex_coord;
 out vec4 color;
 
@@ -279,7 +275,13 @@ void RendererOpenGL::InitOpenGLObjects() {
                  0.0f);
 
     // Link shaders and get variable locations
-    shader.Create(vertex_shader, fragment_shader);
+    if (GL_ES_VERSION_3_1) {
+        std::string frag_source(fragment_shader_precision_OES);
+        frag_source += fragment_shader;
+        shader.Create(vertex_shader, frag_source.data());
+    } else {
+        shader.Create(vertex_shader, fragment_shader);
+    }
     state.draw.shader_program = shader.handle;
     state.Apply();
     uniform_modelview_matrix = glGetUniformLocation(shader.handle, "modelview_matrix");
@@ -344,7 +346,7 @@ void RendererOpenGL::ConfigureFramebufferTexture(TextureInfo& texture,
     case GPU::Regs::PixelFormat::RGBA8:
         internal_format = GL_RGBA;
         texture.gl_format = GL_RGBA;
-        texture.gl_type = GL_UNSIGNED_INT_8_8_8_8;
+        texture.gl_type = GLAD_GL_ES_VERSION_3_1 ? GL_UNSIGNED_BYTE : GL_UNSIGNED_INT_8_8_8_8;
         break;
 
     case GPU::Regs::PixelFormat::RGB8:
@@ -353,7 +355,9 @@ void RendererOpenGL::ConfigureFramebufferTexture(TextureInfo& texture,
         // mostly everywhere) for words or half-words.
         // TODO: check how those behave on big-endian processors.
         internal_format = GL_RGB;
-        texture.gl_format = GL_BGR;
+
+        // GLES Dosen't support BGR , Use RGB instead
+        texture.gl_format = GLAD_GL_ES_VERSION_3_1 ? GL_RGB : GL_BGR;
         texture.gl_type = GL_UNSIGNED_BYTE;
         break;
 
@@ -555,7 +559,7 @@ Core::System::ResultStatus RendererOpenGL::Init() {
         return Core::System::ResultStatus::ErrorVideoCore_ErrorGenericDrivers;
     }
 
-    if (!GLAD_GL_VERSION_3_3) {
+    if (!(GLAD_GL_VERSION_3_3 || GLAD_GL_ES_VERSION_3_1)) {
         return Core::System::ResultStatus::ErrorVideoCore_ErrorBelowGL33;
     }
 

@@ -2,6 +2,8 @@
 // Licensed under GPLv2 or any later version
 // Refer to the license.txt file included.
 
+#include <array>
+#include <string>
 #include <vector>
 #include <glad/glad.h>
 #include "common/assert.h"
@@ -11,6 +13,20 @@
 namespace OpenGL {
 
 GLuint LoadShader(const char* source, GLenum type) {
+    const std::string version = GL_ES_VERSION_3_1 ? R"(
+#version 310 es
+#if defined(GL_ANDROID_extension_pack_es31a)
+#extension GL_ANDROID_extension_pack_es31a : enable
+#endif // defined(GL_ANDROID_extension_pack_es31a)
+
+#ifdef GL_ES
+#if defined(GL_EXT_clip_cull_distance)
+#extension GL_EXT_clip_cull_distance : enable
+#endif // defined(GL_EXT_clip_cull_distance)
+#endif // GL_ES
+)"
+                                                  : "#version 330\n";
+
     const char* debug_type;
     switch (type) {
     case GL_VERTEX_SHADER:
@@ -26,8 +42,9 @@ GLuint LoadShader(const char* source, GLenum type) {
         UNREACHABLE();
     }
 
+    std::array<const char*, 2> src_arr{version.data(), source};
     GLuint shader_id = glCreateShader(type);
-    glShaderSource(shader_id, 1, &source, nullptr);
+    glShaderSource(shader_id, src_arr.size(), src_arr.data(), nullptr);
     LOG_DEBUG(Render_OpenGL, "Compiling {} shader...", debug_type);
     glCompileShader(shader_id);
 
@@ -44,7 +61,7 @@ GLuint LoadShader(const char* source, GLenum type) {
         } else {
             LOG_ERROR(Render_OpenGL, "Error compiling {} shader:\n{}", debug_type,
                       &shader_error[0]);
-            LOG_ERROR(Render_OpenGL, "Shader source code:\n{}", source);
+            LOG_ERROR(Render_OpenGL, "Shader source code:\n{}{}", src_arr[0], src_arr[1]);
         }
     }
     return shader_id;
