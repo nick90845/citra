@@ -1,3 +1,28 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: de1128c60df958b6f283df620951426ef14b7dfa
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4632](https://github.com/citra-emu/citra/pull/4632)|[1995e8f](https://github.com/citra-emu/citra/pull/4632/files/)|service/soc_u: Implement getaddrinfo and getnameinfo|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4630](https://github.com/citra-emu/citra/pull/4630)|[7074dab](https://github.com/citra-emu/citra/pull/4630/files/)|Memory: don't lock hle mutex in memory read/write|[wwylele](https://github.com/wwylele)|Yes|
+|[4629](https://github.com/citra-emu/citra/pull/4629)|[ba4f777](https://github.com/citra-emu/citra/pull/4629/files/)|Port minor changes for BitField from yuzu|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4617](https://github.com/citra-emu/citra/pull/4617)|[4d0fc5a](https://github.com/citra-emu/citra/pull/4617/files/)|HLE/IPC: clean up System::GetInstance|[wwylele](https://github.com/wwylele)|Yes|
+|[4616](https://github.com/citra-emu/citra/pull/4616)|[4d10a2d](https://github.com/citra-emu/citra/pull/4616/files/)|Cleanup System::GetInstance reference - Part 1|[wwylele](https://github.com/wwylele)|Yes|
+|[4613](https://github.com/citra-emu/citra/pull/4613)|[d63acfc](https://github.com/citra-emu/citra/pull/4613/files/)|video_core: add GLES support|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4610](https://github.com/citra-emu/citra/pull/4610)|[433176a](https://github.com/citra-emu/citra/pull/4610/files/)|Implement UI for adding/editing/deleting cheats|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4608](https://github.com/citra-emu/citra/pull/4608)|[3a7a686](https://github.com/citra-emu/citra/pull/4608/files/)|Kernel/SharedMemory: make owner_process a raw pointer|[wwylele](https://github.com/wwylele)|Yes|
+|[4472](https://github.com/citra-emu/citra/pull/4472)|[4f4deb6](https://github.com/citra-emu/citra/pull/4472/files/)|HLE: Move NS:S into APT and remove NS|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[8a24cbb](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
