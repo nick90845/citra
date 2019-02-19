@@ -86,7 +86,9 @@ cat > /tmp/org.citra.$REPO_NAME.json <<EOF
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DENABLE_QT_TRANSLATION=ON",
                 "-DCITRA_ENABLE_COMPATIBILITY_REPORTING=ON",
-                "-DENABLE_COMPATIBILITY_LIST_DOWNLOAD=ON"
+                "-DENABLE_COMPATIBILITY_LIST_DOWNLOAD=ON",
+                "-DENABLE_FFMPEG=ON",
+                "-DENABLE_FFMPEG_FRAME_DUMPING=ON"
             ],
             "cleanup": [
               "/bin/citra",
