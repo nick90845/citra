@@ -79,6 +79,8 @@ add_executable(citra-qt
     debugger/wait_tree.cpp
     debugger/wait_tree.h
     discord.h
+    dumping_progress_dialog.cpp
+    dumping_progress_dialog.h
     game_list.cpp
     game_list.h
     game_list_p.h
@@ -248,4 +250,9 @@ if (MSVC)
     include(CopyCitraSDLDeps)
     copy_citra_Qt5_deps(citra-qt)
     copy_citra_SDL_deps(citra-qt)
+
+    if (ENABLE_FFMPEG)
+        include(CopyCitraFFmpegDeps)
+        copy_citra_FFmpeg_deps(citra-qt)
+    endif()
 endif()
