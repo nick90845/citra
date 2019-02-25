@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 93275d752bc098ec9541b84c174d1bb149d70af7
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4659](https://github.com/citra-emu/citra/pull/4659)|[af22dd7](https://github.com/citra-emu/citra/pull/4659/files/)|Force dedicated AMD Card for switchable Graphics |[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[9035d13](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4627](https://github.com/citra-emu/citra/pull/4627)|[931895d](https://github.com/citra-emu/citra/pull/4627/files/)|citra_qt: when opening a cia file directly, make Citra ask to install it|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4618](https://github.com/citra-emu/citra/pull/4618)|[a6d9baa](https://github.com/citra-emu/citra/pull/4618/files/)|FS: pass down program ID for archive operation (cleanup System::GetInstance part 3)|[wwylele](https://github.com/wwylele)|Yes|
+|[4610](https://github.com/citra-emu/citra/pull/4610)|[433176a](https://github.com/citra-emu/citra/pull/4610/files/)|Implement UI for adding/editing/deleting cheats|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4608](https://github.com/citra-emu/citra/pull/4608)|[3a7a686](https://github.com/citra-emu/citra/pull/4608/files/)|Kernel/SharedMemory: make owner_process a raw pointer|[wwylele](https://github.com/wwylele)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[8b31f9c](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4472](https://github.com/citra-emu/citra/pull/4472)|[4f4deb6](https://github.com/citra-emu/citra/pull/4472/files/)|HLE: Move NS:S into APT and remove NS|[jroweboy](https://github.com/jroweboy)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
