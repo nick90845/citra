@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: ad1cfc8d50b266f627f8000ba42a351a20ced21d
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4669](https://github.com/citra-emu/citra/pull/4669)|[870579d](https://github.com/citra-emu/citra/pull/4669/files/)|rpc: send ending packet in Server instead of UDPServer|[wwylele](https://github.com/wwylele)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4627](https://github.com/citra-emu/citra/pull/4627)|[931895d](https://github.com/citra-emu/citra/pull/4627/files/)|citra_qt: when opening a cia file directly, make Citra ask to install it|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4618](https://github.com/citra-emu/citra/pull/4618)|[a6d9baa](https://github.com/citra-emu/citra/pull/4618/files/)|FS: pass down program ID for archive operation (cleanup System::GetInstance part 3)|[wwylele](https://github.com/wwylele)|Yes|
+|[4610](https://github.com/citra-emu/citra/pull/4610)|[433176a](https://github.com/citra-emu/citra/pull/4610/files/)|Implement UI for adding/editing/deleting cheats|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[8b31f9c](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
