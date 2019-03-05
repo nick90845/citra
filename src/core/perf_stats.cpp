@@ -4,18 +4,26 @@
 
 #include <algorithm>
 #include <chrono>
+#include <fstream>
 #include <mutex>
+#include <regex>
 #include <thread>
+#include "common/detached_tasks.h"
+#include "common/file_util.h"
+#include "core/core.h"
 #include "core/hw/gpu.h"
 #include "core/perf_stats.h"
 #include "core/settings.h"
 
 using namespace std::chrono_literals;
-using DoubleSecs = std::chrono::duration<double, std::chrono::seconds::period>;
 using std::chrono::duration_cast;
 using std::chrono::microseconds;
 
 namespace Core {
+
+PerfStats::PerfStats(System& system) : system{system} {}
+
+PerfStats::~PerfStats() = default;
 
 void PerfStats::BeginSystemFrame() {
     std::lock_guard<std::mutex> lock(object_mutex);
@@ -32,6 +40,12 @@ void PerfStats::EndSystemFrame() {
 
     previous_frame_length = frame_end - previous_frame_end;
     previous_frame_end = frame_end;
+
+    if (Settings::values.record_frame_times) {
+        RecordFrameTime(duration_cast<DoubleSecs>(previous_frame_length));
+    } else {
+        FlushFrameData();
+    }
 }
 
 void PerfStats::EndGameFrame() {
@@ -71,6 +85,37 @@ double PerfStats::GetLastFrameTimeScale() {
 
     constexpr double FRAME_LENGTH = 1.0 / GPU::SCREEN_REFRESH_RATE;
     return duration_cast<DoubleSecs>(previous_frame_length).count() / FRAME_LENGTH;
+}
+
+inline void PerfStats::RecordFrameTime(DoubleSecs frame_time) {
+    if (!frame_data)
+        frame_data.emplace();
+    frame_data->push_back(frame_time.count());
+}
+
+void PerfStats::FlushFrameData() {
+    if (!frame_data)
+        return;
+
+    std::string game_title;
+    system.GetAppLoader().ReadTitle(game_title);
+
+    Common::DetachedTasks::AddTask([game_title, data = std::move(*frame_data)]() {
+        static const std::regex invalid_chars(R"([\\/:"*?<>|])");
+        // file path is "log/<game title> <version>.csv"
+        std::string path = FileUtil::GetUserPath(FileUtil::UserPath::LogDir) +
+                           std::regex_replace(game_title, invalid_chars, "");
+        unsigned int i = 1;
+        while (FileUtil::Exists(path + ' ' + std::to_string(i) + ".csv"))
+            ++i;
+        path += ' ' + std::to_string(i) + ".csv";
+
+        std::ofstream file;
+        OpenFStream(file, path, std::ofstream::out);
+        std::copy(data.begin(), data.end(), std::ostream_iterator<double>(file, "\n"));
+    });
+
+    frame_data.reset();
 }
 
 void FrameLimiter::DoFrameLimiting(microseconds current_system_time_us) {
