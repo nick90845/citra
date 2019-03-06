@@ -4,6 +4,7 @@
 
 #include "common/logging/log.h"
 #include "core/core.h"
+#include "core/frontend/mic.h"
 #include "core/hle/ipc.h"
 #include "core/hle/ipc_helpers.h"
 #include "core/hle/kernel/event.h"
@@ -14,24 +15,97 @@
 
 namespace Service::MIC {
 
+/// Microphone audio encodings.
 enum class Encoding : u8 {
-    PCM8 = 0,
-    PCM16 = 1,
-    PCM8Signed = 2,
-    PCM16Signed = 3,
+    PCM8 = 0,        ///< Unsigned 8-bit PCM.
+    PCM16 = 1,       ///< Unsigned 16-bit PCM.
+    PCM8Signed = 2,  ///< Signed 8-bit PCM.
+    PCM16Signed = 3, ///< Signed 16-bit PCM.
 };
 
+/// Microphone audio sampling rates. The actual accurate sampling rate can be calculated using
+/// (16756991 / 512) / (SampleRate + 1) where SampleRate is one of the above values.
 enum class SampleRate : u8 {
-    SampleRate32730 = 0,
-    SampleRate16360 = 1,
-    SampleRate10910 = 2,
-    SampleRate8180 = 3
+    Rate32730 = 0, ///< 32728.498 Hz
+    Rate16360 = 1, ///< 16364.479 Hz
+    Rate10910 = 2, ///< 10909.499 Hz
+    Rate8180 = 3   ///< 8182.1245 Hz
+};
+
+constexpr u32 GetSampleRateInHz(SampleRate sample_rate) {
+    switch (sample_rate) {
+    case SampleRate::Rate8180:
+        return 8182;
+    case SampleRate::Rate10910:
+        return 10909;
+    case SampleRate::Rate16360:
+        return 16364;
+    case SampleRate::Rate32730:
+        return 32728;
+    default:
+        UNREACHABLE();
+    }
+}
+
+// The following buffer write rates were found by hardware test on o3ds and n3ds.
+// The 3ds writes to the sharedmem roughly every 15 samples
+constexpr u64 BufferUpdateRate8180 = BASE_CLOCK_RATE_ARM11 / 511;
+constexpr u64 BufferUpdateRate10910 = BASE_CLOCK_RATE_ARM11 / 681;
+constexpr u64 BufferUpdateRate16360 = BASE_CLOCK_RATE_ARM11 / 1022;
+constexpr u64 BufferUpdateRate32730 = BASE_CLOCK_RATE_ARM11 / 2045;
+
+constexpr u64 GetBufferUpdateRate(SampleRate sample_rate) {
+    return GetSampleRateInHz(sample_rate) / 16;
+}
+
+// Variables holding the current mic buffer writing state
+struct State {
+    u8* sharedmem_buffer = nullptr;
+    u32 sharedmem_size = 0;
+    std::size_t size = 0;
+    u32 offset = 0;
+    u32 initial_offset = 0;
+    bool looped_buffer = false;
+    u8 sample_size = 0;
+    SampleRate sample_rate = SampleRate::Rate16360;
+
+    void WriteSamples(const std::vector<u8>& samples) {
+        u32 bytes_total_written = 0;
+        const std::size_t remaining_space = size - offset;
+        std::size_t bytes_to_write = std::min(samples.size(), remaining_space);
+
+        // Write as many samples as we can to the buffer.
+        // TODO if the sample size is 16bit, this could theoretically cut a sample in the case where
+        // the application configures an odd size
+        std::memcpy(sharedmem_buffer + offset, samples.data(), bytes_to_write);
+        offset += static_cast<u32>(bytes_to_write);
+        bytes_total_written += static_cast<u32>(bytes_to_write);
+
+        // If theres any samples left to write after we looped, go ahead and write them now
+        if (looped_buffer && samples.size() > bytes_total_written) {
+            offset = initial_offset;
+            bytes_to_write = std::min(samples.size() - bytes_total_written, size);
+            std::memcpy(sharedmem_buffer + offset, samples.data() + bytes_total_written,
+                        bytes_to_write);
+            offset += static_cast<u32>(bytes_to_write);
+        }
+
+        // The last 4 bytes of the shared memory contains the latest offset
+        // so update that as well https://www.3dbrew.org/wiki/MIC_Shared_Memory
+        u32_le off = offset;
+        std::memcpy(sharedmem_buffer + (sharedmem_size - sizeof(u32)), reinterpret_cast<u8*>(&off),
+                    sizeof(u32));
+    }
 };
 
 struct MIC_U::Impl {
-    explicit Impl(Core::System& system) {
+    explicit Impl(Core::System& system) : timing(system.CoreTiming()) {
         buffer_full_event =
             system.Kernel().CreateEvent(Kernel::ResetType::OneShot, "MIC_U::buffer_full_event");
+        buffer_write_event =
+            timing.RegisterEvent("MIC_U::UpdateBuffer", [this](u64 userdata, s64 cycles_late) {
+                UpdateSharedMemBuffer(userdata, cycles_late);
+            });
     }
 
     void MapSharedMem(Kernel::HLERequestContext& ctx) {
@@ -41,12 +115,14 @@ struct MIC_U::Impl {
 
         if (shared_memory) {
             shared_memory->SetName("MIC_U:shared_memory");
+            state.sharedmem_buffer = shared_memory->GetPointer();
+            state.sharedmem_size = size;
         }
 
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
 
-        LOG_WARNING(Service_MIC, "called, size=0x{:X}", size);
+        LOG_TRACE(Service_MIC, "MapSharedMem called, size=0x{:X}", size);
     }
 
     void UnmapSharedMem(Kernel::HLERequestContext& ctx) {
@@ -54,55 +130,98 @@ struct MIC_U::Impl {
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         shared_memory = nullptr;
         rb.Push(RESULT_SUCCESS);
-        LOG_WARNING(Service_MIC, "called");
+        LOG_TRACE(Service_MIC, "UnmapSharedMem called");
+    }
+
+    void UpdateSharedMemBuffer(u64 userdata, s64 cycles_late) {
+        // If the event was scheduled before the application requested the mic to stop sampling
+        if (!mic->IsSampling()) {
+            return;
+        }
+
+        Frontend::Mic::Samples samples = mic->Read();
+        if (!samples.empty()) {
+            // write the samples to sharedmem page
+            state.WriteSamples(samples);
+        }
+
+        // schedule next run
+        timing.ScheduleEvent(GetBufferUpdateRate(state.sample_rate) - cycles_late,
+                             buffer_write_event);
     }
 
     void StartSampling(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x03, 5, 0};
 
-        encoding = rp.PopEnum<Encoding>();
-        sample_rate = rp.PopEnum<SampleRate>();
-        audio_buffer_offset = rp.PopRaw<s32>();
-        audio_buffer_size = rp.Pop<u32>();
-        audio_buffer_loop = rp.Pop<bool>();
+        Encoding encoding = rp.PopEnum<Encoding>();
+        SampleRate sample_rate = rp.PopEnum<SampleRate>();
+        u32 audio_buffer_offset = rp.PopRaw<u32>();
+        u32 audio_buffer_size = rp.Pop<u32>();
+        bool audio_buffer_loop = rp.Pop<bool>();
+
+        if (mic->IsSampling()) {
+            LOG_CRITICAL(Service_MIC,
+                         "Application started sampling again before stopping sampling");
+            mic->StopSampling();
+        }
+
+        auto sign = encoding == Encoding::PCM8Signed || encoding == Encoding::PCM16Signed
+                        ? Frontend::Mic::Signedness::Signed
+                        : Frontend::Mic::Signedness::Unsigned;
+        u8 sample_size = encoding == Encoding::PCM8Signed || encoding == Encoding::PCM8 ? 8 : 16;
+        state.offset = state.initial_offset = audio_buffer_offset;
+        state.sample_rate = sample_rate;
+        state.sample_size = sample_size;
+        state.looped_buffer = audio_buffer_loop;
+        state.size = audio_buffer_size;
+
+        mic->StartSampling({sign, sample_size, audio_buffer_loop, GetSampleRateInHz(sample_rate),
+                            audio_buffer_offset, audio_buffer_size});
+
+        timing.ScheduleEvent(GetBufferUpdateRate(state.sample_rate), buffer_write_event);
 
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
-        is_sampling = true;
-        LOG_WARNING(Service_MIC,
-                    "(STUBBED) called, encoding={}, sample_rate={}, "
-                    "audio_buffer_offset={}, audio_buffer_size={}, audio_buffer_loop={}",
-                    static_cast<u32>(encoding), static_cast<u32>(sample_rate), audio_buffer_offset,
-                    audio_buffer_size, audio_buffer_loop);
+        LOG_TRACE(Service_MIC,
+                  "StartSampling called, encoding={}, sample_rate={}, "
+                  "audio_buffer_offset={}, audio_buffer_size={}, audio_buffer_loop={}",
+                  static_cast<u32>(encoding), static_cast<u32>(sample_rate), audio_buffer_offset,
+                  audio_buffer_size, audio_buffer_loop);
     }
 
     void AdjustSampling(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x04, 1, 0};
-        sample_rate = rp.PopEnum<SampleRate>();
+        SampleRate sample_rate = rp.PopEnum<SampleRate>();
+        mic->AdjustSampleRate(GetSampleRateInHz(sample_rate));
 
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
-        LOG_WARNING(Service_MIC, "(STUBBED) called, sample_rate={}", static_cast<u32>(sample_rate));
+        LOG_TRACE(Service_MIC, "AdjustSampling sample_rate={}", static_cast<u32>(sample_rate));
     }
 
     void StopSampling(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x05, 0, 0};
+
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
-        is_sampling = false;
-        LOG_WARNING(Service_MIC, "(STUBBED) called");
+        mic->StopSampling();
+        timing.RemoveEvent(buffer_write_event);
+        LOG_TRACE(Service_MIC, "StopSampling called");
     }
 
     void IsSampling(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x06, 0, 0};
+
         IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
         rb.Push(RESULT_SUCCESS);
+        bool is_sampling = mic->IsSampling();
         rb.Push<bool>(is_sampling);
-        LOG_WARNING(Service_MIC, "(STUBBED) called");
+        LOG_TRACE(Service_MIC, "IsSampling: {}", is_sampling);
     }
 
     void GetBufferFullEvent(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x07, 0, 0};
+
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 2);
         rb.Push(RESULT_SUCCESS);
         rb.PushCopyObjects(buffer_full_event);
@@ -111,11 +230,12 @@ struct MIC_U::Impl {
 
     void SetGain(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x08, 1, 0};
-        mic_gain = rp.Pop<u8>();
+        u8 gain = rp.Pop<u8>();
+        mic->SetGain(gain);
 
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
-        LOG_WARNING(Service_MIC, "(STUBBED) called, mic_gain={}", mic_gain);
+        LOG_TRACE(Service_MIC, "SetGain gain={}", gain);
     }
 
     void GetGain(Kernel::HLERequestContext& ctx) {
@@ -123,25 +243,29 @@ struct MIC_U::Impl {
 
         IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
         rb.Push(RESULT_SUCCESS);
-        rb.Push<u8>(mic_gain);
-        LOG_WARNING(Service_MIC, "(STUBBED) called");
+        u8 gain = mic->GetGain();
+        rb.Push<u8>(gain);
+        LOG_TRACE(Service_MIC, "GetGain gain={}", gain);
     }
 
     void SetPower(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x0A, 1, 0};
-        mic_power = rp.Pop<bool>();
+        bool power = rp.Pop<bool>();
+        mic->SetPower(power);
 
         IPC::RequestBuilder rb = rp.MakeBuilder(1, 0);
         rb.Push(RESULT_SUCCESS);
-        LOG_WARNING(Service_MIC, "(STUBBED) called, mic_power={}", mic_power);
+        LOG_TRACE(Service_MIC, "SetPower mic_power={}", power);
     }
 
     void GetPower(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x0B, 0, 0};
+
         IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
         rb.Push(RESULT_SUCCESS);
+        bool mic_power = mic->GetPower();
         rb.Push<u8>(mic_power);
-        LOG_WARNING(Service_MIC, "(STUBBED) called");
+        LOG_TRACE(Service_MIC, "GetPower called");
     }
 
     void SetIirFilterMic(Kernel::HLERequestContext& ctx) {
@@ -167,6 +291,7 @@ struct MIC_U::Impl {
 
     void GetClamp(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x0E, 0, 0};
+
         IPC::RequestBuilder rb = rp.MakeBuilder(2, 0);
         rb.Push(RESULT_SUCCESS);
         rb.Push<bool>(clamp);
@@ -184,7 +309,6 @@ struct MIC_U::Impl {
 
     void SetClientVersion(Kernel::HLERequestContext& ctx) {
         IPC::RequestParser rp{ctx, 0x10, 1, 0};
-
         const u32 version = rp.Pop<u32>();
         LOG_WARNING(Service_MIC, "(STUBBED) called, version: 0x{:08X}", version);
 
@@ -192,19 +316,15 @@ struct MIC_U::Impl {
         rb.Push(RESULT_SUCCESS);
     }
 
-    u32 client_version = 0;
     Kernel::SharedPtr<Kernel::Event> buffer_full_event;
+    Core::TimingEventType* buffer_write_event = nullptr;
     Kernel::SharedPtr<Kernel::SharedMemory> shared_memory;
-    u8 mic_gain = 0;
-    bool mic_power = false;
-    bool is_sampling = false;
-    bool allow_shell_closed;
+    u32 client_version = 0;
+    bool allow_shell_closed = false;
     bool clamp = false;
-    Encoding encoding = Encoding::PCM8;
-    SampleRate sample_rate = SampleRate::SampleRate32730;
-    s32 audio_buffer_offset = 0;
-    u32 audio_buffer_size = 0;
-    bool audio_buffer_loop = false;
+    std::shared_ptr<Frontend::Mic::Interface> mic;
+    Core::Timing& timing;
+    State state{};
 };
 
 void MIC_U::MapSharedMem(Kernel::HLERequestContext& ctx) {
@@ -292,10 +412,13 @@ MIC_U::MIC_U(Core::System& system)
         {0x00100040, &MIC_U::SetClientVersion, "SetClientVersion"},
     };
 
+    impl->mic = Frontend::Mic::GetCurrentMic();
     RegisterHandlers(functions);
 }
 
-MIC_U::~MIC_U() = default;
+MIC_U::~MIC_U() {
+    impl->mic->StopSampling();
+}
 
 void InstallInterfaces(Core::System& system) {
     auto& service_manager = system.ServiceManager();
@@ -303,3 +426,19 @@ void InstallInterfaces(Core::System& system) {
 }
 
 } // namespace Service::MIC
+
+namespace Frontend::Mic {
+static std::shared_ptr<Mic::Interface> current_mic;
+
+void RegisterMic(std::shared_ptr<Mic::Interface> mic) {
+    current_mic = mic;
+}
+
+std::shared_ptr<Mic::Interface> GetCurrentMic() {
+    if (!current_mic) {
+        current_mic = std::make_shared<Mic::NullMic>();
+    }
+    return current_mic;
+}
+
+} // namespace Frontend::Mic
