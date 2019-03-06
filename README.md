@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 5954dc11ba3ba15fe301071f6a8afcdcfa7299ee
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4627](https://github.com/citra-emu/citra/pull/4627)|[931895d](https://github.com/citra-emu/citra/pull/4627/files/)|citra_qt: when opening a cia file directly, make Citra ask to install it|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[8b31f9c](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[c1e40d7](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
