@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: c3e661080791f4ed1ba55a551d7a0a4d8246191f
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4671](https://github.com/citra-emu/citra/pull/4671)|[f5b86cf](https://github.com/citra-emu/citra/pull/4671/files/)|Microphone support|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[2999c83](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
