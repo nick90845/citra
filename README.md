@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 1f233e43655ae73e4c09de6b7a092a61b39e9a28
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4690](https://github.com/citra-emu/citra/pull/4690)|[4696b13](https://github.com/citra-emu/citra/pull/4690/files/)|UDS: implement deprecated functions|[wwylele](https://github.com/wwylele)|Yes|
+|[4689](https://github.com/citra-emu/citra/pull/4689)|[8750b81](https://github.com/citra-emu/citra/pull/4689/files/)| ServiceFrameworkBase: remove ownership to ServerPort |[wwylele](https://github.com/wwylele)|Yes|
+|[4683](https://github.com/citra-emu/citra/pull/4683)|[9c016ff](https://github.com/citra-emu/citra/pull/4683/files/)|Misc global instance reference cleaup|[wwylele](https://github.com/wwylele)|Yes|
+|[4671](https://github.com/citra-emu/citra/pull/4671)|[9739e2b](https://github.com/citra-emu/citra/pull/4671/files/)|Microphone support|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4635](https://github.com/citra-emu/citra/pull/4635)|[43385c2](https://github.com/citra-emu/citra/pull/4635/files/)|citra-qt: Implement Mii selector applet |[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4396](https://github.com/citra-emu/citra/pull/4396)|[2999c83](https://github.com/citra-emu/citra/pull/4396/files/)|fs_user: Add a delay for each file open|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4125](https://github.com/citra-emu/citra/pull/4125)|[2b57d9d](https://github.com/citra-emu/citra/pull/4125/files/)|travis: Use Ninja for Travis builds|[ccawley2011](https://github.com/ccawley2011)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
