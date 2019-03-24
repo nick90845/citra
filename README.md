@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: c1de8acfe5895f16713cd20cdc105d69036304a3
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4710](https://github.com/citra-emu/citra/pull/4710)|[51850c1](https://github.com/citra-emu/citra/pull/4710/files/)|Kernel: replace boost::intrusive_ptr with std::shared_ptr|[wwylele](https://github.com/wwylele)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4635](https://github.com/citra-emu/citra/pull/4635)|[43385c2](https://github.com/citra-emu/citra/pull/4635/files/)|citra-qt: Implement Mii selector applet |[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
