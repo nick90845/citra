@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 21bda754b3cd7347b924c51be8c36f06076be027
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4689](https://github.com/citra-emu/citra/pull/4689)|[8750b81](https://github.com/citra-emu/citra/pull/4689/files/)| ServiceFrameworkBase: remove ownership to ServerPort |[wwylele](https://github.com/wwylele)|Yes|
+|[4636](https://github.com/citra-emu/citra/pull/4636)|[b0973aa](https://github.com/citra-emu/citra/pull/4636/files/)|Add Frame Time Recording|[BreadFish64](https://github.com/BreadFish64)|Yes|
+|[4635](https://github.com/citra-emu/citra/pull/4635)|[43385c2](https://github.com/citra-emu/citra/pull/4635/files/)|citra-qt: Implement Mii selector applet |[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4125](https://github.com/citra-emu/citra/pull/4125)|[2b57d9d](https://github.com/citra-emu/citra/pull/4125/files/)|travis: Use Ninja for Travis builds|[ccawley2011](https://github.com/ccawley2011)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
