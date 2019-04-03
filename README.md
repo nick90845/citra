@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 14730ed5600e67ad4db6b2f9ca1b43bfed91111e
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4716](https://github.com/citra-emu/citra/pull/4716)|[f565ea8](https://github.com/citra-emu/citra/pull/4716/files/)|HLE/IPC: HLEContext can memorize the client thread and use it for SleepClientThread|[wwylele](https://github.com/wwylele)|Yes|
+|[4635](https://github.com/citra-emu/citra/pull/4635)|[43385c2](https://github.com/citra-emu/citra/pull/4635/files/)|citra-qt: Implement Mii selector applet |[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[88a011e](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
