@@ -1,3 +1,23 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: bbc8fd71650a7ff1d8eebced86bdf713ec5cb0e5
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[a53a8d3](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4731](https://github.com/citra-emu/citra/pull/4731)|[7ce5c68](https://github.com/citra-emu/citra/pull/4731/files/)|Enable ffmpeg support on Linux FlatPak|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4728](https://github.com/citra-emu/citra/pull/4728)|[2070b43](https://github.com/citra-emu/citra/pull/4728/files/)|Set accepted EULA version to max value|[B3n30](https://github.com/B3n30)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4700](https://github.com/citra-emu/citra/pull/4700)|[d7fbc1c](https://github.com/citra-emu/citra/pull/4700/files/)|applets/swkbd: Add callback support|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[3910](https://github.com/citra-emu/citra/pull/3910)|[e3b6bf9](https://github.com/citra-emu/citra/pull/3910/files/)|gl_rasterizer: implement mipmap by forwarding PICA mipmap configuration|[wwylele](https://github.com/wwylele)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
