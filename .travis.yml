@@ -58,8 +58,6 @@ matrix:
       after_success: "./.travis/linux-mingw/upload.sh"
       cache: ccache
     - if: repo =~ ^.*\/(citra-canary|citra-nightly)$ AND tag IS present
-      git:
-        depth: false
       os: linux
       env: NAME="flatpak build"
       sudo: required
