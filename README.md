@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 0ec45f694cc24cfda2782421a926737aa47b4395
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[258546b](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4737](https://github.com/citra-emu/citra/pull/4737)|[6d2cf67](https://github.com/citra-emu/citra/pull/4737/files/)|Port yuzu-emu/yuzu#2017: "Frontend: Migrate to QOpenGLWindow and support shared contexts"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4736](https://github.com/citra-emu/citra/pull/4736)|[4253546](https://github.com/citra-emu/citra/pull/4736/files/)|Port yuzu-emu/yuzu#2356: "kernel/{server_port, server_session}: Return pairs instead of tuples from pair creation functions"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4731](https://github.com/citra-emu/citra/pull/4731)|[5c1d59e](https://github.com/citra-emu/citra/pull/4731/files/)|Enable ffmpeg support on Linux FlatPak|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4728](https://github.com/citra-emu/citra/pull/4728)|[2070b43](https://github.com/citra-emu/citra/pull/4728/files/)|Set accepted EULA version to max value|[B3n30](https://github.com/B3n30)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4700](https://github.com/citra-emu/citra/pull/4700)|[d7fbc1c](https://github.com/citra-emu/citra/pull/4700/files/)|applets/swkbd: Add callback support|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
