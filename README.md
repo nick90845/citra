@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 536e4de4991ee4f94fbc5e910f238b998eef4b69
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4749](https://github.com/citra-emu/citra/pull/4749)|[40ad54c](https://github.com/citra-emu/citra/pull/4749/files/)|web_service: Misc fixes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4748](https://github.com/citra-emu/citra/pull/4748)|[2a44abf](https://github.com/citra-emu/citra/pull/4748/files/)|Launch directly in Mac without terminal|[Arcanus73](https://github.com/Arcanus73)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[301fbb4](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4737](https://github.com/citra-emu/citra/pull/4737)|[6d2cf67](https://github.com/citra-emu/citra/pull/4737/files/)|Port yuzu-emu/yuzu#2017: "Frontend: Migrate to QOpenGLWindow and support shared contexts"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4736](https://github.com/citra-emu/citra/pull/4736)|[4253546](https://github.com/citra-emu/citra/pull/4736/files/)|Port yuzu-emu/yuzu#2356: "kernel/{server_port, server_session}: Return pairs instead of tuples from pair creation functions"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4731](https://github.com/citra-emu/citra/pull/4731)|[5c1d59e](https://github.com/citra-emu/citra/pull/4731/files/)|Enable ffmpeg support on Linux FlatPak|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4728](https://github.com/citra-emu/citra/pull/4728)|[2070b43](https://github.com/citra-emu/citra/pull/4728/files/)|Set accepted EULA version to max value|[B3n30](https://github.com/B3n30)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[ede9b7e](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
