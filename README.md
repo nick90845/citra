@@ -1,3 +1,25 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: f4da2de99a920d7a44c6571cb13196d5b7069af3
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4749](https://github.com/citra-emu/citra/pull/4749)|[40ad54c](https://github.com/citra-emu/citra/pull/4749/files/)|web_service: Misc fixes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[301fbb4](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4736](https://github.com/citra-emu/citra/pull/4736)|[4253546](https://github.com/citra-emu/citra/pull/4736/files/)|Port yuzu-emu/yuzu#2356: "kernel/{server_port, server_session}: Return pairs instead of tuples from pair creation functions"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4733](https://github.com/citra-emu/citra/pull/4733)|[0f65dac](https://github.com/citra-emu/citra/pull/4733/files/)|service/ps: Implement PS:EncryptDecryptAes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4605](https://github.com/citra-emu/citra/pull/4605)|[4581e9d](https://github.com/citra-emu/citra/pull/4605/files/)|Fix dialog and message box placement for SBS 3D mode.|[CarlKenner](https://github.com/CarlKenner)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[ede9b7e](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
