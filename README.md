@@ -1,3 +1,26 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 7ea82e7941af3f7ee6fc12b38685091a0a3d5052
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4749](https://github.com/citra-emu/citra/pull/4749)|[40ad54c](https://github.com/citra-emu/citra/pull/4749/files/)|web_service: Misc fixes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4747](https://github.com/citra-emu/citra/pull/4747)|[065d3ce](https://github.com/citra-emu/citra/pull/4747/files/)|memory: Re-order CopyBlock arguments to match other overload|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[15d114b](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4733](https://github.com/citra-emu/citra/pull/4733)|[0f65dac](https://github.com/citra-emu/citra/pull/4733/files/)|service/ps: Implement PS:EncryptDecryptAes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4725](https://github.com/citra-emu/citra/pull/4725)|[0433956](https://github.com/citra-emu/citra/pull/4725/files/)|Port various minor changes from yuzu PRs|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[ede9b7e](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4578](https://github.com/citra-emu/citra/pull/4578)|[8e9c57d](https://github.com/citra-emu/citra/pull/4578/files/)|renderer_opengl: Add support for custom shaders|[xperia64](https://github.com/xperia64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
