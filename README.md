@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: ad34f86f3bab552d269d29429ec80f2778a96d37
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4759](https://github.com/citra-emu/citra/pull/4759)|[14ed702](https://github.com/citra-emu/citra/pull/4759/files/)|FileSys: Load the ticket when the CIAContainer is loaded|[B3n30](https://github.com/B3n30)|Yes|
+|[4747](https://github.com/citra-emu/citra/pull/4747)|[065d3ce](https://github.com/citra-emu/citra/pull/4747/files/)|memory: Re-order CopyBlock arguments to match other overload|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[656f0f4](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[ede9b7e](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4578](https://github.com/citra-emu/citra/pull/4578)|[8e9c57d](https://github.com/citra-emu/citra/pull/4578/files/)|renderer_opengl: Add support for custom shaders|[xperia64](https://github.com/xperia64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
