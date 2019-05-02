@@ -4,7 +4,7 @@
 # of citra we're building (nightly or canary)
 
 # Converts "citra-emu/citra-nightly" to "citra-nightly"
-REPO_NAME=$(echo $TRAVIS_REPO_SLUG | cut -d'/' -f 2)
+REPO_NAME=$(echo $BUILD_REPOSITORY_NAME | cut -d'/' -f 2)
 # Converts "citra-nightly" to "Citra Nightly"
 REPO_NAME_FRIENDLY=$(echo $REPO_NAME | sed -e 's/-/ /g' -e 's/\b\(.\)/\u\1/g')
 
@@ -63,7 +63,7 @@ cat > /tmp/org.citra.$REPO_NAME.json <<EOF
             "TRAVIS_COMMIT": "$TRAVIS_COMMIT",
             "TRAVIS_JOB_ID": "$TRAVIS_JOB_ID",
             "TRAVIS_JOB_NUMBER": "$TRAVIS_JOB_NUMBER",
-            "TRAVIS_REPO_SLUG": "$TRAVIS_REPO_SLUG",
+            "TRAVIS_REPO_SLUG": "$BUILD_REPOSITORY_NAME",
             "TRAVIS_TAG": "$TRAVIS_TAG"
         }
     },
@@ -108,7 +108,7 @@ cat > /tmp/org.citra.$REPO_NAME.json <<EOF
                 {
                     "type": "git",
                     "url": "https://github.com/citra-emu/$REPO_NAME.git",
-                    "branch": "$TRAVIS_BRANCH",
+                    "branch": "${BUILD_SOURCEBRANCHNAME}",
                     "disable-shallow-clone": true
                 },
                 {
@@ -122,4 +122,4 @@ cat > /tmp/org.citra.$REPO_NAME.json <<EOF
 EOF
 
 # Call the script to build citra
-/bin/bash -ex /citra/.travis/linux-flatpak/docker.sh
+# /bin/bash -ex /citra/.travis/linux-flatpak/docker.sh
