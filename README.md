@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 216fc0b546890bf2449d67f814efa90d0186768f
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4865](https://github.com/citra-emu/citra/pull/4865)|[616ab52](https://github.com/citra-emu/citra/pull/4865/files/)|[Test][Hotfix] Revert change in configure_dialog|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4859](https://github.com/citra-emu/citra/pull/4859)|[899e3eb](https://github.com/citra-emu/citra/pull/4859/files/)|minor fix for opengles|[weihuoya](https://github.com/weihuoya)|Yes|
+|[4850](https://github.com/citra-emu/citra/pull/4850)|[602abd9](https://github.com/citra-emu/citra/pull/4850/files/)|externals: Update dynarmic to e814b4|[MerryMage](https://github.com/MerryMage)|Yes|
+|[4847](https://github.com/citra-emu/citra/pull/4847)|[907e25b](https://github.com/citra-emu/citra/pull/4847/files/)|core, citra_qt: IPC Recorder|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4844](https://github.com/citra-emu/citra/pull/4844)|[c602e89](https://github.com/citra-emu/citra/pull/4844/files/)|Use a clear texture instead of texture 0 (solid black) in the GL rasterizer|[hamish-milne](https://github.com/hamish-milne)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[07e86ff](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4703](https://github.com/citra-emu/citra/pull/4703)|[fafaa8c](https://github.com/citra-emu/citra/pull/4703/files/)|[EXPERIMENT] gl_rasterizer: decrease vertex buffer size|[wwylele](https://github.com/wwylele)|Yes|
+|[4602](https://github.com/citra-emu/citra/pull/4602)|[ec9d084](https://github.com/citra-emu/citra/pull/4602/files/)|Implement dumping audio+video to video files|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4578](https://github.com/citra-emu/citra/pull/4578)|[03f4023](https://github.com/citra-emu/citra/pull/4578/files/)|renderer_opengl: Add support for custom shaders|[xperia64](https://github.com/xperia64)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
