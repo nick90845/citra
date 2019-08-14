@@ -8,6 +8,7 @@
 #include "audio_core/hle/hle.h"
 #include "audio_core/lle/lle.h"
 #include "common/logging/log.h"
+#include "common/texture.h"
 #include "core/arm/arm_interface.h"
 #ifdef ARCHITECTURE_x86_64
 #include "core/arm/dynarmic/arm_dynarmic.h"
@@ -16,10 +17,9 @@
 #include "core/cheats/cheats.h"
 #include "core/core.h"
 #include "core/core_timing.h"
+#include "core/custom_tex_cache.h"
 #include "core/dumping/backend.h"
-#ifdef ENABLE_FFMPEG
 #include "core/dumping/ffmpeg_backend.h"
-#endif
 #include "core/gdbstub/gdbstub.h"
 #include "core/hle/kernel/client_port.h"
 #include "core/hle/kernel/kernel.h"
@@ -96,6 +96,47 @@ System::ResultStatus System::SingleStep() {
     return RunLoop(false);
 }
 
+void System::PreloadCustomTextures() {
+    // Custom textures are currently stored as
+    // load/textures/[TitleID]/tex1_[width]x[height]_[64-bit hash]_[format].png
+    const std::string load_path =
+        fmt::format("{}textures/{:016X}/", FileUtil::GetUserPath(FileUtil::UserPath::LoadDir),
+                    Kernel().GetCurrentProcess()->codeset->program_id);
+
+    if (FileUtil::Exists(load_path)) {
+        FileUtil::FSTEntry texture_files;
+        FileUtil::ScanDirectoryTree(load_path, texture_files);
+        for (const auto& file : texture_files.children) {
+            if (file.isDirectory)
+                continue;
+            if (file.virtualName.substr(0, 5) != "tex1_")
+                continue;
+
+            u32 width;
+            u32 height;
+            u64 hash;
+            u32 format; // unused
+            // TODO: more modern way of doing this
+            if (std::sscanf(file.virtualName.c_str(), "tex1_%ux%u_%llX_%u.png", &width, &height,
+                            &hash, &format) == 4) {
+                u32 png_width;
+                u32 png_height;
+                std::vector<u8> decoded_png;
+
+                if (registered_image_interface->DecodePNG(decoded_png, png_width, png_height,
+                                                          file.physicalName)) {
+                    LOG_INFO(Render_OpenGL, "Preloaded custom texture from {}", file.physicalName);
+                    Common::FlipRGBA8Texture(decoded_png, png_width, png_height);
+                    custom_tex_cache->CacheTexture(hash, decoded_png, png_width, png_height);
+                } else {
+                    // Error should be reported by frontend
+                    LOG_CRITICAL(Render_OpenGL, "Failed to preload custom texture");
+                }
+            }
+        }
+    }
+}
+
 System::ResultStatus System::Load(Frontend::EmuWindow& emu_window, const std::string& filepath) {
     app_loader = Loader::GetLoader(filepath);
     if (!app_loader) {
@@ -146,6 +187,14 @@ System::ResultStatus System::Load(Frontend::EmuWindow& emu_window, const std::st
         }
     }
     cheat_engine = std::make_unique<Cheats::CheatEngine>(*this);
+    custom_tex_cache = std::make_unique<Core::CustomTexCache>();
+    if (Settings::values.custom_textures) {
+        FileUtil::CreateFullPath(fmt::format("{}textures/{:016X}/",
+                                             FileUtil::GetUserPath(FileUtil::UserPath::LoadDir),
+                                             Kernel().GetCurrentProcess()->codeset->program_id));
+    }
+    if (Settings::values.preload_textures)
+        PreloadCustomTextures();
     status = ResultStatus::Success;
     m_emu_window = &emu_window;
     m_filepath = filepath;
@@ -284,6 +333,14 @@ const Cheats::CheatEngine& System::CheatEngine() const {
     return *cheat_engine;
 }
 
+Core::CustomTexCache& System::CustomTexCache() {
+    return *custom_tex_cache;
+}
+
+const Core::CustomTexCache& System::CustomTexCache() const {
+    return *custom_tex_cache;
+}
+
 VideoDumper::Backend& System::VideoDumper() {
     return *video_dumper;
 }
@@ -298,6 +355,10 @@ void System::RegisterMiiSelector(std::shared_ptr<Frontend::MiiSelector> mii_sele
 
 void System::RegisterSoftwareKeyboard(std::shared_ptr<Frontend::SoftwareKeyboard> swkbd) {
     registered_swkbd = std::move(swkbd);
+}
+
+void System::RegisterImageInterface(std::shared_ptr<Frontend::ImageInterface> image_interface) {
+    registered_image_interface = std::move(image_interface);
 }
 
 void System::Shutdown() {

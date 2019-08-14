@@ -37,6 +37,8 @@ add_executable(citra-qt
     configuration/configure_camera.h
     configuration/configure_debug.cpp
     configuration/configure_debug.h
+    configuration/configure_enhancements.cpp
+    configuration/configure_enhancements.h
     configuration/configure_dialog.cpp
     configuration/configure_dialog.h
     configuration/configure_general.cpp
@@ -108,6 +110,8 @@ add_executable(citra-qt
     multiplayer/state.cpp
     multiplayer/state.h
     multiplayer/validation.h
+    qt_image_interface.cpp
+    qt_image_interface.h
     ui_settings.cpp
     ui_settings.h
     updater/updater.cpp
@@ -130,6 +134,7 @@ set(UIS
     configuration/configure_audio.ui
     configuration/configure_camera.ui
     configuration/configure_debug.ui
+    configuration/configure_enhancements.ui
     configuration/configure_general.ui
     configuration/configure_graphics.ui
     configuration/configure_hotkeys.ui
