@@ -1,3 +1,27 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 4bc22aa350e63b3443c2c48bc6f85c59e68ef58a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4917](https://github.com/citra-emu/citra/pull/4917)|[d4179da](https://github.com/citra-emu/citra/pull/4917/files/)|Allow displaying the long_title of the game|[vitor-k](https://github.com/vitor-k)|Yes|
+|[4915](https://github.com/citra-emu/citra/pull/4915)|[5609124](https://github.com/citra-emu/citra/pull/4915/files/)|Port citra-emu/citra#2818: "externals: update fmt to 6.0.0"|[FearlessTobi](https://github.com/FearlessTobi)|Yes|
+|[4900](https://github.com/citra-emu/citra/pull/4900)|[7318913](https://github.com/citra-emu/citra/pull/4900/files/)|ncch_container: Fix NCCH decryption heuristic when replacing exheader|[leoetlino](https://github.com/leoetlino)|Yes|
+|[4896](https://github.com/citra-emu/citra/pull/4896)|[531bf85](https://github.com/citra-emu/citra/pull/4896/files/)|citra_qt: Misc game list updates/fixes|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4893](https://github.com/citra-emu/citra/pull/4893)|[8b8111b](https://github.com/citra-emu/citra/pull/4893/files/)|NFC: extract frontend-facing tag state|[wwylele](https://github.com/wwylele)|Yes|
+|[4868](https://github.com/citra-emu/citra/pull/4868)|[aa79ce9](https://github.com/citra-emu/citra/pull/4868/files/)|[WIP] texture dumping and replacement|[khang06](https://github.com/khang06)|Yes|
+|[4847](https://github.com/citra-emu/citra/pull/4847)|[3d14abe](https://github.com/citra-emu/citra/pull/4847/files/)|core, citra_qt: IPC Recorder|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4754](https://github.com/citra-emu/citra/pull/4754)|[0f23efd](https://github.com/citra-emu/citra/pull/4754/files/)|HTTP_C::Implement Context::MakeRequest|[B3n30](https://github.com/B3n30)|Yes|
+|[4739](https://github.com/citra-emu/citra/pull/4739)|[07e86ff](https://github.com/citra-emu/citra/pull/4739/files/)|Use Azure Pipeline to build Linux Flatpaks|[liushuyu](https://github.com/liushuyu)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
