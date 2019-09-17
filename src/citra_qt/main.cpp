@@ -499,6 +499,21 @@ void GMainWindow::RestoreUIState() {
     statusBar()->setVisible(ui.action_Show_Status_Bar->isChecked());
 }
 
+void GMainWindow::OnAppFocusStateChanged(Qt::ApplicationState state) {
+    if (!UISettings::values.pause_when_in_background) {
+        return;
+    }
+    if (ui.action_Pause->isEnabled() &&
+        (state & (Qt::ApplicationHidden | Qt::ApplicationInactive))) {
+        auto_paused = true;
+        OnPauseGame();
+    }
+    if (ui.action_Start->isEnabled() && auto_paused && state == Qt::ApplicationActive) {
+        auto_paused = false;
+        OnStartGame();
+    }
+}
+
 void GMainWindow::ConnectWidgetEvents() {
     connect(game_list, &GameList::GameChosen, this, &GMainWindow::OnGameListLoadFile);
     connect(game_list, &GameList::OpenDirectory, this, &GMainWindow::OnGameListOpenDirectory);
@@ -2022,6 +2037,10 @@ int main(int argc, char* argv[]) {
     Core::System::GetInstance().RegisterSoftwareKeyboard(std::make_shared<QtKeyboard>(main_window));
 
     main_window.show();
+
+    QObject::connect(&app, &QGuiApplication::applicationStateChanged, &main_window,
+                     &GMainWindow::OnAppFocusStateChanged);
+
     int result = app.exec();
     detached_tasks.WaitForAllTasks();
     return result;
