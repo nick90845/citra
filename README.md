@@ -1,3 +1,24 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 4b05078def6951597a4c285089f44ee595dfb883
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4940](https://github.com/citra-emu/citra/pull/4940)|[ba8c217](https://github.com/citra-emu/citra/pull/4940/files/)|Split Presentation thread from Render thread|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4930](https://github.com/citra-emu/citra/pull/4930)|[05b1cfc](https://github.com/citra-emu/citra/pull/4930/files/)|Pause when in background|[vitor-k](https://github.com/vitor-k)|Yes|
+|[4917](https://github.com/citra-emu/citra/pull/4917)|[966d128](https://github.com/citra-emu/citra/pull/4917/files/)|Allow displaying the long_title of the game|[vitor-k](https://github.com/vitor-k)|Yes|
+|[4868](https://github.com/citra-emu/citra/pull/4868)|[12968f0](https://github.com/citra-emu/citra/pull/4868/files/)|Texture dumping and replacement|[khang06](https://github.com/khang06)|Yes|
+|[4847](https://github.com/citra-emu/citra/pull/4847)|[3d14abe](https://github.com/citra-emu/citra/pull/4847/files/)|core, citra_qt: IPC Recorder|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4754](https://github.com/citra-emu/citra/pull/4754)|[0f23efd](https://github.com/citra-emu/citra/pull/4754/files/)|HTTP_C::Implement Context::MakeRequest|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
