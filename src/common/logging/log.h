@@ -101,6 +101,7 @@ enum class Class : ClassType {
     Movie,             ///< Movie (Input Recording) Playback
     WebService,        ///< Interface to Citra Web Services
     RPC_Server,        ///< RPC server
+    Host,              ///< Information about the host machine
     Count              ///< Total number of logging classes
 };
 
