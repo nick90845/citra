@@ -1,3 +1,22 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 377abfa3e62374951dde54eda4eedaaf044cb80a
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4931](https://github.com/citra-emu/citra/pull/4931)|[5933263](https://github.com/citra-emu/citra/pull/4931/files/)|Added Host CPU and OS to log|[pbarilla](https://github.com/pbarilla)|Yes|
+|[4868](https://github.com/citra-emu/citra/pull/4868)|[12968f0](https://github.com/citra-emu/citra/pull/4868/files/)|Texture dumping and replacement|[khang06](https://github.com/khang06)|Yes|
+|[4847](https://github.com/citra-emu/citra/pull/4847)|[3d14abe](https://github.com/citra-emu/citra/pull/4847/files/)|core, citra_qt: IPC Recorder|[zhaowenlan1779](https://github.com/zhaowenlan1779)|Yes|
+|[4754](https://github.com/citra-emu/citra/pull/4754)|[0f23efd](https://github.com/citra-emu/citra/pull/4754/files/)|HTTP_C::Implement Context::MakeRequest|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
