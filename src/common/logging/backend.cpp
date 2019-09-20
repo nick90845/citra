@@ -238,6 +238,7 @@ void DebuggerBackend::Write(const Entry& entry) {
     CLS(Movie)                                                                                     \
     CLS(Loader)                                                                                    \
     CLS(WebService)                                                                                \
+    CLS(Host)                                                                                      \
     CLS(RPC_Server)
 
 // GetClassName is a macro defined by Windows.h, grrr...
