@@ -1,3 +1,21 @@
+# Merge log
+
+Scroll down for the original README.md!
+
+Base revision: 223bfc9a2aaa37a6ef0e255ebad5dc042fe1bf81
+
+|Pull Request|Commit|Title|Author|Merged?|
+|----|----|----|----|----|
+|[6](https://github.com/citra-emu/citra-canary/pull/6)|[d9c3e53](https://github.com/citra-emu/citra-canary/pull/6/files/)|Canary Base (MinGW Test)|[liushuyu](https://github.com/liushuyu)|Yes|
+|[4940](https://github.com/citra-emu/citra/pull/4940)|[07ed9dc](https://github.com/citra-emu/citra/pull/4940/files/)|Split Presentation thread from Render thread|[jroweboy](https://github.com/jroweboy)|Yes|
+|[4868](https://github.com/citra-emu/citra/pull/4868)|[12968f0](https://github.com/citra-emu/citra/pull/4868/files/)|Texture dumping and replacement|[khang06](https://github.com/khang06)|Yes|
+|[4754](https://github.com/citra-emu/citra/pull/4754)|[0f23efd](https://github.com/citra-emu/citra/pull/4754/files/)|HTTP_C::Implement Context::MakeRequest|[B3n30](https://github.com/B3n30)|Yes|
+
+
+End of merge log. You can find the original README.md below the break.
+
+------
+
 **BEFORE FILING AN ISSUE, READ THE RELEVANT SECTION IN THE [CONTRIBUTING](https://github.com/citra-emu/citra/wiki/Contributing#reporting-issues) FILE!!!**
 
 Citra
